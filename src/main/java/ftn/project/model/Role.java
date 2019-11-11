@@ -1,0 +1,5 @@
+package ftn.project.model;
+
+public enum Role {
+	CLINIC_CENTER_ADMINISTRATOR,CLINIC_ADMINISTRATOR,PACIENT,DOCTOR,NURSE
+}
