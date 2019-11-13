@@ -28,7 +28,9 @@ public class UserMapper {
 		userDto.setCityDto(user.getCity());
 		userDto.setPhoneDto(user.getPhone());
 		userDto.setRoleDto(user.getRole());
-
+		userDto.setBiographyDto(user.getBiography());
+		userDto.setMarkDto(user.getMark());
+		
 		return userDto;
 	}
 
@@ -47,7 +49,8 @@ public class UserMapper {
 		user.setCity(userDto.getCityDto());
 		user.setPhone(userDto.getPhoneDto());
 		user.setRole(userDto.getRoleDto());
-
+		user.setBiography(userDto.getBiographyDto());
+		user.setMark(userDto.getMarkDto());
 		return user;
 	}
 

@@ -45,6 +45,13 @@ public class User {
 	@Column(name = "Email", nullable = true)
 	private String email;
 	
-	@Column(name = "Role", nullable = false)
+	@Column(name = "Role", nullable = true)
 	private String role;
+	
+	// polja za doktora
+	@Column(name= "Biography",nullable = true)
+	private String biography;
+	
+	@Column(name="Mark",nullable = true)
+	private String mark;
 }

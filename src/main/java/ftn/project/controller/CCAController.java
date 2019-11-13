@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Controller
-public class AdministratorController {
+public class CCAController {
 
 	private UserService userService;
 	

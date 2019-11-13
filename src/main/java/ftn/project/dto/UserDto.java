@@ -1,5 +1,7 @@
 package ftn.project.dto;
 
+import javax.persistence.Column;
+
 import ftn.project.model.Role;
 import lombok.Data;
 
@@ -16,4 +18,9 @@ public class UserDto {
 	public String phoneDto;
 	public String emailDto;
 	public String roleDto;
+	
+
+	//polja za doktora
+	private String biographyDto;
+	private String markDto;
 }

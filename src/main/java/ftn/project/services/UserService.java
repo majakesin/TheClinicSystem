@@ -17,4 +17,9 @@ public interface UserService {
 	Set<UserDto> allUsers();
 	
 
+	
+	Set<UserDto> allMedicalStaff();
+
+	
+
 }
