@@ -48,6 +48,11 @@ public class User {
 	@Column(name = "Role", nullable = true)
 	private String role;
 	
+	//polje za pacijenta
+	@Column(name = "InsuranceNumber", nullable = true)
+	private String insuranceNumber;
+	
+	
 	// polja za doktora
 	@Column(name= "Biography",nullable = true)
 	private String biography;
