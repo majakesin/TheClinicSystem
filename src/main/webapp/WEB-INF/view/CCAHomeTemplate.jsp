@@ -10,7 +10,7 @@
 <body>
 
 	
-		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #00cc66;" >
+		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #53e3a6;" >
 		<li class="nav-item "><a  class="nav-link text-light" href="/clinics"><i class="fa fa-hospital-o" aria-hidden="true"></i> Klinike</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href="/administrators"><i class="fa fa-user-plus" aria-hidden="true"></i> Administratori</a></li>
 		

@@ -1,5 +1,9 @@
 package ftn.project.services_impl;
 
+
+import java.util.List;
+import java.util.Optional;
+
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -59,6 +63,17 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(idDto);
 	}
 
+
+	public UserDto getUserById(Long idDto) {
+			
+		
+		return userMapper.UserToDto(userRepository.findAllById(idDto));
+	
+		
+	}
+	
+=======
+
 	public Set<UserDto> allUsers() {
 		return userMapper.UserToDtoSet(userRepository.findAll());
 	}
@@ -71,7 +86,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 
+	public Set<UserDto> allNurse() {
+		
+		return userMapper.UserToDtoSet(userRepository.findAllByRole("med. sestra"));
+	}
+
+	
+
+	@Override
+	public void editUser(Long idDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	public UserDto getUserById(String username) {
+
 
 	
 
@@ -158,29 +188,4 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	
-	
-	/*
-	 * 
-	 * public Set<UserDto> allMedicalStaff() {
-	 * 
-	 * 
-	 * 
-	 * List<User> sviKorisnici = userRepository.findAll();
-	 * 
-	 * System.out.println("bio sam ovdje");
-	 * 
-	 * for (User user : sviKorisnici) {
-	 * 
-	 * System.out.println("korisnik:"+user.getName());
-	 * 
-	 * if(!user.getRole().equals("doktor")) {
-	 * 
-	 * sviKorisnici.remove(user); }
-	 * 
-	 * } if(sviKorisnici.isEmpty()) {
-	 * 
-	 * return userMapper.UserToDtoSet(userRepository.findAll()); } else { return
-	 * userMapper.UserToDtoSet(sviKorisnici); } }
-	 */
 }
