@@ -21,15 +21,19 @@ public class UserMapper {
 		userDto.setUsernameDto(user.getUsername());
 		userDto.setPasswordDto(user.getPassword());
 		userDto.setEmailDto(user.getEmail());
-
+		userDto.setRoleDto(user.getRole());
 		userDto.setNameDto(user.getName());
 		userDto.setSurnameDto(user.getSurname());
 		userDto.setAddressDto(user.getAdress());
 		userDto.setCityDto(user.getCity());
 		userDto.setPhoneDto(user.getPhone());
-		userDto.setRoleDto(user.getRole());
+		
 		userDto.setBiographyDto(user.getBiography());
 		userDto.setMarkDto(user.getMark());
+		
+		userDto.setCountryDto(user.getCountry());
+		userDto.setInsuranceNumberDto(user.getInsuranceNumber());
+		
 		
 		return userDto;
 	}
@@ -51,6 +55,11 @@ public class UserMapper {
 		user.setRole(userDto.getRoleDto());
 		user.setBiography(userDto.getBiographyDto());
 		user.setMark(userDto.getMarkDto());
+		
+		user.setCountry(userDto.getCountryDto());
+		user.setInsuranceNumber(userDto.getInsuranceNumberDto());
+		
+		
 		return user;
 	}
 

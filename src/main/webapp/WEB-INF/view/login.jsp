@@ -1,15 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 
 <!DOCTYPE html>
 <html>
+
+
 <head>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta charset="UTF-8">
-<title>Registration</title>
+
+<title>Login</title>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var username = $(usernameDto).val();
+	});
+	
+	
+
+</script>
 
 <style type="text/css">
 
@@ -62,11 +77,11 @@ background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
 background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 	
 	position: absolute;
-	top: 0%;
-	
+	top: 50%;
+	left: 0;
 	width: 100%;
-	height: 100%;
-	margin-top: 0px;
+	height: 400px;
+	margin-top: -200px;
 	overflow: hidden;
 	
 	&.form-success{
@@ -79,10 +94,10 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 }
 
 .container{
-	max-width: 400px;
+	max-width: 600px;
 	margin: 0 auto;
-	padding: 0px 0;
-	height: 100%;
+	padding: 80px 0;
+	height: 400px;
 	text-align: center;
 	
 	h1{
@@ -93,7 +108,9 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 }
 
 
-	
+	padding: 20px 0;
+	position: relative;
+	z-index: 2;
 	
 	input{
 		display: block;
@@ -101,7 +118,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 		outline: 0;
 		border: 1px solid fade(white, 40%);
 		background-color: fade(white, 20%);
-		width: 150px;
+		width: 250px;
 		
 		border-radius: 3px;
 		padding: 10px 15px;
@@ -127,8 +144,8 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 		}
 	}
 	
-	#registracija{
-		font-color :#53e3a6
+	#login{
+		font-color :#53e3a6 ;
 		appearance: none;
 		outline: 0;
 		background-color: white;
@@ -136,7 +153,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 		padding: 10px 15px;
 		color: @prim;
 		border-radius: 3px;
-		width: 150px;
+		width: 250px;
 		cursor: pointer;
 		font-size: 18px;
 		transition-duration: 0.25s;
@@ -159,49 +176,29 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 
 
 </style>
+
 </head>
 <body>
 
 	<div class="wrapper">
 	<div class="container">
-	<h1>Registracija</h1>
+		<h1>Dobrodošli</h1>
+		
+		<form:form method="POST"  class="form" action="/patient/login/${username}" modelAttribute="userDto">
+			<form:input class="form-control" id="usernameDto" placeholder="Korisničko ime" path="usernameDto" required="required"/>
+			<br>
+			<form:input class="form-control" type="password" placeholder="Lozinka" path="passwordDto" required="required"/>
+			<br>
+			<input type="submit"  id="login" value= "Uloguj se">
+			<br>
+			<a href="/registracija">Registruj se</a>
+			</form:form>
+		
+	</div>
 	
-	<form:form method="POST" action="/patient/create" modelAttribute="userDto">
-				
-				
-		
-				<form:input class="form-control" placeholder=" * Korisničko ime" path="usernameDto" required="required" />
-			
-				<form:input class="form-control" type="password" placeholder=" * Lozinka"  path="passwordDto"  required="required"/>
-		
-				<form:input class="form-control" placeholder=" Ime " path="nameDto" />
-			
-			
-				<form:input  class="form-control"  placeholder= " Prezime" path="surnameDto" />
-			
-				<form:input class="form-control" placeholder= " Adresa" path="addressDto" />
-			
+	
+</div>
 
-				<form:input class="form-control" placeholder=" Grad" path="cityDto" />
-			
-				
-				<form:input class="form-control" placeholder = " Država" path="countryDto" />
-			
-			
-				
-				<form:input class="form-control" path="insuranceNumberDto" placeholder =" * Broj osiguranika " required="required" />
-			
-				
-				<form:input  class="form-control" placeholder=" Telefon" path="phoneDto" />
-			
-				<form:input class="form-control"  type="email" placeholder= " * Email" path="emailDto" required="required"/>
-			
-				<br>
-				 <input  type="submit" id="Registracija" value="Registruj se" />
-				
-				
-	</form:form>
-	</div>
-	</div>
+
 </body>
 </html>

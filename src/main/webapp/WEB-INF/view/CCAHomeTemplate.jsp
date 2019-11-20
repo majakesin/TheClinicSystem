@@ -15,7 +15,7 @@
 		<li class="nav-item "><a class="nav-link text-light" href="/administrators"><i class="fa fa-user-plus" aria-hidden="true"></i> Administratori</a></li>
 		
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-book" aria-hidden="true"></i> Sifrarnik</a></li>
-		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-bell" aria-hidden="true"></i>Zahtevi</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href=/requests><i class="fa fa-bell" aria-hidden="true"></i>Zahtevi</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>
 	

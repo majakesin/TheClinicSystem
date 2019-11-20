@@ -3,8 +3,8 @@ package ftn.project.dto;
 import lombok.Data;
 
 @Data
-public class UserDto {
-
+public class RequestDto {
+	
 	public Long idDto;
 	public String usernameDto;
 	public String passwordDto;
@@ -15,6 +15,7 @@ public class UserDto {
 	public String phoneDto;
 	public String emailDto;
 	public String roleDto;
+	
 	private String countryDto;
 	private String insuranceNumberDto;
 	
