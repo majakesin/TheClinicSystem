@@ -1,18 +1,31 @@
 package ftn.project.model;
 
+import java.util.Collection;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name="User")
-public class User {
+public class User implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,8 +58,8 @@ public class User {
 	@Column(name = "Email", nullable = true)
 	private String email;
 	
-	@Column(name = "Role", nullable = true)
-	private String role;
+	@Column(name = "Enabled")
+	private boolean enabled;
 	
 	//polje za pacijenta
 	@Column(name = "InsuranceNumber", nullable = true)
@@ -59,4 +72,45 @@ public class User {
 	
 	@Column(name="Mark",nullable = true)
 	private String mark;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name = "user_authority",
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+	private Set<Authority> authorities;
+	
+	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return enabled;
+	}
 }

@@ -15,6 +15,6 @@ import ftn.project.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	
-	public Set<User> findAllByRole(String s); 
-	
+//	public List<User> findAllByAuthority(String s); 
+	User findByUsername(String username);
 }
