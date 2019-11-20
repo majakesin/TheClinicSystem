@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <title>Clinics</title>
 <style>
@@ -31,26 +31,26 @@ body {
 		modelAttribute="clinicDto">
 		<table>
 			<tr>
-				<td><form:label path="nameDto">Name:</form:label></td>
+				<td><form:label path="nameDto">Ime:</form:label></td>
 				<td><form:input class="form-control" placeholder="Name" path="nameDto" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="adressDto">Address:</form:label></td>
+				<td><form:label path="adressDto">Adresa:</form:label></td>
 				<td><form:input  class="form-control" placeholder="Address" path="adressDto" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="phoneDto">Phone:</form:label></td>
+				<td><form:label path="phoneDto">Telefon:</form:label></td>
 				<td><form:input  class="form-control" placeholder="Phone" path="phoneDto" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="descriptionDto">Description:</form:label></td>
+				<td><form:label path="descriptionDto">Opis:</form:label></td>
 				<td><form:textarea class="form-control" path="descriptionDto" /></td>
 			</tr>
 
 			<tr>
 				<td></td>
 				<td></td>
-				<td><input type="submit" class="btn btn-outline-danger" value="Create clinic" /></td>
+				<td><input type="submit" class="btn btn-outline-danger" value="Kreiraj" /></td>
 			</tr>
 		</table>
 	</form:form>
@@ -60,18 +60,18 @@ body {
 	 <br> <br> <br>
 	<table class="table">
 		
-		<tr style="background-color: #00cc66;">
+		<tr style="background-color: #53e3a6;">
 			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> KLINIKE </h6> </th>
 		</tr>
 		<tr>
-			<td>Name</td>
-			<td>Address</td>
-			<td>Phone</td>
-			<td>Description</td>
+			<td>Ime</td>
+			<td>Adresa</td>
+			<td>Telefon</td>
+			<td>Opis</td>
 			
-			<td>Delete</td>
-			<td>Edit</td>
-			<td>More</td>
+			<td>Izbriši</td>
+			<td>Uredi</td>
+			<td>Više</td>
 		</tr>
 		<tr>
 			<c:forEach var="clinic" items="${clinicsDto}">

@@ -1,26 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >    
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
-<title>Clinics</title>
+<title>Insert title here</title>
 </head>
 <body>
+
 
 	<div >
 		<%@ include file="CAHomeTemplate.jsp"%>
 	</div>
 	
-	
-<div class="container">
+	<div class="container">
 	<div class="row">
 	 <div class="col-sm">
 		<br> <br> <br>
-	<form:form method="POST" action="/doctors/create"
+		
+	<form:form method="POST" action="/nurse/create"
 		modelAttribute="userDto">
 		<table>
 			<tr>
@@ -38,8 +39,6 @@
 			<tr>
 				<td><form:label path="passwordDto">Šifra:</form:label></td>
 				<td><form:input class="form-control" path="passwordDto" /></td>
-			
-				
 			</tr>
 			<tr>
 				<td></td>
@@ -48,8 +47,8 @@
 			</tr>
 		</table>
 	</form:form>
-	
 	</div>
+
 	 <div class="col-sm">
 	 <br> <br> <br>
 	<table class="table">
@@ -61,22 +60,21 @@
 			<td>Ime</td>
 			<td>Adresa</td>
 			<td>Mobilni telefon</td>
-			<td>Biografija</td>
 			
-			<td>Obriši</td>
+			
+			<td>Izbrši</td>
 			<td>Izmeni</td>
 			<td>Više</td>
 		</tr>
 		<tr>
-			<c:forEach var="user" items="${doctorsDto}">
+			<c:forEach var="user" items="${nurseDto}">
 				<tr>
 					<td><c:out value="${user.nameDto}" /></td>
 					<td><c:out value="${user.surnameDto}" /></td>
 					<td><c:out value="${user.phoneDto}" /></td>
-					<td><c:out value="${user.biographyDto}" /></td>
-					<td><a class="btn btn-outline-success" href="/doctors/delete/${user.idDto}">Delete</a></td>
-					<td><a class="btn btn-outline-success" href="/doctors/edit/${user.idDto}">Edit</a></td>
-					<td><a class="btn btn-outline-info" href="/clinics/details/${user.idDto}">Details</a></td>
+					<td><a class="btn btn-outline-success" href="/nurse/delete/${user.idDto}">Delete</a></td>
+					<td><a class="btn btn-outline-success" href="/nurse/edit/${user.idDto}">Edit</a></td>
+					<td><a class="btn btn-outline-info" href="/nurse/details/${user.idDto}">Details</a></td>
 				</tr>
 			</c:forEach>
 		</tr>
@@ -89,5 +87,6 @@
 	
 	
 	
+
 </body>
 </html>

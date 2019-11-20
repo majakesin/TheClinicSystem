@@ -8,9 +8,10 @@
 <body>
 
 	
-		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #00cc66;" >
+		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #53e3a6;" >
 		<li class="nav-item "><a  class="nav-link text-light" href="/clinics"><i class="fa fa-hospital-o" aria-hidden="true"></i> Klinika</a></li>
-		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user-md" aria-hidden="true"></i> Doktori</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href="/doctors"><i class="fa fa-user-md" aria-hidden="true"></i> Doktori</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href="/nurse"><i class="fa fa-user-md" aria-hidden="true"></i> Sestre</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-bed" aria-hidden="true"></i> Sale</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-calendar" aria-hidden="true"></i> Termini</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-line-chart" aria-hidden="true"></i> Poslovanje</a></li>

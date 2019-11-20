@@ -16,9 +16,13 @@ public interface UserService {
 	
 	Set<UserDto> allUsers();
 	
-
+	Set<UserDto> allNurse();
+	
+	 UserDto getUserById(Long idDto);
 	
 	Set<UserDto> allMedicalStaff();
+
+	void editUser(Long idDto);
 
 	
 
