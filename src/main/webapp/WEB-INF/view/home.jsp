@@ -8,9 +8,7 @@
 <title>Home page</title>
 </head>
 <body>
-	<div class="container">
-	 <%@ include file="Template.jsp" %>
-	</div>
+
 <h1>HOME PAGE</h1>
 
 <a href="/clinics">Clinics</a>

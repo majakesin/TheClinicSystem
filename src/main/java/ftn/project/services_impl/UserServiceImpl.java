@@ -47,6 +47,12 @@ public class UserServiceImpl implements UserService {
 		return userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
 	}
 
+	@Override
+	public UserDto getUserById(String username) {
+		// TODO Auto-generated method stub
+		return userMapper.UserToDto(userRepository.findByUsername(username));
+	}
+
 	
 	
 	

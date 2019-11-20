@@ -16,6 +16,7 @@ public interface UserService {
 	
 	Set<UserDto> allUsers();
 	
+	UserDto getUserById(String username);
 
 	
 	Set<UserDto> allMedicalStaff();
