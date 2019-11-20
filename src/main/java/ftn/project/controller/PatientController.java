@@ -19,9 +19,10 @@ import lombok.Data;
 @Controller
 public class PatientController {
 	
+	
 	private UserService userService;
 	
-	
+	//pisi mapiranja metoda na engleskom
 	@GetMapping("/registracija")
 	public ModelAndView showRegistrationPage(@ModelAttribute("userDto") UserDto userto,ModelMap model) {
 		
@@ -32,6 +33,9 @@ public class PatientController {
 	
 			userDto.setRoleDto("pacijent");
 			userService.createUser(userDto);
-			return "redirect:/registracija";
+			return "registrationConfirm";
 	}
+	
+	
+	
 }
