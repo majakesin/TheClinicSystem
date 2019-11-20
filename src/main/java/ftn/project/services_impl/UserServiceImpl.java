@@ -69,14 +69,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
-		if (user == null) {
-			throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
-		} else {
-			return user;
-		}
+
+	public UserDto getUserById(String username) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	
+	
+
 
 	public void changePassword(String oldPassword, String newPassword) {
 
