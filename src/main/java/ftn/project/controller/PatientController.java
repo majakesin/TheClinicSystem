@@ -22,9 +22,10 @@ import lombok.Data;
 @Controller
 public class PatientController {
 	
+	
 	private UserService userService;
 	
-	
+	//pisi mapiranja metoda na engleskom
 	@GetMapping("/registracija")
 	public ModelAndView showRegistrationPage(@ModelAttribute("userDto") UserDto userto,ModelMap model) {
 		
@@ -35,25 +36,6 @@ public class PatientController {
 	
 			userDto.setRoleDto("pacijent");
 			userService.createUser(userDto);
-			return "redirect:/logovanje";
-	}
-	
-	
-	@GetMapping("/logovanje")
-	public ModelAndView showLoginPage(@ModelAttribute("userDto") UserDto us, ModelMap m) {
-	
-		return new ModelAndView("login");
-	}
-	
-	
-	@PostMapping("/patient/login/{username}")
-	public String loginPatient(@PathParam("username") String username ,ModelMap model) {
-		
-		if(userService.getUserById(username)!=null) {
-			model.addAttribute("ulogovanPacijent", userService.getUserById(username));
-		System.out.println("BIO SAM OVDJE");
-		return "redirect:/home";
-	}
-	return "redirect:/logovanje";
-}
+      return"redirect:/logovanje";
+  }
 }
