@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
   
   
   
-	public Set<User> findAllByRole(String s); 
+	 
 
 
 //	public List<User> findAllByAuthority(String s); 
