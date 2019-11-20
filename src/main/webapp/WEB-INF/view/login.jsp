@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 
@@ -9,7 +9,7 @@
 
 <head>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -182,12 +182,12 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 
 	<div class="wrapper">
 	<div class="container">
-		<h1>Dobrodosli</h1>
+		<h1>Dobrodošli</h1>
 		
 		<form:form method="POST"  class="form" action="/patient/login/${username}" modelAttribute="userDto">
-			<form:input class="form-control" id="usernameDto" placeholder="Korisnicko ime" path="usernameDto" required="required"/>
+			<form:input class="form-control" id="usernameDto" placeholder="Korisničko ime" path="usernameDto" required="required"/>
 			<br>
-			<form:input class="form-control" placeholder="Lozinka" path="passwordDto" required="required"/>
+			<form:input class="form-control" type="password" placeholder="Lozinka" path="passwordDto" required="required"/>
 			<br>
 			<input type="submit"  id="login" value= "Uloguj se">
 			<br>

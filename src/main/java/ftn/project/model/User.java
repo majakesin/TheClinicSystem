@@ -80,7 +80,7 @@ public class User implements UserDetails{
     inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
 	private Set<Authority> authorities;
 	
-	
+	private String role;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
