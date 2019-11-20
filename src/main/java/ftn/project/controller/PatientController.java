@@ -59,8 +59,26 @@ public class PatientController {
       return"redirect:/logovanje";
 	}
 	
+ 
+	@GetMapping("/logovanje")
+	public ModelAndView showLoginPage(@ModelAttribute("userDto") UserDto us, ModelMap m) {
+	
+		return new ModelAndView("login");
+	}
+	@PostMapping("/patient/login/")
+	public String login(@ModelAttribute("userDto") UserDto us,ModelMap m) {
+		return "redirect:/"+userService.autentification(us);
+	}
+	
+	@GetMapping("/badUser")
+	public String showBad() {
+	
+		return "badUser";
+	}
+
 	
 	
 	
+
 	
 }

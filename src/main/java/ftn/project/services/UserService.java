@@ -18,6 +18,10 @@ public interface UserService extends UserDetailsService,IUserService  {
 	Set<UserDto> allUsers();
 	
 	UserDto getUserById(String username);
+	
+	UserDto getUserByRole(String role);
+	
+	String autentification(UserDto userDto);
 
 	
 	Set<UserDto> allMedicalStaff();

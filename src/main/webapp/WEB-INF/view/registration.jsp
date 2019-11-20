@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Registration</title>
 
 <style type="text/css">
@@ -128,7 +128,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 	}
 	
 	#registracija{
-		
+		font-color :#53e3a6
 		appearance: none;
 		outline: 0;
 		background-color: white;
@@ -170,7 +170,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 				
 				
 		
-				<form:input class="form-control" placeholder=" * Korisnicko ime" path="usernameDto" required="required" />
+				<form:input class="form-control" placeholder=" * Korisničko ime" path="usernameDto" required="required" />
 			
 				<form:input class="form-control" type="password" placeholder=" * Lozinka"  path="passwordDto"  required="required"/>
 		
@@ -185,7 +185,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 				<form:input class="form-control" placeholder=" Grad" path="cityDto" />
 			
 				
-				<form:input class="form-control" placeholder = " Drzava" path="countryDto" />
+				<form:input class="form-control" placeholder = " Država" path="countryDto" />
 			
 			
 				
@@ -197,7 +197,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 				<form:input class="form-control"  type="email" placeholder= " * Email" path="emailDto" required="required"/>
 			
 				<br>
-				 <input  type="submit" id="registracija"  value="Registruj se" />
+				 <input  type="submit" id="Registracija" value="Registruj se" />
 				
 				
 	</form:form>

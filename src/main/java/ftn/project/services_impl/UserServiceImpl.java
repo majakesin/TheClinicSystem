@@ -1,6 +1,7 @@
 package ftn.project.services_impl;
 
 import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +72,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 
 	public UserDto getUserById(String username) {
+
+	
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	
 
+	}
+
+	public UserDto getUserByRole(String role) {
+		return userMapper.UserToDto(userRepository.findByRole(role));
+	}
 
 	public void changePassword(String oldPassword, String newPassword) {
 
@@ -105,8 +112,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-
-
 	@Override
 	public void createVerificationToken(User user, String token) {
 		// TODO Auto-generated method stub
@@ -122,7 +127,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(String verificationToken) {
 		return verificationTokenRepository.findByToken(verificationToken).getUser();
-		
+
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String autentification(UserDto userDto) {
+		for(User u : userRepository.findAll()) {
+			if(u.getUsername().equals(userDto.getUsernameDto())&&u.getPassword().equals(userDto.getPasswordDto())) {
+				if(u.getRole().equals("Admin")) {
+					return "administratorRegistration";
+			}
+				else if(u.getRole().equals("doktor")) {
+					return "doctors";
+				}
+				return "home";
+			}
+		}
+		return "badUser";
 	}
 
 	@Override
