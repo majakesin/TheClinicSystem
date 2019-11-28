@@ -53,7 +53,7 @@
 	 <div class="col-sm">
 	 <br> <br> <br>
 	<table class="table">
-		<tr style="background-color: #00cc66;">
+		<tr style="background-color: #FF756B;">
 			<th colspan=4 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> ADMINISTRATORI </h6> </th>
 		</tr>
 		<tr>
