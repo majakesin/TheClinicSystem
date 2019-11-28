@@ -21,9 +21,10 @@
 	 <div class="col-sm">
 		<br> <br> <br>
 		
-	<form:form method="POST" action="/nurse/create"
+	<form:form method="POST" action="/nurse/edit/create"
 		modelAttribute="userDto">
 		<table>
+			<tr><td><form:hidden path="idDto"/></td></tr>
 			<tr>
 				<td><form:label path="nameDto">Ime:</form:label></td>
 				<td><form:input class="form-control" placeholder="Name" path="nameDto" /></td>
@@ -43,50 +44,8 @@
 			<tr>
 				<td></td>
 				<td></td>
-				<td><input type="submit" class="btn btn-outline-danger" value="Kreiraj" /></td>
+				<td><input type="submit" class="btn btn-outline-warning" value="Izmeni" /></td>
 			</tr>
 		</table>
 	</form:form>
 	</div>
-
-	 <div class="col-sm">
-	 <br> <br> <br>
-	<table class="table">
-		
-		<tr style="background-color: #53e3a6;">
-			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> MEDICINSKO OSOBLJE </h6> </th>
-		</tr>
-		<tr>
-			<td>Ime</td>
-			<td>Adresa</td>
-			<td>Mobilni telefon</td>
-			
-			
-			<td>Izbrši</td>
-			<td>Izmeni</td>
-			<td>Više</td>
-		</tr>
-		<tr>
-			<c:forEach var="user" items="${nurseDto}">
-				<tr>
-					<td><c:out value="${user.nameDto}" /></td>
-					<td><c:out value="${user.surnameDto}" /></td>
-					<td><c:out value="${user.phoneDto}" /></td>
-					<td><a class="btn btn-outline-success" href="/nurse/delete/${user.idDto}">Delete</a></td>
-					<td><a class="btn btn-outline-success" href="/nurse/edit/${user.idDto}">Edit</a></td>
-					<td><a class="btn btn-outline-info" href="/nurse/details/${user.idDto}">Details</a></td>
-				</tr>
-			</c:forEach>
-		</tr>
-
-	</table>
-	</div>
-	</div>
-	</div>
-	
-	
-	
-	
-
-</body>
-</html>

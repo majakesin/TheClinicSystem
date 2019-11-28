@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
-<title>Administrator registration</title>
+<title>Administrator registration requests</title>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 	 <div class="col-sm">
 	 <br> <br> <br>
 	<table class="table">
-		<tr style="background-color: #00cc66;">
+		<tr style="background-color: #FF756B;">
 			<th colspan=4 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> ZAHTEVI </h6> </th>
 		</tr>
 		<tr>

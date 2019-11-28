@@ -10,11 +10,11 @@
 <body>
 
 	
-		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #53e3a6;" >
+		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #FF756B;" >
 		<li class="nav-item "><a  class="nav-link text-light" href="/clinics"><i class="fa fa-hospital-o" aria-hidden="true"></i> Klinike</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href="/administrators"><i class="fa fa-user-plus" aria-hidden="true"></i> Administratori</a></li>
 		
-		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-book" aria-hidden="true"></i> Sifrarnik</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href=/administrators/codebook/><i class="fa fa-book" aria-hidden="true"></i> Sifrarnik</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=/requests><i class="fa fa-bell" aria-hidden="true"></i>Zahtevi</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>
