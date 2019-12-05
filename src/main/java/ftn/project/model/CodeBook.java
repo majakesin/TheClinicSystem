@@ -14,7 +14,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 @Table(name = "Codebook")
-public class Codebook {
+public class CodeBook {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
