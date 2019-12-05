@@ -1,5 +1,6 @@
 package ftn.project.dto;
 
+import ftn.project.model.MedicalRecord;
 import lombok.Data;
 
 @Data
@@ -15,6 +16,8 @@ public class RequestDto {
 	public String phoneDto;
 	public String emailDto;
 	public String roleDto;
+	
+	private MedicalRecord medicalDto;
 	
 	private String countryDto;
 	private String insuranceNumberDto;

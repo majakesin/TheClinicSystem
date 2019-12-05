@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void deleteUser(Long idDto) {
-
 		userRepository.deleteById(idDto);
 	}
 
@@ -179,6 +178,12 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 		return "badUser";
+	}
+
+	@Override
+	public Set<UserDto> allUserByRole(String role) {
+		Set<User> users=userRepository.findAllByRole(role);
+		return userMapper.UserToDtoSet(users);
 	}
 
 	

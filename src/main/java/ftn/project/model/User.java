@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,8 +25,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="User")
-public class User implements UserDetails{
+@Table(name = "User")
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,9 +35,9 @@ public class User implements UserDetails{
 	@Column(name = "Username", nullable = false)
 	private String username;
 
-	@Column(name="Password",nullable = false)
+	@Column(name = "Password", nullable = false)
 	private String password;
-	
+
 	@Column(name = "Name", nullable = true)
 	private String name;
 
@@ -57,29 +58,31 @@ public class User implements UserDetails{
 
 	@Column(name = "Email", nullable = true)
 	private String email;
-	
+
 	@Column(name = "Enabled")
 	private boolean enabled;
-	
-	//polje za pacijenta
+
+	// polje za pacijenta
 	@Column(name = "InsuranceNumber", nullable = true)
 	private String insuranceNumber;
-	
-	
+
 	// polja za doktora
-	@Column(name= "Biography",nullable = true)
+	@Column(name = "Biography", nullable = true)
 	private String biography;
-	
-	@Column(name="Mark",nullable = true)
+
+	@Column(name = "Mark", nullable = true)
 	private String mark;
-	
-	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(name = "user_authority",
-    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name = "PacientRecords", joinColumns = {
+			@JoinColumn(name = "pacient_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "records_id", referencedColumnName = "id") })
+	private MedicalRecord medicalRecord;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
 	private Set<Authority> authorities;
-	
+
 	private String role;
 
 	@Override
@@ -107,7 +110,6 @@ public class User implements UserDetails{
 		return true;
 	}
 
-	
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub

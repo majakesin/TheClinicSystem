@@ -36,7 +36,7 @@ public class PatientController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	private UserService userService;
+	private final UserService userService;
 	
 	@Autowired
 	private RequestService requestService;
@@ -54,6 +54,7 @@ public class PatientController {
 	public String createPatient(@Valid @ModelAttribute("userDto") UserDto userDto) {
 	
 			userDto.setRoleDto("pacijent");
+			
 			requestService.saveRequest(userDto);
 //			userService.createUser(userDto);
       return"redirect:/logovanje";
