@@ -36,4 +36,12 @@ public class ClinicServiceImpl implements ClinicService {
 		return clinicMapper.ClinicToDtoSet(clinicRepository.findAll());
 	}
 
+	@Override
+	public ClinicDto getClinicById(Long id) {
+		// TODO Auto-generated method stub
+		return clinicMapper.ClinicToDto(clinicRepository.findAllById(id));
+	}
+
+	
+
 }

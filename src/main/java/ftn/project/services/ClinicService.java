@@ -16,6 +16,10 @@ public interface ClinicService {
 	public void deleteClinic(Long id);
 	
 	public Set<ClinicDto> allClinics();
+
+	public ClinicDto getClinicById(Long id);
+
+	
 	
 	
 }

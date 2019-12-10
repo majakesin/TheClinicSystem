@@ -18,6 +18,10 @@ import lombok.Data;
 @Table(name = "Room")
 public class Room {
 
+	public Room() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -28,6 +32,5 @@ public class Room {
 	@Column(name = "HallNumber", nullable = false)
 	private String hallNumber;
 	
-//	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
-//	private Appointment appointment;
+
 }
