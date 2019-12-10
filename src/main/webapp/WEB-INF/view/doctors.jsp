@@ -36,7 +36,7 @@
 			</tr>
 			<tr>
 				<td><form:label path="surnameDto">Prezime:</form:label></td>
-				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" /></td>
+				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" val/></td>
 
 			<tr>
 				<td><form:label path="usernameDto">Korisničko ime:</form:label></td>
