@@ -33,7 +33,7 @@ public class ClinicController {
 	
 	
 	
-	
+	@PostMapping("/clinics/create")
 	public String createClinic(@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
 		clinicService.createClinic(clinicDto);
 		return "redirect:/clinics";

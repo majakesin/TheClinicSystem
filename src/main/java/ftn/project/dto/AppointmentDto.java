@@ -18,7 +18,4 @@ public class AppointmentDto {
 	public String priceDto;
 	public String discountDto;
 
-public class AppointmentDto {
-
-
 }
