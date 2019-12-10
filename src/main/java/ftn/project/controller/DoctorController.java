@@ -30,6 +30,7 @@ public class DoctorController {
 		return new ModelAndView("doctors", "Model", userService.allMedicalStaff());
 
 	}
+	
 
 	@PostMapping("/doctors/create")
 	public String createClinic(@Valid @ModelAttribute("userDto") UserDto userDto) {
