@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-=======
+
 
 	public Set<UserDto> allUsers() {
 		return userMapper.UserToDtoSet(userRepository.findAll());
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	}
+	
 
 	public UserDto getUserByRole(String role) {
 		return userMapper.UserToDto(userRepository.findByRole(role));
@@ -160,11 +160,7 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public String autentification(UserDto userDto) {
@@ -175,6 +171,9 @@ public class UserServiceImpl implements UserService {
 			}
 				else if(u.getRole().equals("doktor")) {
 					return "doctors";
+				}
+				else if(u.getRole().equals("pacijent")) {
+					return "patientProfile";
 				}
 				return "home";
 			}

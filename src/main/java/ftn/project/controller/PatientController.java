@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,7 @@ public class PatientController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	private UserService userService;
+	private final UserService userService;
 	
 	@Autowired
 	private RequestService requestService;
@@ -55,7 +56,7 @@ public class PatientController {
 	
 			userDto.setRoleDto("pacijent");
 			requestService.saveRequest(userDto);
-//			userService.createUser(userDto);
+			userService.createUser(userDto);
       return"redirect:/logovanje";
 	}
 	
@@ -76,9 +77,35 @@ public class PatientController {
 		return "badUser";
 	}
 
+	@GetMapping("/patientHome")
+	public ModelAndView home(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		
+		return new ModelAndView("patientHome");
+	}
 	
+	@GetMapping("/patientProfile")
+	public ModelAndView profil(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		Long id=(long) 131;
+		model.addAttribute("userDto", userService.getUserById(id));
+		
+		return new ModelAndView("patientProfile", "Model", userService.allUsers());
+		
+	}
 	
+	@GetMapping("/patientProfile/edit/{idDto}")
+	public ModelAndView getEditPatient(@PathVariable("idDto") Long idDto,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		model.addAttribute("userDto",userService.getUserById(idDto));
+		return new ModelAndView("patientEdit");
+	}
 	
+
+	@PostMapping("/patientProfile/edit/create")
+	public String EditPatient(@ModelAttribute("userDto") UserDto userDto) {
+		
+		
+		userService.createUser(userDto);
+		return "redirect:/patientProfile";
+	}
 
 	
 }
