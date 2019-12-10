@@ -22,7 +22,7 @@ import lombok.Data;
 @Controller
 public class DoctorController {
 
-	private UserService userService;
+	private final UserService userService;
 
 	@GetMapping("/doctors")
 	public ModelAndView showUsers(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
@@ -30,6 +30,7 @@ public class DoctorController {
 		return new ModelAndView("doctors", "Model", userService.allMedicalStaff());
 
 	}
+	
 
 	@PostMapping("/doctors/create")
 	public String createClinic(@Valid @ModelAttribute("userDto") UserDto userDto) {
@@ -38,9 +39,22 @@ public class DoctorController {
 		return "redirect:/doctors";
 	}
 
-	@GetMapping("doctors/delete/{idDto}")
+	@GetMapping("/doctors/delete/{idDto}")
 	public String deleteDoctor(@PathVariable("idDto") Long idDto, ModelMap model) {
 		userService.deleteUser(idDto);
+		return "redirect:/doctors";
+	}
+	
+	@GetMapping("/doctors/edit/{idDto}")
+	public String getEditPage(@PathVariable("idDto") Long idDto, ModelMap model) {
+		model.addAttribute("userDto",userService.getUserById(idDto));
+		return "doctorEdit";
+	}
+	
+	@PostMapping("/doctors/edit/create")
+	public String editDoctor(@Valid @ModelAttribute("userDto") UserDto userDto) {
+		userDto.setRoleDto("doktor");
+		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}
 

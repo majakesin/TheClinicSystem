@@ -4,6 +4,7 @@ package ftn.project.dto;
 
 
 
+
 import lombok.Data;
 
 @Data
@@ -16,4 +17,8 @@ public class AppointmentDto {
 	public String typeDto;
 	public String priceDto;
 	public String discountDto;
+
+public class AppointmentDto {
+
+
 }
