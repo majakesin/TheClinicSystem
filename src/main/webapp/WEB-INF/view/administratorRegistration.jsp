@@ -69,7 +69,7 @@
 					<td><c:out value="${user.usernameDto}" /></td>
 					<td><c:out value="${user.passwordDto}" /></td>
 					<td><c:out value="${user.roleDto}" /></td>
-					<td><a  class="btn btn-outline-success" href="/clinics/delete/${user.idDto}">Delete</a></td>
+					<td><a  class="btn btn-outline-success" href="administrators/user/delete/${user.idDto}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</tr>

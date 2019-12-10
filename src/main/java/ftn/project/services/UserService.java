@@ -17,6 +17,7 @@ public interface UserService extends UserDetailsService,IUserService  {
 	
 	Set<UserDto> allUsers();
 	
+	Set<UserDto> allUserByRole(String role);
 
 	Set<UserDto> allNurse();
 	
@@ -28,6 +29,8 @@ public interface UserService extends UserDetailsService,IUserService  {
 	UserDto getUserByRole(String role);
 	
 	String autentification(UserDto userDto);
+	
+	
 
 
 	

@@ -49,6 +49,9 @@ public class RegisterRequest {
 	@Column(name = "Enabled")
 	private boolean enabled;
 	
+	@Column(name="Role",nullable = true)
+	private String role;
+	
 	//polje za pacijenta
 	@Column(name = "InsuranceNumber", nullable = true)
 	private String insuranceNumber;

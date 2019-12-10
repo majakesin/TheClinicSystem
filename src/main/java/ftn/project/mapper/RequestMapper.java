@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import ftn.project.dto.RequestDto;
 import ftn.project.dto.UserDto;
+import ftn.project.model.MedicalRecord;
 import ftn.project.model.RegisterRequest;
 import ftn.project.model.User;
 import lombok.Data;
@@ -59,6 +60,7 @@ public class RequestMapper {
 		
 		request.setBiographyDto(registerRequest.getBiography());
 		request.setMarkDto(registerRequest.getMark());
+		request.setRoleDto(registerRequest.getRole());
 		
 		request.setCountryDto(registerRequest.getCountry());
 		request.setInsuranceNumberDto(registerRequest.getInsuranceNumber());
@@ -82,6 +84,8 @@ public class RequestMapper {
 		
 		u.setBiography(requestDto.getBiographyDto());
 		u.setMark(requestDto.getMarkDto());
+		u.setRole(requestDto.getRoleDto());
+		
 		
 		u.setCountry(requestDto.getCountryDto());
 		u.setInsuranceNumber(requestDto.getInsuranceNumberDto());
@@ -104,6 +108,9 @@ public class RequestMapper {
 		
 		regRequest.setBiography(userDto.getBiographyDto());
 		regRequest.setMark(userDto.getMarkDto());
+		regRequest.setRole(userDto.getRoleDto());
+		
+		
 		
 		regRequest.setCountry(userDto.getCountryDto());
 		regRequest.setInsuranceNumber(userDto.getInsuranceNumberDto());

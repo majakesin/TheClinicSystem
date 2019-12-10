@@ -12,14 +12,22 @@ import ftn.project.dto.UserDto;
 import ftn.project.mapper.AppointmentMapper;
 import ftn.project.mapper.RequestMapper;
 import ftn.project.mapper.UserMapper;
+
+import ftn.project.model.MedicalRecord;
+
 import ftn.project.model.Appointment;
+
 import ftn.project.model.RegisterRequest;
+import ftn.project.model.User;
+import ftn.project.repository.MedicalRecordsRepository;
 import ftn.project.repository.RequestRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.repository.SchedulingRequestRepository;
 import ftn.project.services.RequestService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
 
 	@Autowired
@@ -34,6 +42,9 @@ public class RequestServiceImpl implements RequestService {
 	@Autowired
 	private UserRepository userRepository;
 	
+
+	private final MedicalRecordsRepository medicalRecordsRepository;
+
 	
 	// za slanje zahteva za pregled
 	
@@ -43,6 +54,7 @@ public class RequestServiceImpl implements RequestService {
 	@Autowired
 	private AppointmentMapper appointmentMapper;
 	
+
 	
 	@Override
 	public Set<RequestDto> allRequests() {
@@ -53,8 +65,10 @@ public class RequestServiceImpl implements RequestService {
 	public void acceptRequest(Long id) {
 		// TODO Auto-generated method stub
 		RegisterRequest registerRequest=requestRepository.findById(id).get();
+		User user=requestMapper.mappToUser(requestMapper.requestToDto(registerRequest));
+		user.setMedicalRecord(new MedicalRecord());
+		userRepository.save(user);
 		
-		userRepository.save(requestMapper.mappToUser(requestMapper.requestToDto(registerRequest)));
 		requestRepository.deleteById(id);
 
 	}

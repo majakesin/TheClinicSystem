@@ -55,6 +55,7 @@ public class PatientController {
 	public String createPatient(@Valid @ModelAttribute("userDto") UserDto userDto) {
 	
 			userDto.setRoleDto("pacijent");
+			
 			requestService.saveRequest(userDto);
 			userService.createUser(userDto);
       return"redirect:/logovanje";
