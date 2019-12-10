@@ -30,8 +30,7 @@ import lombok.Data;
 
 @Service
 @Data
-@AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -108,7 +107,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 
 
