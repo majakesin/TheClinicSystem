@@ -22,9 +22,13 @@ public interface UserService extends UserDetailsService,IUserService  {
 	Set<UserDto> allNurse();
 	
 
-	 UserDto getUserById(Long idDto);
 
-	UserDto getUserById(String username);
+
+
+	UserDto getUserById(Long idDto);
+	
+
+	UserDto getUserByUsername(String username);
 	
 	UserDto getUserByRole(String role);
 	

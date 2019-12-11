@@ -108,7 +108,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 11aefb9ab9caf85e1c3c8a55f8300d83c9e818a5
 
 	public UserDto getUserByRole(String role) {
 		return userMapper.UserToDto(userRepository.findByRole(role));
