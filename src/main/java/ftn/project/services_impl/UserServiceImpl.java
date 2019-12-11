@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void deleteUser(Long idDto) {
-
 		userRepository.deleteById(idDto);
 	}
 
@@ -163,11 +162,7 @@ public class UserServiceImpl implements UserService{
 
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public String autentification(UserDto userDto) {
@@ -179,10 +174,25 @@ public class UserServiceImpl implements UserService{
 				else if(u.getRole().equals("doktor")) {
 					return "doctors";
 				}
+				else if(u.getRole().equals("pacijent")) {
+					return "patientProfile";
+				}
 				return "home";
 			}
 		}
 		return "badUser";
+	}
+
+	@Override
+	public Set<UserDto> allUserByRole(String role) {
+		Set<User> users=userRepository.findAllByRole(role);
+		return userMapper.UserToDtoSet(users);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
