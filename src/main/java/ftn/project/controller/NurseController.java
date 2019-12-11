@@ -55,17 +55,23 @@ public class NurseController {
 		return "redirect:/nurse";
 	}
 	
-	@PostMapping("/nurse/edit")
-	public String editNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
-		
-		userService.createUser(userDto);
-		return "redirect:/nurse";
+	@GetMapping("/nurse/edit/{idDto}")
+	public String getEditPage(@PathVariable("idDto") Long idDto, ModelMap model) {
+		model.addAttribute("userDto",userService.getUserById(idDto));
+		return "nurseEdit";
 	}
+	
 
-
-	@GetMapping("nurse/delete/{idDto}")
+	@GetMapping("/nurse/delete/{idDto}")
 	public String deleteNurse(@PathVariable("idDto") Long idDto, ModelMap model) {
 		userService.deleteUser(idDto);
+		return "redirect:/nurse";
+	}
+	
+	@PostMapping("/nurse/edit/create")
+	public String editNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
+		userDto.setRoleDto("med. sestra");
+		userService.createUser(userDto);
 		return "redirect:/nurse";
 	}
 

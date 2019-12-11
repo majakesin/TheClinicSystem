@@ -30,8 +30,7 @@ import lombok.Data;
 
 @Service
 @Data
-@AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -110,7 +109,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 11aefb9ab9caf85e1c3c8a55f8300d83c9e818a5
 
 	public UserDto getUserByRole(String role) {
 		return userMapper.UserToDto(userRepository.findByRole(role));
