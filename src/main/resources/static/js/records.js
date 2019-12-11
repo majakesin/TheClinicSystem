@@ -58,7 +58,7 @@ $(document).ready(function() {
 												+ "></tr></div>");
 						$("#pacientRecords")
 						.append(
-								"<div><tr><td></td><td></td></tr><tr><td><input type=\"submit\" id=\"saveChanges\" class=\"btn btn-outline-danger\" value=\"Sacuvaj izmene\" onclick=\"foo();\" /></td></tr>" +
+								"<div><tr><td></td><td></td></tr><tr><td><input type=\"submit\" id=\"saveChanges\" class=\"btn btn-outline-danger\" value=\"Sacuvaj izmene\" onclick=\"foo()\" /></td></tr>" +
 								"</table></div>");
 						
 	}

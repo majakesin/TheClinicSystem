@@ -1,9 +1,11 @@
 package ftn.project.controller;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpRequest;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.CodeBookDto;
 import ftn.project.model.CodeBook;
 import ftn.project.services.CodeBookService;
+import ftn.project.services_impl.EmailServiceImpl;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -25,6 +28,8 @@ public class CodeBookController {
 
 	private final CodeBookService codeBookService;
 
+	private  EmailServiceImpl emailService;
+	
 	@GetMapping
 	public ModelAndView getCodeBook(@ModelAttribute("codeBookDto") CodeBookDto codeBookDto, ModelMap model) {
 		model.addAttribute("codeBooksDto", codeBookService.allCodeBooks());
@@ -32,8 +37,14 @@ public class CodeBookController {
 	}
 
 	@PostMapping("/create")
-	public String createCodeBook(@Valid @ModelAttribute("codeBookDto") CodeBookDto codeBookDto) {
+	public String createCodeBook(@Valid @ModelAttribute("codeBookDto") CodeBookDto codeBookDto) throws MailException, MessagingException {
 		codeBookService.createCodeBook(codeBookDto);
+		try {
+			emailService.send("abc@gmail.com", "do not reply", "this is the template mesage");
+		} 
+		catch (Exception ex) {
+		   ex.printStackTrace(); //but use a logger instead
+		}
 		return "redirect:/administrators/codebook";
 	}
 
