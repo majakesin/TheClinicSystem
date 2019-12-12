@@ -33,12 +33,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public Set<User> findBySurname(String surnameDto);
 	public Set<User> findByInsuranceNumber(String insuranceNumberDto);
 
-	//za pretragu doktora
-	public Set<User> findByName(String nameDto);
-	public Set<User> findBySurname(String surnameDto);
+
 	public Set<User> findByMark(String markDto);
 	
-	public Set<User> findByNameAndSurname(String nameDto, String surnameDto);
+
 	public Set<User> findByNameAndMark(String nameDto, String markDto);
 	public Set<User> findBySurnameAndMark(String surnameDto, String markDto);
 	
