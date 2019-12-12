@@ -39,12 +39,7 @@ public class CodeBookController {
 	@PostMapping("/create")
 	public String createCodeBook(@Valid @ModelAttribute("codeBookDto") CodeBookDto codeBookDto) throws MailException, MessagingException {
 		codeBookService.createCodeBook(codeBookDto);
-		try {
-			emailService.send("abc@gmail.com", "do not reply", "this is the template mesage");
-		} 
-		catch (Exception ex) {
-		   ex.printStackTrace(); //but use a logger instead
-		}
+		
 		return "redirect:/administrators/codebook";
 	}
 

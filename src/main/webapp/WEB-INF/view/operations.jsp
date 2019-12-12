@@ -75,7 +75,7 @@
 					<td><c:out value="${user.nameDto}" /></td>
 					<td><c:out value="${user.surnameDto}" /></td>
 					<td><c:out value="${user.biographyDto}" /></td>
-					<td><input type="checkbox" id="${user.idDto}"></td>
+					<td><input type="checkbox" value="${user.nameDto}"></td>
 				</tr>
 			</c:forEach>
 		</tr>

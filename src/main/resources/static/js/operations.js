@@ -14,9 +14,30 @@ $(document).ready(function(){
   });
   
   $("#createOperation").on('click',function(){
-	 alert("eag");
+	 
   });
   
+  $('#createOperation').click(function(){
+	  var list = [];
+	  
+	  $(':checkbox:checked').each(function(i){
+		  list[i] = $(this).val();
+		  
+      });
+	  
+	  $.ajax({
+			type : "POST",
+			url : "/operations/sendmail",
+			dataType:"json",
+			contentType: "application/json; charset=utf-8",
+			data:JSON.stringify({"operationIds" :list}),
+				success : function(data) {
+					
+				}
+	  
+	  });
+	  alert(list);
+  });
   
   
   

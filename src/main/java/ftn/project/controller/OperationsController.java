@@ -8,12 +8,15 @@ import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ftn.project.dto.OperationDto;
 import ftn.project.model.Appointment;
 import ftn.project.services.AppointmentService;
+import ftn.project.services.OperationService;
 import ftn.project.services.UserService;
-import ftn.project.services_impl.EmailServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -25,7 +28,7 @@ public class OperationsController {
 	
 	private final AppointmentService appointmentService;
 	
-	
+	private final OperationService operationService;
 
 	@GetMapping
 	public String getPage(Model model) throws MailException, MessagingException {
@@ -35,5 +38,11 @@ public class OperationsController {
 		
 		return "operations";
 		
+	}
+	
+	@PostMapping("/sendmail")
+	public String getIds(@RequestBody OperationDto operationDto ) {
+		operationService.scheduleOperation();
+		return "operations";
 	}
 }

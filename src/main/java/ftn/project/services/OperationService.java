@@ -7,6 +7,6 @@ import ftn.project.dto.UserDto;
 
 public interface OperationService {
 
-	void scheduleOperation(RoomDto roomDto,Collection<UserDto> doctors);
+	void scheduleOperation();
 	
 }
