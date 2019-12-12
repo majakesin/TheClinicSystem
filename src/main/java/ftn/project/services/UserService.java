@@ -42,6 +42,8 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	void editUser(Long idDto);
 
+	Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto);
+
 	
 
 }

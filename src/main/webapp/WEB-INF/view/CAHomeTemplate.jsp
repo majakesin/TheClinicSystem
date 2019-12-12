@@ -20,6 +20,7 @@
 		<li class="nav-item "><a class="nav-link text-light" href="/rooms"><i class="fa fa-bed" aria-hidden="true"></i> Sale</a></li>
 
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-line-chart" aria-hidden="true"></i> Poslovanje</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href="/doctorsSearch"><i class="fa fa-search" aria-hidden="true"></i> Pretraga doktora</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>
 	
