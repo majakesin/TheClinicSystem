@@ -1,5 +1,8 @@
 package ftn.project.controller;
 
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
-import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +32,32 @@ public class NurseController {
 		return new ModelAndView("nurseAdd", "Model", userService.allNurse());
 
 	}
+	
+	
+	@GetMapping("/patientSearch/nurse")
+	public ModelAndView searchPatient(HttpServletRequest request, @ModelAttribute("patientDto") UserDto patientDto, ModelMap model) {
+		ModelAndView mav=new ModelAndView("patientSearchNurse");
+		
+		Set<UserDto> pacijenti=(Set<UserDto>)request.getSession().getAttribute("patientsDto");
+		
+		if(pacijenti==null) {
+			mav.addObject("patientsDto", userService.allUserByRole("pacijent"));
+		}
+		else {
+	
+		mav.addObject("patientsDto", pacijenti);
+		}
+		return mav;
 
+	}
+	
+	@PostMapping("/patient/search")
+	public String searchPatientR(HttpServletRequest request,@ModelAttribute("patientDto") UserDto patientDto,ModelMap model) {
+		request.getSession().setAttribute("patientsDto", userService.searchPatient(patientDto.nameDto, patientDto.surnameDto, patientDto.getInsuranceNumberDto()));
+		return "redirect:/patientSearch/nurse";
+		
+	}
+	
 	
 	@GetMapping("/nurseProfile/edit/{idDto}")
 	public ModelAndView showNurseProfileEdit(@ModelAttribute("userDto") UserDto userDto,@PathVariable("idDto") Long idDto, ModelMap model ) {

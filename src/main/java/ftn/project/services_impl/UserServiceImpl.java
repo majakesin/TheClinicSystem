@@ -1,9 +1,7 @@
 package ftn.project.services_impl;
 
-
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -25,12 +23,11 @@ import ftn.project.model.VerificationToken;
 import ftn.project.repository.UserRepository;
 import ftn.project.repository.VerificationTokenRepository;
 import ftn.project.services.UserService;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Service
 @Data
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -58,20 +55,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void deleteUser(Long idDto) {
-
 		userRepository.deleteById(idDto);
 	}
 
-
 	public UserDto getUserById(Long idDto) {
-			
-		
-		return userMapper.UserToDto(userRepository.findAllById(idDto));
-	
-		
-	}
-	
 
+		return userMapper.UserToDto(userRepository.findAllById(idDto));
+
+	}
 
 	public Set<UserDto> allUsers() {
 		return userMapper.UserToDtoSet(userRepository.findAll());
@@ -86,34 +77,21 @@ public class UserServiceImpl implements UserService{
 	@Override
 
 	public Set<UserDto> allNurse() {
-		
+
 		return userMapper.UserToDtoSet(userRepository.findAllByRole("med. sestra"));
 	}
-
-	
 
 	@Override
 	public void editUser(Long idDto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-
 	public UserDto getUserById(String username) {
-
-
-	
 
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 11aefb9ab9caf85e1c3c8a55f8300d83c9e818a5
 
 	public UserDto getUserByRole(String role) {
 		return userMapper.UserToDto(userRepository.findByRole(role));
@@ -164,20 +142,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String autentification(UserDto userDto) {
-		for(User u : userRepository.findAll()) {
-			if(u.getUsername().equals(userDto.getUsernameDto())&&u.getPassword().equals(userDto.getPasswordDto())) {
-				if(u.getRole().equals("Admin")) {
+		for (User u : userRepository.findAll()) {
+			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
+				if (u.getRole().equals("Admin")) {
 					return "administratorRegistration";
-			}
-				else if(u.getRole().equals("doktor")) {
+				} else if (u.getRole().equals("doktor")) {
 					return "doctors";
+				} else if (u.getRole().equals("pacijent")) {
+					return "patientProfile";
 				}
 				return "home";
 			}
@@ -185,6 +158,66 @@ public class UserServiceImpl implements UserService{
 		return "badUser";
 	}
 
-	
+	@Override
+	public Set<UserDto> allUserByRole(String role) {
+		Set<User> users = userRepository.findAllByRole(role);
+		return userMapper.UserToDtoSet(users);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDto getUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<UserDto> searchPatient(String nameDto, String surnameDto, String insuranceNumberDto) {
+		// TODO Auto-generated method stub
+		Set<UserDto> pacijenti = null;
+		if (nameDto != "" & surnameDto != "" & insuranceNumberDto != "") {
+			Set<User> pacijentiTemp = userRepository.findByNameAndSurnameAndInsuranceNumber(nameDto, surnameDto,
+					insuranceNumberDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+			return pacijenti;
+		} else if (nameDto != "" & surnameDto != "" & insuranceNumberDto == ""){
+			Set<User> pacijentiTemp = userRepository.findByNameAndSurname(nameDto, surnameDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+			return pacijenti;
+		}
+
+		else if (nameDto != "" & surnameDto == "" & insuranceNumberDto != "") {
+			Set<User> pacijentiTemp = userRepository.findByNameAndInsuranceNumber(nameDto, insuranceNumberDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+			return pacijenti;
+		} else if (nameDto == "" & surnameDto != "" & insuranceNumberDto != "") {
+			Set<User> pacijentiTemp = userRepository.findBySurnameAndInsuranceNumber(surnameDto, insuranceNumberDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+			return pacijenti;
+		} else if (nameDto == "" & surnameDto == "" & insuranceNumberDto == "") {
+
+			Set<User> pacijentiTemp = userRepository.findAllByRole("pacijent");
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+			return pacijenti;
+		}
+		else if(nameDto!="" & surnameDto == "" & insuranceNumberDto == "" ) {
+			Set<User> pacijentiTemp = userRepository.findByName(nameDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+		}
+		else if(nameDto=="" & surnameDto != "" & insuranceNumberDto == "" ) {
+			Set<User> pacijentiTemp = userRepository.findBySurname(surnameDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+		}
+		else if(nameDto=="" & surnameDto == "" & insuranceNumberDto != "" ) {
+			Set<User> pacijentiTemp = userRepository.findByInsuranceNumber(insuranceNumberDto);
+			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
+		}
+		return pacijenti;
+	}
 
 }
