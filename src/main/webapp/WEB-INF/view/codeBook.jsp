@@ -29,6 +29,7 @@ body {
 		<br> <br> <br>
 
 	<form:form method="POST" action="codebook/create"
+
 		modelAttribute="codeBookDto">
 		<table>
 			<tr>

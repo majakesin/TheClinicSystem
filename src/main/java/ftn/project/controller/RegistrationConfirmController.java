@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import ftn.project.mapper.UserMapper;
 import ftn.project.model.User;
 import ftn.project.model.VerificationToken;
+import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,8 @@ import lombok.Data;
 public class RegistrationConfirmController {
 
 	private UserService userService;
+	
+	private final RequestService requestService;
 	
 	private UserMapper userMapper;
 	
@@ -50,7 +53,7 @@ public class RegistrationConfirmController {
 	    } 
 	     
 	    user.setEnabled(true); 
-	    userService.createUser(userMapper.UserToDto(user)); 
+	    requestService.saveRequest(userMapper.UserToDto(user)); 
 	    return "registrationConfirm"; 
 	}
 }

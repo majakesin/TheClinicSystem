@@ -43,6 +43,9 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	Set<UserDto> searchPatient(String nameDto, String surnameDto, String insuranceNumberDto);
 
+	Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto);
+
+
 	
 
 }

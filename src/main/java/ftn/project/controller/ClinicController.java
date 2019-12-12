@@ -2,6 +2,7 @@ package ftn.project.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
 import ftn.project.services.ClinicService;
+import ftn.project.services.EmailService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class ClinicController {
 
-	private ClinicService clinicService;
+	private final ClinicService clinicService;
+	
+	
 	
 	
 	
@@ -36,6 +41,7 @@ public class ClinicController {
 	@PostMapping("/clinics/create")
 	public String createClinic(@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
 		clinicService.createClinic(clinicDto);
+		
 		return "redirect:/clinics";
 	}
 	
