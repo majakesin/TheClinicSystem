@@ -8,10 +8,11 @@
 
 <meta charset="UTF-8">
 
-
-
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
 <title>Doctors</title>
 
 
@@ -22,7 +23,13 @@
 		<%@ include file="CAHomeTemplate.jsp"%>
 	</div>
 	
+
+	<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #d3d3d3;">
+	<li class="nav-item "><a  class="nav-link text-light" href="/doctors"><i class="fa fa-plus" aria-hidden="true"></i> Kreiraj/Izbriši</a></li>
+	<li class="nav-item "><a  class="nav-link text-light" href=#><i class="fa fa-search" aria-hidden="true"></i> Pretraži</a></li>
+	</ul>
 	
+
 <div class="container">
 	<div class="row">
 	 <div class="col-sm">

@@ -22,10 +22,9 @@ public interface UserService extends UserDetailsService,IUserService  {
 	Set<UserDto> allNurse();
 	
 
-
-
-
 	UserDto getUserById(Long idDto);
+
+
 	
 
 	UserDto getUserByUsername(String username);
@@ -42,7 +41,10 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	void editUser(Long idDto);
 
+	Set<UserDto> searchPatient(String nameDto, String surnameDto, String insuranceNumberDto);
+
 	Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto);
+
 
 	
 
