@@ -1,5 +1,8 @@
 package ftn.project.controller;
 
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -10,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
-import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,5 +58,26 @@ public class DoctorController {
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}
+	
+	//za pretragu
+	
+	@GetMapping("/doctorsSearch")
+	public ModelAndView searchDoctor(HttpServletRequest request, @ModelAttribute("doctorDto") UserDto doctorDto, ModelMap model) {
+		ModelAndView mav= new ModelAndView("doctorsSearchAll");
+		
+		Set<UserDto> doktori=(Set<UserDto>)request.getSession().getAttribute("doctorsDto");
+		
+		if(doktori==null) {
+			mav.addObject("doctorsDto", userService.allUserByRole("doktor"));
+		} else {
+			mav.addObject("doctorsDto", doktori);
+		}
+		return mav;
+	}
 
+	@PostMapping("/doctors/search")
+	public String searchDoctors(HttpServletRequest request, @ModelAttribute("doctorDto") UserDto doctorDto, ModelMap model ) {
+		request.getSession().setAttribute("doctorsDto", userService.searchDoctor(doctorDto.nameDto, doctorDto.surnameDto, doctorDto.getMarkDto()));
+		return "redirect:/doctorsSearch";
+	}
 }

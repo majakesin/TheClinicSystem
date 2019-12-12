@@ -21,6 +21,7 @@
 		<li class="nav-item "><a class="nav-link text-light" href="/records"><i class="fa fa-paste" aria-hidden="true"></i> Termini</a></li>
 
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-line-chart" aria-hidden="true"></i> Poslovanje</a></li>
+		<li class="nav-item "><a class="nav-link text-light" href="/doctorsSearch"><i class="fa fa-search" aria-hidden="true"></i> Pretraga doktora</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>
 	
