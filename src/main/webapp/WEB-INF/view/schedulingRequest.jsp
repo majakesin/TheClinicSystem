@@ -1,55 +1,59 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+
 <style>
 
 body
 {
-    background-color: #1b1b1b;
-    padding-top: 40px;
-}
-.form-signin {
-    max-width: 480px;
-    padding: 15px;
-    margin:100px;
-    margin-top:70px;
-  }
-
-.input-group-addon
-{
-    background-color: rgb(50, 118, 177);
-    border-color: rgb(40, 94, 142);
-    color: rgb(255, 255, 255);
+    background-image:url('https://i.pinimg.com/236x/f1/4e/9c/f14e9cc84854358f08917ad8a5568765--white-wallpaper-iphone-white-background-wallpaper.jpg');;
+     background-position: cover;
+ 	 background-repeat: no-repeat;
+  	background-size: cover;
+  	background-height:100%
 }
 
-.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid rgb(50, 118, 177); }
-.fullscreen_bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-image: url('https://mares-med.com/profiles/recruiter/themes/cloudy/images/search-container-img.jpg');
-    background-repeat:repeat;
-  }
+
+
+
+
 
 </style>
-<div id="fullscreen_bg" class="fullscreen_bg"/>
- <form class="form-signin">
+</head>
+<body>
+
+<div >
+		<%@ include file="CAHomeTemplate.jsp"%>
+	</div>
+	
+	 <ul  class="nav nav-tabs justify-content-center nav-fill"  >
+		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/appointmentRequests" ><i class="fa fa-calendar" aria-hidden="true"></i>Zahtevi </a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/operations"><i class="fa fa-scissors"></i> Operacije</a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/createTerm"><i class="fa fa-calendar" aria-hidden="true"></i>  Kreiraj termin</a></li>
+	</ul>	
+		
+
 <div class="container">
+	<br> <br> <br> <br>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-        <div class="panel panel-primary">
+        <div class="col-md-12 col-md-offset-8">
+        
         
             <h3 class="text-center">
                         Zahtevi za pregled </h3>
         
-        <div class="panel-body">    
+            
  
  
  <table class="table table-striped table-condensed">
@@ -87,14 +91,14 @@ body
                                                         
                 </tr>
            
-        
+        		  
               </tbody>
-              
-  </div>
-       </div>
-        </div>
+              </table>
+ 
     </div>
+	
 </div>
-</form>
               
-            </table>
+          
+</body>
+</html>

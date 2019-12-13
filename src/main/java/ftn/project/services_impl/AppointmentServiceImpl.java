@@ -4,16 +4,24 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import ftn.project.model.Appointment;
+import ftn.project.dto.AppointmentRequestDto;
+import ftn.project.mapper.AppointmentRequestMapper;
+import ftn.project.repository.AppointmentRepository;
 import ftn.project.services.AppointmentService;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
 
+	private final AppointmentRepository appointmentRepository;
+	
+	private final AppointmentRequestMapper appointmentMapper;
+	
 	@Override
-	public Set<Appointment> allAppointments() {
+	public Set<AppointmentRequestDto> allAppointments() {
 		// TODO Auto-generated method stub
-		return null;
+		return appointmentMapper.SetAppReqToDto(appointmentRepository.findAll());
 	}
 
 }

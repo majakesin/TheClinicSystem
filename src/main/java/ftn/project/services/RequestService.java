@@ -20,6 +20,7 @@ public interface RequestService {
 	//za slanje zahteva za pregled
 	
 	Set<AppointmentDto> allSchedulingRequest();
+	
 	void acceptSchedulingRequest(Long id);
 	void rejectSchedulingRequest(Long id);
 	

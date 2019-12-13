@@ -88,7 +88,7 @@ body {
 	<div>
 	<table class="table">
 		
-		<tr style="background-color: #FF756B;">
+		<tr style="background-color: #53e3a6;">
 			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;">SIFRARNIK</h6> </th>
 		</tr>
 		<tr>
