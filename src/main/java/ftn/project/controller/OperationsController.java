@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.OperationDto;
-import ftn.project.model.Appointment;
-import ftn.project.services.AppointmentService;
 import ftn.project.services.OperationService;
+import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,16 +26,14 @@ public class OperationsController {
 
 	private final UserService userService;
 	
-	private final AppointmentService appointmentService;
+	private final RequestService requestService;
 	
 	private final OperationService operationService;
 
 	@GetMapping
 	public String getPage(Model model) throws MailException, MessagingException {
 		model.addAttribute("doctorsList",userService.allUserByRole("doktor"));
-		Set<Appointment> appointments=appointmentService.allAppointments();
-		model.addAttribute("appointmentsList",appointmentService.allAppointments());
-		
+		model.addAttribute("appointmentsList",requestService.allSchedulingRequest());
 		return "operations";
 		
 	}

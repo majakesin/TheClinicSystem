@@ -4,11 +4,13 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import ftn.project.model.Appointment;
+import ftn.project.dto.AppointmentDto;
+import ftn.project.dto.AppointmentRequestDto;
 
-@Service
+
 public interface AppointmentService {
 
-	Set<Appointment> allAppointments();
-
+	Set<AppointmentRequestDto> allAppointments();
+	
+	
 }

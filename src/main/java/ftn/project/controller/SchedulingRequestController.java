@@ -12,71 +12,71 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
+import ftn.project.services.AppointmentService;
 import ftn.project.services.RequestService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@RequiredArgsConstructor
 @Controller
-public class schedulingRequestController {
+public class SchedulingRequestController {
 
+	private final AppointmentService appointmentService;
 	
 	private final RequestService requestService;
-	
+
 	@GetMapping("/createTerm")
 	public ModelAndView createTerm(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto, ModelMap model) {
 		model.addAttribute("termsDto", requestService.allSchedulingRequest());
 		return new ModelAndView("createTerm", "Model", requestService.allSchedulingRequest());
 
 	}
-	
+
 	@PostMapping("/createTerm/create")
 	public String createTerms(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto) {
-		
 		requestService.createTerm(appointmentDto);
 		return "redirect:/createTerm";
 	}
-	
-	
+
 	@GetMapping("createTerm/delete/{idDto}")
 	public String deleteTerm(@PathVariable("idDto") Long idDto, ModelMap model) {
 		requestService.deleteTerm(idDto);
 		return "redirect:/createTerm";
 	}
 
-	
-	
 	@GetMapping("/appointmentRequests")
 	public ModelAndView showRequests(ModelMap model) {
-		model.addAttribute("aDto",requestService.allSchedulingRequest());
-		return new ModelAndView("schedulingRequest","Model",requestService.allSchedulingRequest());
-		
+		model.addAttribute("appointmentDto", appointmentService.allAppointments());
+		return new ModelAndView("schedulingRequest", "Model", appointmentService.allAppointments());
+
 	}
-	
-	@GetMapping("appointmentRequests/accept/{idDto}") 
-	public String acceptSRequest(@PathVariable("idDto") Long idDto,ModelMap model) {
+
+	@GetMapping("appointmentRequests/accept/{idDto}")
+	public String acceptSRequest(@PathVariable("idDto") Long idDto, ModelMap model) {
 		requestService.acceptSchedulingRequest(idDto);
 		return "redirect:/appointmentRequests";
 	}
-	
-	@GetMapping("appointmentRequests/reject/{idDto}") 
-	public String rejectSRequest(@PathVariable("idDto") Long idDto,ModelMap model) {
+
+	@GetMapping("appointmentRequests/reject/{idDto}")
+	public String rejectSRequest(@PathVariable("idDto") Long idDto, ModelMap model) {
 		requestService.rejectSchedulingRequest(idDto);
 		return "redirect:/appointmentRequests";
 	}
-	
+
 	@GetMapping("/freeTerms")
 	public ModelAndView showTerms(ModelMap model) {
-		model.addAttribute("termsDto",requestService.allSchedulingRequest());
-		return new ModelAndView("freeTerms","Model",requestService.allSchedulingRequest());
-		
+		model.addAttribute("termsDto", requestService.allSchedulingRequest());
+		return new ModelAndView("freeTerms", "Model", requestService.allSchedulingRequest());
+
 	}
-	
-	@GetMapping("/appointmentRequests/{idDto}") 
-		public ModelAndView getSelectedTerms(@PathVariable("idDto") Long idDto, ModelMap model) {
-			AppointmentDto app=requestService.getAppointmentById(idDto);
-			Set<AppointmentDto> apoint=new HashSet<AppointmentDto>();
-			apoint.add(app);
-			model.addAttribute("appointmentDto",apoint) ;
-			return new ModelAndView("schedulingRequest","Model",requestService.allSchedulingRequest() );
+
+	@GetMapping("/appointmentRequests/{idDto}")
+	public ModelAndView getSelectedTerms(@PathVariable("idDto") Long idDto, ModelMap model) {
+		AppointmentDto app = requestService.getAppointmentById(idDto);
+		Set<AppointmentDto> apoint = new HashSet<AppointmentDto>();
+		apoint.add(app);
+		requestService.deleteTerm(idDto);
+		model.addAttribute("appointmentDto", apoint);
+		return new ModelAndView("freeTerms", "Model", requestService.allSchedulingRequest());
 	}
 }
