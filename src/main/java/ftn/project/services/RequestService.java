@@ -29,5 +29,6 @@ public interface RequestService {
 	
 	AppointmentDto getAppointmentById(Long idDto);
 	
-
+	Set<AppointmentDto> allFreeTerms();	
+	Set<AppointmentDto> allNotAccepted();	
 }

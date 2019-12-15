@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Set<UserDto> allMedicalStaff() {
 		// TODO Auto-generated method stub
-		return userMapper.UserToDtoSet(userRepository.findAll());
+		return userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
 	}
 
 	@Override
@@ -145,17 +145,15 @@ public class UserServiceImpl implements UserService {
 	public String autentification(UserDto userDto) {
 		for (User u : userRepository.findAll()) {
 			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
-				if (u.getRole().equals("Admin")) {
-					return "administratorRegistration";
-				} else if (u.getRole().equals("doktor")) {
+				if (u.getRole().equals("Clinic Centar Administrator")) {
+					return "administrators";
+				} else if (u.getRole().equals("Clinic Administrator")) {
 					return "doctors";
 				} else if (u.getRole().equals("pacijent")) {
 					return "patientProfile";
 				}
-				else if(u.getRole().equals("pacijent")) {
-					return "patientProfile";
-				}
-				return "home";
+				
+				
 			}
 		}
 		return "badUser";

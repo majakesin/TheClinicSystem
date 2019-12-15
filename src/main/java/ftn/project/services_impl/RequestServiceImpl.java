@@ -1,6 +1,7 @@
 package ftn.project.services_impl;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,14 @@ import ftn.project.dto.UserDto;
 import ftn.project.mapper.AppointmentMapper;
 import ftn.project.mapper.RequestMapper;
 import ftn.project.mapper.UserMapper;
-
-import ftn.project.model.MedicalRecord;
-
 import ftn.project.model.Appointment;
-
+import ftn.project.model.MedicalRecord;
 import ftn.project.model.RegisterRequest;
 import ftn.project.model.User;
 import ftn.project.repository.MedicalRecordsRepository;
 import ftn.project.repository.RequestRepository;
-import ftn.project.repository.UserRepository;
 import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.UserRepository;
 import ftn.project.services.RequestService;
 import lombok.RequiredArgsConstructor;
 
@@ -32,30 +30,26 @@ public class RequestServiceImpl implements RequestService {
 
 	@Autowired
 	private RequestRepository requestRepository;
-	
+
 	@Autowired
 	private RequestMapper requestMapper;
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
 
 	private final MedicalRecordsRepository medicalRecordsRepository;
 
-	
 	// za slanje zahteva za pregled
-	
+
 	@Autowired
 	private SchedulingRequestRepository sRequestRepository;
-	
+
 	@Autowired
 	private AppointmentMapper appointmentMapper;
-	
 
-	
 	@Override
 	public Set<RequestDto> allRequests() {
 		return requestMapper.setToDtoSet(requestRepository.findAll());
@@ -64,12 +58,10 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public void acceptRequest(Long id) {
 		// TODO Auto-generated method stub
-		RegisterRequest registerRequest=requestRepository.findById(id).get();
-		User user=requestMapper.mappToUser(requestMapper.requestToDto(registerRequest));
-		user.setMedicalRecord(new MedicalRecord());
-		userRepository.save(user);
-		
-		requestRepository.deleteById(id);
+		Appointment registerRequest = sRequestRepository.findById(id).get();
+		registerRequest.setBusy(true);
+		registerRequest.setAccept(true);
+		sRequestRepository.save(registerRequest);
 
 	}
 
@@ -81,57 +73,61 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void saveRequest(UserDto userDto) {
-		
+
 		requestRepository.save(requestMapper.mappToRequest(userDto));
-		
+
 	}
-	
+
 	// za kreiranje termina i slanje zahteva za pregled
 
 	@Override
 	public Set<AppointmentDto> allSchedulingRequest() {
-
 		return appointmentMapper.setToDtoSet(sRequestRepository.findAll());
 	}
 
 	@Override
 	public void acceptSchedulingRequest(Long id) {
-		
-	Appointment appointmentRequest=sRequestRepository.findById(id).get();
-		
+		Appointment appointmentRequest = sRequestRepository.findById(id).get();
+		appointmentRequest.setBusy(true);
+		appointmentRequest.setAccept(false);
 		sRequestRepository.save(appointmentRequest);
-		
-		
+
 	}
 
 	@Override
 	public void rejectSchedulingRequest(Long id) {
-		
-		sRequestRepository.deleteById(id);
-		
+		Appointment appointmentRequest = sRequestRepository.findById(id).get();
+		appointmentRequest.setBusy(false);
+		appointmentRequest.setAccept(false);
+		sRequestRepository.save(appointmentRequest);
+
 	}
 
 	@Override
 	public void createTerm(AppointmentDto appointmentDto) {
-
 		sRequestRepository.save(appointmentMapper.dtoToAppointment(appointmentDto));
-		
+
 	}
 
 	@Override
 	public void deleteTerm(Long idDto) {
-		
 		sRequestRepository.deleteById(idDto);
-		
-		
+
 	}
 
 	@Override
 	public AppointmentDto getAppointmentById(Long idDto) {
+		return null;
+	}
+
+	@Override
+	public Set<AppointmentDto> allFreeTerms() {
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByIsBusy(false));
+	}
 	
-		return appointmentMapper.appointmentToDto(sRequestRepository.findAllById(idDto)) ;
+	public Set<AppointmentDto> allNotAccepted(){
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByisAccept(true));
 	}
 
 	
-
 }

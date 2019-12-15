@@ -28,7 +28,7 @@ body {
 	 <div class="col-sm">
 		<br> <br> <br>
 
-	<form:form method="POST" action="codebook/create"
+	<form:form method="POST" action="/administrators/codebook/create"
 
 		modelAttribute="codeBookDto">
 		<table>
