@@ -55,6 +55,9 @@ public class Appointment {
 	@Column(name = "IsBusy", nullable = true)
 	private boolean isBusy;
 	
+	@Column(name = "IsAccept", nullable = true)
+	private boolean isAccept;
+	
 	@ManyToOne
 	@JoinColumn(name="appointment_record_id",nullable=true)
 	private MedicalRecord record;

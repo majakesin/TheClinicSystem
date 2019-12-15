@@ -72,6 +72,7 @@ public class User implements UserDetails {
 
 	@Column(name = "Mark", nullable = true)
 	private String mark;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "PacientRecords", joinColumns = {

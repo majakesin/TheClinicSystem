@@ -1,29 +1,20 @@
 package ftn.project.controller;
 
-import java.io.IOException;
-
-import javax.naming.AuthenticationException;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
 import ftn.project.mapper.RequestMapper;
-import ftn.project.model.User;
 import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
@@ -68,7 +59,8 @@ public class PatientController {
 		return new ModelAndView("login");
 	}
 	@PostMapping("/patient/login/")
-	public String login(@ModelAttribute("userDto") UserDto us,ModelMap m) {
+	public String login(HttpServletRequest request,@ModelAttribute("userDto") UserDto us,ModelMap m) {
+		request.setAttribute("logUsername",us.getUsernameDto());
 		return "redirect:/"+userService.autentification(us);
 	}
 	

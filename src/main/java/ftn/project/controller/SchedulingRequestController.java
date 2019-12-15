@@ -46,8 +46,8 @@ public class SchedulingRequestController {
 
 	@GetMapping("/appointmentRequests")
 	public ModelAndView showRequests(ModelMap model) {
-		model.addAttribute("appointmentDto", appointmentService.allAppointments());
-		return new ModelAndView("schedulingRequest", "Model", appointmentService.allAppointments());
+		model.addAttribute("appointmentDto", requestService.allNotAccepted());
+		return new ModelAndView("schedulingRequest", "Model", requestService.allNotAccepted());
 
 	}
 
@@ -65,18 +65,14 @@ public class SchedulingRequestController {
 
 	@GetMapping("/freeTerms")
 	public ModelAndView showTerms(ModelMap model) {
-		model.addAttribute("termsDto", requestService.allSchedulingRequest());
-		return new ModelAndView("freeTerms", "Model", requestService.allSchedulingRequest());
+		model.addAttribute("termsDto", requestService.allFreeTerms());
+		return new ModelAndView("freeTerms", "Model", requestService.allFreeTerms());
 
 	}
 
 	@GetMapping("/appointmentRequests/{idDto}")
-	public ModelAndView getSelectedTerms(@PathVariable("idDto") Long idDto, ModelMap model) {
-		AppointmentDto app = requestService.getAppointmentById(idDto);
-		Set<AppointmentDto> apoint = new HashSet<AppointmentDto>();
-		apoint.add(app);
-		requestService.deleteTerm(idDto);
-		model.addAttribute("appointmentDto", apoint);
-		return new ModelAndView("freeTerms", "Model", requestService.allSchedulingRequest());
+	public String getSelectedTerms(@PathVariable("idDto") Long idDto) {
+		requestService.acceptRequest(idDto);
+		return "redirect:/freeTerms";
 	}
 }

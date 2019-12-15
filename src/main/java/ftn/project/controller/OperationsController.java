@@ -33,7 +33,7 @@ public class OperationsController {
 	@GetMapping
 	public String getPage(Model model) throws MailException, MessagingException {
 		model.addAttribute("doctorsList",userService.allUserByRole("doktor"));
-		model.addAttribute("appointmentsList",requestService.allSchedulingRequest());
+		model.addAttribute("appointmentsList",requestService.allNotAccepted());
 		return "operations";
 		
 	}
