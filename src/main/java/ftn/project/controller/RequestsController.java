@@ -32,7 +32,7 @@ public class RequestsController {
 
 	@GetMapping("requests/accept/{idDto}") 
 	public String acceptRequest(@PathVariable("idDto") Long idDto,ModelMap model) {
-		requestService.acceptRequest(idDto);
+		requestService.acceptUserRequest(idDto);
 		return "redirect:/requests";
 	}
 	

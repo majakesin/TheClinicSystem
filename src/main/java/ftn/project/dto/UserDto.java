@@ -17,7 +17,7 @@ public class UserDto {
 	public String roleDto;
 	private String countryDto;
 	private String insuranceNumberDto;
-	
+	private String medicalRecordIdDto;
 
 	//polja za doktora
 	private String biographyDto;

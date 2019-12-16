@@ -35,7 +35,6 @@ public class MedicalRecordsController {
 	@ResponseBody
 	public ResponseEntity<RecordsDto> showPacientRecords(@PathVariable("idDto") Long idDto) {
 		RecordsDto recordsDto=medicalRecordsService.getPacientRecords(idDto);
-		
 		return new ResponseEntity<RecordsDto>(recordsDto,HttpStatus.OK);
 	}
 	

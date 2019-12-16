@@ -26,6 +26,8 @@
 	<form:hidden path="passwordDto"/>
 		<table>
 			<tr><td><form:hidden path="idDto"/></td></tr>
+			<tr><td><form:hidden path="roleDto"/></td></tr>
+			
 			<tr>
 				<td><form:label path="nameDto">Ime:</form:label></td>
 				<td><form:input class="form-control" placeholder="Name" path="nameDto" /></td>

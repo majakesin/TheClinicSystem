@@ -73,6 +73,12 @@ public class User implements UserDetails {
 	@Column(name = "Mark", nullable = true)
 	private String mark;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="AdministratorsClinics",joinColumns = {
+	@JoinColumn(name = "admin_id", referencedColumnName = "id" ) }, inverseJoinColumns = {
+			@JoinColumn(name = "clinic_id", referencedColumnName = "id") })
+	private Clinic clinic;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "PacientRecords", joinColumns = {

@@ -46,9 +46,8 @@ public class PatientController {
 	public String createPatient(@Valid @ModelAttribute("userDto") UserDto userDto) {
 	
 			userDto.setRoleDto("pacijent");
-			
 			requestService.saveRequest(userDto);
-			userService.createUser(userDto);
+			
       return"redirect:/logovanje";
 	}
 	
@@ -60,7 +59,7 @@ public class PatientController {
 	}
 	@PostMapping("/patient/login/")
 	public String login(HttpServletRequest request,@ModelAttribute("userDto") UserDto us,ModelMap m) {
-		request.setAttribute("logUsername",us.getUsernameDto());
+		request.getSession().setAttribute("logUsername",us.getUsernameDto());
 		return "redirect:/"+userService.autentification(us);
 	}
 	
@@ -77,9 +76,9 @@ public class PatientController {
 	}
 	
 	@GetMapping("/patientProfile")
-	public ModelAndView profil(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
-		Long id=(long) 131;
-		model.addAttribute("userDto", userService.getUserById(id));
+	public ModelAndView profil(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		String username=(String)request.getSession().getAttribute("logUsername");
+		model.addAttribute("userDto", userService.getUserProfile(username));
 		
 		return new ModelAndView("patientProfile", "Model", userService.allUsers());
 		
@@ -92,7 +91,7 @@ public class PatientController {
 	}
 	
 
-	@PostMapping("/patientProfile/edit/create")
+	@PostMapping("/patientProfile/edit/create/")
 	public String EditPatient(@ModelAttribute("userDto") UserDto userDto) {
 		
 		
