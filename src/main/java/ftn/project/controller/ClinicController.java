@@ -1,8 +1,8 @@
 package ftn.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
 import ftn.project.services.ClinicService;
-import ftn.project.services.EmailService;
-import lombok.AllArgsConstructor;
+import ftn.project.services.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -26,30 +25,29 @@ public class ClinicController {
 
 	private final ClinicService clinicService;
 	
-	
-	
+	private final UserService userService;
 	
 	
 	@GetMapping("/clinics")
 	public ModelAndView showClinics(@ModelAttribute("clinicDto")ClinicDto clinicDto,ModelMap model) {
 		model.addAttribute("clinicsDto",clinicService.allClinics());
+		model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
 		return new ModelAndView("clinics","Model",clinicService.allClinics());
 	}
 	
 	
 	
 	@PostMapping("/clinics/create")
-	public String createClinic(@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
+	public String createClinic(HttpServletRequest request,@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
 		clinicService.createClinic(clinicDto);
-		
 		return "redirect:/clinics";
 	}
 	
 	@GetMapping("/clinicsProfileCA")
-	public ModelAndView showClinicProfile(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
-		Long id = (long) 100;
-		model.addAttribute("clinicDto", clinicService.getClinicById(id));
-		return new ModelAndView("clinicProfileCA", "Model", clinicService.getClinicById(id));
+	public String showClinicProfile(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		String username=(String)request.getSession().getAttribute("logUsername");
+		model.addAttribute("clinicDto", clinicService.getClinicProfile(username));
+		return "clinicProfileCA";
 
 	}
 	
@@ -69,7 +67,7 @@ public class ClinicController {
 	
 	@PostMapping("/clinic/edit/ca")
 	public String edtClinicCA(@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
-		clinicService.createClinic(clinicDto);
+		clinicService.editClinicProfile(clinicDto);
 		
 	return "redirect:/clinicsProfileCA";
 	

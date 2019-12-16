@@ -31,4 +31,6 @@ public interface RequestService {
 	
 	Set<AppointmentDto> allFreeTerms();	
 	Set<AppointmentDto> allNotAccepted();	
+	
+	void acceptUserRequest(Long idDto);
 }

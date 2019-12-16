@@ -76,10 +76,19 @@
             <hr style="margin:10px 0 0px 0;">
    
    
-   	<form:form method="POST" action="/nurse/edit"
+   	<form:form method="POST" action="/nurse/edit/create"
 		modelAttribute="userDto"> 
 
 	<table class="table table-striped">
+	<tr>
+				<td><form:hidden path="idDto"/></td>
+	</tr>
+	<tr>
+				<td><form:hidden path="passwordDto"/></td>
+	</tr>
+	<tr>
+				<td><form:hidden path="usernameDto"/></td>
+	</tr>
 	<tr>
 	<td><h6>Ime: </h6></td>
 	<td><form:input class="form-control" path="nameDto" type="text"  /></td>
@@ -109,6 +118,9 @@
 	<td><h6>Adresa:</h6> </td>
 	<td><form:input class="form-control"  path="addressDto" type="text"  /></td>
 	</tr>
+	<tr>
+	<tr>
+	
 	<tr>
 	
 	<td><input type="submit" class="btn btn-outline-danger" value="Potvrdi" /></td>

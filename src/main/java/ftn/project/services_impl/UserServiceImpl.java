@@ -150,10 +150,11 @@ public class UserServiceImpl implements UserService {
 				} else if (u.getRole().equals("Clinic Administrator")) {
 					return "doctors";
 				} else if (u.getRole().equals("pacijent")) {
-					return "patientProfile";
+					return "patientHome";
+				} else if(u.getRole().equals("med. sestra")) {
+					return "nurseProfile";
 				}
-				
-				
+
 			}
 		}
 		return "badUser";
@@ -188,7 +189,7 @@ public class UserServiceImpl implements UserService {
 					insuranceNumberDto);
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
 			return pacijenti;
-		} else if (nameDto != "" & surnameDto != "" & insuranceNumberDto == ""){
+		} else if (nameDto != "" & surnameDto != "" & insuranceNumberDto == "") {
 			Set<User> pacijentiTemp = userRepository.findByNameAndSurname(nameDto, surnameDto);
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
 			return pacijenti;
@@ -207,16 +208,13 @@ public class UserServiceImpl implements UserService {
 			Set<User> pacijentiTemp = userRepository.findAllByRole("pacijent");
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
 			return pacijenti;
-		}
-		else if(nameDto!="" & surnameDto == "" & insuranceNumberDto == "" ) {
+		} else if (nameDto != "" & surnameDto == "" & insuranceNumberDto == "") {
 			Set<User> pacijentiTemp = userRepository.findByName(nameDto);
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
-		}
-		else if(nameDto=="" & surnameDto != "" & insuranceNumberDto == "" ) {
+		} else if (nameDto == "" & surnameDto != "" & insuranceNumberDto == "") {
 			Set<User> pacijentiTemp = userRepository.findBySurname(surnameDto);
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
-		}
-		else if(nameDto=="" & surnameDto == "" & insuranceNumberDto != "" ) {
+		} else if (nameDto == "" & surnameDto == "" & insuranceNumberDto != "") {
 			Set<User> pacijentiTemp = userRepository.findByInsuranceNumber(insuranceNumberDto);
 			pacijenti = userMapper.UserToDtoSet(pacijentiTemp);
 		}
@@ -224,38 +222,38 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto) {
-	
+
 		Set<UserDto> doktori = null;
 		if (nameDto != "" & surnameDto == "" & markDto == "") {
 			Set<User> doktoriTemp = userRepository.findByName(nameDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-			
-		} else if (nameDto == "" & surnameDto != "" & markDto == ""){
+
+		} else if (nameDto == "" & surnameDto != "" & markDto == "") {
 			Set<User> doktoriTemp = userRepository.findBySurname(surnameDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-		
+
 		} else if (nameDto == "" & surnameDto == "" & markDto != "") {
 			Set<User> doktoriTemp = userRepository.findByMark(markDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-			
+
 		} else if (nameDto != "" & surnameDto != "" & markDto == "") {
 			Set<User> doktoriTemp = userRepository.findByNameAndSurname(nameDto, surnameDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-			
+
 		} else if (nameDto != "" & surnameDto == "" & markDto != "") {
 			Set<User> doktoriTemp = userRepository.findByNameAndMark(nameDto, markDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-			
+
 		} else if (nameDto == "" & surnameDto != "" & markDto != "") {
 			Set<User> doktoriTemp = userRepository.findBySurnameAndMark(surnameDto, markDto);
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
 			return doktori;
-		
+
 		} else if (nameDto == "" & surnameDto == "" & markDto == "") {
 			Set<User> doktoriTemp = userRepository.findAllByRole("doktor");
 			doktori = userMapper.UserToDtoSet(doktoriTemp);
@@ -264,6 +262,9 @@ public class UserServiceImpl implements UserService {
 		return doktori;
 	}
 
-
+	@Override
+	public UserDto getUserProfile(String username) {
+		return userMapper.UserToDto(userRepository.findByUsername(username));
+	}
 
 }

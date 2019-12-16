@@ -60,7 +60,7 @@ public class NurseController {
 	
 	
 	@GetMapping("/nurseProfile/edit/{idDto}")
-	public ModelAndView showNurseProfileEdit(@ModelAttribute("userDto") UserDto userDto,@PathVariable("idDto") Long idDto, ModelMap model ) {
+	public ModelAndView showNurseProfileEdit(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto,@PathVariable("idDto") Long idDto, ModelMap model ) {
 		
 		model.addAttribute("userDto", userService.getUserById(idDto));
 		return new ModelAndView("nurseProfileEdit", "Model",userService.getUserById(idDto));
@@ -68,9 +68,9 @@ public class NurseController {
 	}
 	
 	@GetMapping("/nurseProfile")
-	public ModelAndView showNurseProfile(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
-		Long id=(long) 291;
-		model.addAttribute("userDto", userService.getUserById(id));
+	public ModelAndView showNurseProfile(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		String username=(String)request.getSession().getAttribute("logUsername");
+		model.addAttribute("userDto", userService.getUserProfile(username));
 		return new ModelAndView("nurseProfile", "Model", userService.allNurse());
 
 	}
@@ -99,9 +99,9 @@ public class NurseController {
 	public String editNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("med. sestra");
 		userService.createUser(userDto);
-		return "redirect:/nurse";
+		return "redirect:/nurseProfile";
 	}
-
+	
 	
 	
 }

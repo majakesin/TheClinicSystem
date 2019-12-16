@@ -11,5 +11,6 @@ public class ClinicDto {
 	public String phoneDto;
 	public String descriptionDto;
 	public double markDto;
-
+	public String adminDto;
+	
 }

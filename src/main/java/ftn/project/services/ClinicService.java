@@ -13,13 +13,15 @@ public interface ClinicService {
 	
 	public void createClinic(ClinicDto clinicDto);
 
+	public void editClinicProfile(ClinicDto clinicDto);
+	
 	public void deleteClinic(Long id);
 	
 	public Set<ClinicDto> allClinics();
 
 	public ClinicDto getClinicById(Long id);
 
-	
+	public ClinicDto getClinicProfile(String ussername);
 	
 	
 }

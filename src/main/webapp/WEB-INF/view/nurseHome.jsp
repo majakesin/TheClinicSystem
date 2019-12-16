@@ -9,7 +9,7 @@
 
 	
 		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #53e3a6;" >
-		<li class="nav-item "><a  class="nav-link text-light" href=#><i class="fa fa-users" aria-hidden="true"></i> Pacijenti</a></li>
+		<li class="nav-item "><a  class="nav-link text-light" href=/patientSearch/nurse><i class="fa fa-users" aria-hidden="true"></i> Pacijenti</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-file-text" aria-hidden="true"></i> Recepti</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href="/nurseProfile"><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>

@@ -129,5 +129,15 @@ public class RequestServiceImpl implements RequestService {
 		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByisAccept(true));
 	}
 
+	@Override
+	public void acceptUserRequest(Long idDto) {
+		RegisterRequest reg=requestRepository.findById(idDto).get();
+		User user=requestMapper.mappToUser(requestMapper.requestToDto(reg));
+		user.setMedicalRecord(new MedicalRecord());
+		userRepository.save(user);
+		requestRepository.delete(reg);
+		
+	}
+
 	
 }
