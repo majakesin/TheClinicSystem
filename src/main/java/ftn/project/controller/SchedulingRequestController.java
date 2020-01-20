@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
+import ftn.project.dto.UserDto;
 import ftn.project.services.AppointmentService;
 import ftn.project.services.RequestService;
-import lombok.Data;
+import ftn.project.services.RoomService;
+import ftn.project.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -24,17 +27,27 @@ public class SchedulingRequestController {
 	private final AppointmentService appointmentService;
 	
 	private final RequestService requestService;
+	
+	private final UserService userService;
+	
+	private final RoomService roomService;
 
 	@GetMapping("/createTerm")
 	public ModelAndView createTerm(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto, ModelMap model) {
+		Set<UserDto> medical=new HashSet<UserDto>();
 		model.addAttribute("termsDto", requestService.allSchedulingRequest());
+		model.addAttribute("allRooms",roomService.allRooms());
+		medical.addAll(userService.allMedicalStaff());
+		medical.addAll(userService.allNurse());
+		model.addAttribute("allMedics",medical);
 		return new ModelAndView("createTerm", "Model", requestService.allSchedulingRequest());
 
 	}
 
 	@PostMapping("/createTerm/create")
-	public String createTerms(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto) {
+	public String createTerms(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto,Model model) {
 		requestService.createTerm(appointmentDto);
+		
 		return "redirect:/createTerm";
 	}
 
