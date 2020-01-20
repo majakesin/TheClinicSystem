@@ -42,9 +42,8 @@ public class Appointment {
 //    @MapsId
 //	private Room room;
 
-	@ManyToOne
-	@JoinColumn(name="appointment_id",nullable=true)
-	private Doctor doctor;
+	@Column(name = "Doctor", nullable = false)
+	private Long doctor;
 
 	@Column(name = "Price", nullable = true)
 	private String price;

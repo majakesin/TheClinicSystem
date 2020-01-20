@@ -11,4 +11,6 @@ public interface SchedulingRequestRepository extends JpaRepository<Appointment, 
 	public List<Appointment> findAllByIsBusy(boolean isBusy);
 	
 	public List<Appointment> findAllByisAccept(boolean isAccept);
+	
+	List<Appointment>findAllByDoctor(Long doctor);
 }
