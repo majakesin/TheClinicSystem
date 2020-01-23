@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+import ftn.project.dto.VacationRequestDto;
 import ftn.project.services.UserService;
+import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,6 +27,7 @@ public class NurseController {
 
 	
 	private UserService userService;
+	private final VacationRequestService vqService;
 
 	@GetMapping("/nurse")
 	public ModelAndView showNursePage(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
@@ -102,6 +105,30 @@ public class NurseController {
 		return "redirect:/nurseProfile";
 	}
 	
+	
+	//godisnji odmor
+	@GetMapping("/godisnjiOdmorRezervisanjeSestra")
+	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
+		String username = (String) request.getSession().getAttribute("logUsername");
+		if(username!=null) {
+		UserDto userTemp = userService.getUserByUsername(username);
+		
+		vacReqDto.setEmailDto(userTemp.emailDto);
+		vacReqDto.setNameDto(userTemp.nameDto);
+		vacReqDto.setSurnameDto(userTemp.getSurnameDto());
+		vacReqDto.setUsernameDto(username);
+		vacReqDto.setRoleDto("med. sestra"); }
+	
+		return new ModelAndView("zakazivanjeGodisnjegSestra");
+
+	}
+	
+	@PostMapping("/kreirajZahtevGodisnjiSestra")
+	public String kreirajZahtev(@Valid @ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto) {
+		
+		vqService.createVacReq(vacReqDto);
+		return "redirect:/godisnjiOdmorRezervisanje";
+	}
 	
 	
 }

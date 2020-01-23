@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ftn.project.dto.RoomDto;
 import ftn.project.mapper.RoomMapper;
+import ftn.project.model.Room;
 import ftn.project.repository.RoomRepository;
 import ftn.project.services.RoomService;
 import lombok.Data;
@@ -42,6 +43,32 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public void deleteRoom(Long idDto) {
 		roomRepository.deleteById(idDto);
+		
+	}
+
+	@Override
+	public Set<RoomDto> searchRooms(String nameDto, String hallNumberDto) {
+		Set<RoomDto> sobe = null;
+		
+		if(nameDto!="" && hallNumberDto=="") {
+			Set<Room> sobeTemp = roomRepository.findByName(nameDto);
+			sobe = roomMapper.setRoomToDto(sobeTemp);
+			return sobe;
+		}
+		
+
+		if(nameDto!="" && hallNumberDto!="") {
+			Set<Room> sobeTemp = roomRepository.findByNameAndHallNumber(nameDto,hallNumberDto);
+			sobe = roomMapper.setRoomToDto(sobeTemp);
+			return sobe;
+		}
+
+		if(nameDto=="" && hallNumberDto!="") {
+			Set<Room> sobeTemp = roomRepository.findByHallNumber(hallNumberDto);
+			sobe = roomMapper.setRoomToDto(sobeTemp);
+			return sobe;
+		}
+		return sobe;
 		
 	}
 	

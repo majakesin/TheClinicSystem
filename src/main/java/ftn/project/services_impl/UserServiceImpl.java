@@ -153,6 +153,8 @@ public class UserServiceImpl implements UserService {
 					return "patientHome";
 				} else if(u.getRole().equals("med. sestra")) {
 					return "nurseProfile";
+				}else if(u.getRole().equals("doktor")){
+					return "patientSearch/doctor";
 				}
 
 			}
@@ -176,8 +178,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 
 	public UserDto getUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.UserToDto(userRepository.findByUsername(username));
 	}
 
 	@Override

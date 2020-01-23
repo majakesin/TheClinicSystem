@@ -17,4 +17,6 @@ public interface RoomService {
 	public void create(@Valid RoomDto roomDto);
 
 	public void deleteRoom(Long idDto);
+
+	public Set<RoomDto> searchRooms(String nameDto, String hallNumberDto);
 }
