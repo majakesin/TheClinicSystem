@@ -16,6 +16,7 @@ public class AppointmentDto {
 	public String roomDto;
 	public String typeDto;
 	public String priceDto;
+	public Long doctorDto;
 	public String discountDto;
 	
 }
