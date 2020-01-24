@@ -24,9 +24,11 @@ import ftn.project.repository.UserRepository;
 import ftn.project.repository.VerificationTokenRepository;
 import ftn.project.services.UserService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Data
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
@@ -35,8 +37,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private UserMapper userMapper;
+	
+	private final UserMapper userMapper;
 
 	// spring security
 	@Autowired

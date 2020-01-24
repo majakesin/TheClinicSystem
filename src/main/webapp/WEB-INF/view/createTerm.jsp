@@ -11,6 +11,7 @@
 
 
 
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <title>Create Term</title>
 
@@ -36,21 +37,30 @@
 		<table>
 			<tr>
 				<td><form:label path="dateDto">Datum:</form:label></td>
-				<td><form:input class="form-control" placeholder="Datum" path="dateDto" /></td>
+				<td><form:input type="date" class="form-control" placeholder="Datum" path="dateDto"  /></td>
 			</tr>
 			<tr>
 				<td><form:label path="timeDto">Vreme:</form:label></td>
-				<td><form:input class="form-control" placeholder="Vreme" path="timeDto" /></td>
+				<td><form:input type="time" class="form-control" placeholder="Vreme" path="timeDto" /></td>
 
 			<tr>
-				<td><form:label path="roomDto">Sala:</form:label></td>
-				<td><form:input class="form-control" placeholder="Sala" path="roomDto" /></td>
+				<td><form:label path="roomDto">Soba:</form:label></td>
+				<td>
+					<form:select class="form-control" path="roomDto">				
+							<c:forEach items="${allRooms}" var="room">
+								<form:option value="${room.nameDto} br:${room.hallNumberDto}"></form:option>
+							</c:forEach>
+					</form:select>
+				</td>
 			</tr>
 			<tr>
-				<td><form:label path="typeDto">Tip pregleda:</form:label></td>
-				<td><form:input class="form-control" placeholder="Tip pregleda" path="typeDto" /></td>
-			
-				
+				<td><form:label path="dateDto">Tip pregleda:</form:label></td>
+				<td>
+					<form:select class="form-control" path="typeDto">
+						<form:option value="Operacija"></form:option>
+						<form:option value="Pregled"></form:option>
+					</form:select>
+				</td>
 			</tr>
 			<tr>
 				<td><form:label path="priceDto">Cena:</form:label></td>
@@ -63,6 +73,19 @@
 				<td><form:input class="form-control" placeholder="Popust" path="discountDto" /></td>
 			
 				
+			</tr>
+				
+				<br/>
+				<br/>
+			<tr>
+				<td><form:label path="roomDto">Doktor:</form:label></td>
+				<td>
+				<form:select class="form-control" path="doctorDto">				
+							<c:forEach items="${allMedics}" var="medic">
+								<form:option value="${medic.idDto}" >${medic.roleDto}: ${medic.nameDto} ${medic.surnameDto}</form:option>
+							</c:forEach>
+				</form:select>
+				</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -87,6 +110,7 @@
 			<td>Tip pregleda</td>
 			<td>Cena</td>
 			<td>Popust</td>
+			<td>Doctor</td>
 			
 			<td> </td>
 			
@@ -100,7 +124,7 @@
 					<td><c:out value="${term.typeDto}" /></td>
 					<td><c:out value="${term.priceDto}" /></td>
 					<td><c:out value="${term.discountDto}" /></td>
-					
+					<td><c:out value="${term.doctorDto}" /></td>
 					<td><a class="btn btn-outline-success" href="/createTerm/delete/${term.idDto}">Delete</a></td>
 					
 				
