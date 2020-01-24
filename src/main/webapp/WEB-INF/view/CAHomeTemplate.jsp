@@ -2,8 +2,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
@@ -19,14 +23,16 @@
 		
 
 		<li class="nav-item "><a class="nav-link text-light" href="/rooms"><i class="fa fa-bed" aria-hidden="true"></i> Sale</a></li>
+		<li class="nav-item "><a  class="nav-link text-light" href="/zahtevi/CA"><i class="fa fa-sun-o" aria-hidden="true"></i>Odmori</a></li>
 
-
-		<li class="nav-item "><a class="nav-link text-light" href="/doctors/records"><i class="fa fa-address-card-o" aria-hidden="true"></i> Zdravstveni karton</a></li>
+	
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-line-chart" aria-hidden="true"></i> Poslovanje</a></li>
 		
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
 		</ul>
 	
+
+
 
 </body>
 </html>

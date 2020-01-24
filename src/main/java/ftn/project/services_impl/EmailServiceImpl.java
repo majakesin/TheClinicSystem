@@ -32,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
 	private final Environment env;
 	
 	@Override
-	public void sendMail(String email) {
+	public void sendMail(String email,String tekst,String subjekat) {
 		final String username="tim44isa@gmail.com";
 		final String password="timisa44";
 		
@@ -53,9 +53,12 @@ public class EmailServiceImpl implements EmailService {
 			Message message=new MimeMessage(session);
 			message.setFrom(new InternetAddress("tim44isa@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(email));
-			message.setSubject("Test");
-			message.setText("Zdravo violeta");
+
+
+			message.setSubject(subjekat);
+			message.setText(tekst);
 			
+
 			Transport.send(message);
 			System.out.println("Done");
 			

@@ -4,17 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>patientSearchNurse</title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<div>
-		<%@ include file="nurseHome.jsp"%>
+
+<div>
+		<%@ include file="DoctorHomePage.jsp"%>
 	</div>
 	<br> <br> <br> 
-	<div class="container">
+
+<div class="container">
 		<%@ include file="PatientSearch.jsp"%>
 	
 	</div>
+
 </body>
 </html>

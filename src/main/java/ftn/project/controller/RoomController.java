@@ -1,5 +1,8 @@
 package ftn.project.controller;
 
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -51,5 +54,26 @@ public class RoomController  {
 	public String deleteRoom(@PathVariable("idDto") Long idDto, ModelMap model) {
 		roomService.deleteRoom(idDto);
 		return "redirect:/rooms";
+	}
+	
+	
+	@GetMapping("/roomsSearch")
+	public ModelAndView searchDoctor(HttpServletRequest request, @ModelAttribute("roomDto") RoomDto roomDto, ModelMap model) {
+		ModelAndView mav= new ModelAndView("RoomSearch");
+		
+		Set<RoomDto> sobe=(Set<RoomDto>)request.getSession().getAttribute("roomsDto");
+		
+		if(sobe==null) {
+			mav.addObject("roomsDto", roomService.allRooms());
+		} else {
+			mav.addObject("roomsDto", sobe);
+		}
+		return mav;
+	}
+	
+	@PostMapping("/room/search")
+	public String searchDoctors(HttpServletRequest request, @ModelAttribute("roomDto") RoomDto roomDto, ModelMap model ) {
+		request.getSession().setAttribute("roomsDto", roomService.searchRooms(roomDto.getNameDto(), roomDto.getHallNumberDto()));
+		return "redirect:/roomsSearch";
 	}
 }
