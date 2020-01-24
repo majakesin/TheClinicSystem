@@ -54,9 +54,9 @@ public class EmailServiceImpl implements EmailService {
 			message.setFrom(new InternetAddress("tim44isa@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(email));
 
+
 			message.setSubject(subjekat);
 			message.setText(tekst);
-
 			
 
 			Transport.send(message);

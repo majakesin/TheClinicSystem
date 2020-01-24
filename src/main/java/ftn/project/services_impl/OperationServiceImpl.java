@@ -16,9 +16,10 @@ public class OperationServiceImpl implements OperationService {
 	public void scheduleOperation() {
 		// TODO Auto-generated method stub
 
+
 		emailService.sendMail("prolomercegovac@yahoo.com","Operacija odobrena","Operacija odobrena");
 
-	}
+
 
 	
 
