@@ -17,6 +17,7 @@
 		<li class="nav-item "><a class="nav-link text-light" href=/administrators/codebook/><i class="fa fa-book" aria-hidden="true"></i> Sifrarnik</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=/requests><i class="fa fa-bell" aria-hidden="true"></i>Zahtevi</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
+		<li class="nav-item "><a class="nav-link text-light" class="btn btn-outline-success" href="/odjava"><i class="fa fa-sign-out" aria-hidden="true"></i></i> Odjava</a></li>
 		</ul>
 	
 

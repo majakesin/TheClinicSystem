@@ -30,7 +30,9 @@ public class CCAController {
 	
 	@PostMapping("/administrators/create")
 	public String createAdministrator(@Valid @ModelAttribute("userDto") UserDto userDto) {
+		userDto.setPrviLoginDto(false);
 		userService.createUser(userDto);
+		
 		return "redirect:/administrators";
 	}
 	@GetMapping("/administrators/user/delete/{idDto}")

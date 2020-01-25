@@ -148,15 +148,34 @@ public class UserServiceImpl implements UserService {
 		for (User u : userRepository.findAll()) {
 			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
 				if (u.getRole().equals("Clinic Centar Administrator")) {
+					
 					return "administrators";
 				} else if (u.getRole().equals("Clinic Administrator")) {
+					 if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
 					return "doctors";
+					 }
 				} else if (u.getRole().equals("pacijent")) {
+					
+					
 					return "patientHome";
+					
 				} else if(u.getRole().equals("med. sestra")) {
+					 if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
 					return "nurseProfile";
+					 }
 				}else if(u.getRole().equals("doktor")){
+					if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
 					return "patientSearch/doctor";
+					 }
 				}
 
 			}
