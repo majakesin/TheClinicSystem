@@ -66,7 +66,7 @@ body {
 							<td><form:textarea class="form-control"
 									path="descriptionDto" /></td>
 						</tr>
-						<tr>
+		<!--  			<tr>
 							<td colspan="2"><form:select class="form-control"
 									path="adminDto">
 									
@@ -74,7 +74,7 @@ body {
 										<form:option value="${pacient.usernameDto}"></form:option>
 									</c:forEach>
 								</form:select></td>
-						</tr>
+						</tr> -->	
 
 						<tr>
 							<td></td>

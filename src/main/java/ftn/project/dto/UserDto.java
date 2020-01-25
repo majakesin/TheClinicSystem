@@ -18,8 +18,15 @@ public class UserDto {
 	private String countryDto;
 	private String insuranceNumberDto;
 	private String medicalRecordIdDto;
+	
+	//menjanjesifre
+	private Boolean prviLoginDto;
+	private String pomocnaSifraDto;
 
 	//polja za doktora
 	private String biographyDto;
 	private String markDto;
+	
+	//polje za select klinike
+	private Long clinicDto;
 }

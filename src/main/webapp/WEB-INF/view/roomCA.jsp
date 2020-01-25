@@ -14,6 +14,10 @@
 		<%@ include file="CAHomeTemplate.jsp"%>
 		</div>
 		
+		<ul  class="nav nav-tabs justify-content-center nav-fill"  >
+		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/rooms" > Kreiranje soba </a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/roomsSearch"><i class="fa fa-search" aria-hidden="true"></i>Pretraga soba</a></li>	
+	</ul>
 		
 		<div class="container">
 	<div class="row">

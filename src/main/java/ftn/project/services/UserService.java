@@ -14,6 +14,8 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	void createUser(UserDto userDto);
 
+	
+	
 	void deleteUser(Long idDto);
 	
 	Set<UserDto> allUsers();

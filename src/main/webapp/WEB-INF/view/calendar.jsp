@@ -9,7 +9,7 @@
   </head>
   <body>
 	<div>
-		<%@ include file="CAHomeTemplate.jsp"%>
+		<%@ include file="DoctorHomePage.jsp"%>
 	</div>
     <div id='calendar'></div>
 	

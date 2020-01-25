@@ -1,9 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	
@@ -31,9 +35,12 @@
 <body>
 
 
-	<div >
-		<%@ include file="nurseHome.jsp"%>
+	<div>
+		<%@ include file="DoctorHomePage.jsp"%>
 	</div>
+
+
+	
 
 <ul class="nav nav-tabs justify-content-center nav-fill">
 		<li class="nav-item "><a class="nav-link "

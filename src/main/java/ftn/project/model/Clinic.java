@@ -1,5 +1,6 @@
 package ftn.project.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -66,4 +67,6 @@ public class Clinic {
 //		joinColumns = @JoinColumn(name = "clinic_id",nullable=true), 
 //		inverseJoinColumns = @JoinColumn(name = "admin_id",nullable=true))
 //	Set<ClinicCenterAdministrator> administrators;
+	
+	
 }

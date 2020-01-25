@@ -15,9 +15,12 @@ public class OperationServiceImpl implements OperationService {
 	@Override
 	public void scheduleOperation() {
 		// TODO Auto-generated method stub
-		emailService.sendMail("jedemise1burek@gmail.com");
-	}
 
+
+		emailService.sendMail("prolomercegovac@yahoo.com","Operacija odobrena","Operacija odobrena");
+
+
+	}
 	
 
 }
