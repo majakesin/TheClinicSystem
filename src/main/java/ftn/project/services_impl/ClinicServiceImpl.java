@@ -34,10 +34,12 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 
 	public void createClinic(ClinicDto clinicDto) {
-		User user=userRepository.findByUsername(clinicDto.getAdminDto());
-		Clinic clinic=clinicMapper.DtoToClinic(clinicDto);
-		user.setClinic(clinic);
-		userRepository.save(user);
+	//	User user=userRepository.findByUsername(clinicDto.getAdminDto());
+	//	Clinic clinic=clinicMapper.DtoToClinic(clinicDto);
+	//	user.setClinic(clinic);
+	//	userRepository.save(user);
+		
+		clinicRepository.save(clinicMapper.DtoToClinic(clinicDto));
 		
 	}
 	
@@ -55,7 +57,7 @@ public class ClinicServiceImpl implements ClinicService {
 	public ClinicDto getClinicProfile(String ussername) {
 		// TODO Auto-generated method stub
 		
-		return clinicMapper.ClinicToDto(userRepository.findByUsername(ussername).getClinic());
+		return clinicMapper.ClinicToDto(clinicRepository.findById(userRepository.findByUsername(ussername).getClinic()).get());
 	}
 
 	@Override

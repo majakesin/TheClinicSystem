@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +25,12 @@ import lombok.Data;
 public class DoctorController {
 
 	private final UserService userService;
+	private final ClinicService clinicService;
 
 	@GetMapping("/doctors")
 	public ModelAndView showUsers(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
 		model.addAttribute("doctorsDto", userService.allMedicalStaff());
+		model.addAttribute("allClinics",clinicService.allClinics());
 		return new ModelAndView("doctors", "Model", userService.allMedicalStaff());
 
 	}
@@ -36,6 +39,7 @@ public class DoctorController {
 	@PostMapping("/doctors/create")
 	public String createClinic(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("doktor");
+		
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}

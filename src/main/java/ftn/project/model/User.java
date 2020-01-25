@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -61,6 +62,9 @@ public class User implements UserDetails {
 
 	@Column(name = "Enabled")
 	private boolean enabled;
+	
+	@Column(name="Clinic")
+    private Long clinic;
 
 	// polje za pacijenta
 	@Column(name = "InsuranceNumber", nullable = true)
@@ -73,11 +77,7 @@ public class User implements UserDetails {
 	@Column(name = "Mark", nullable = true)
 	private String mark;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="AdministratorsClinics",joinColumns = {
-	@JoinColumn(name = "admin_id", referencedColumnName = "id" ) }, inverseJoinColumns = {
-			@JoinColumn(name = "clinic_id", referencedColumnName = "id") })
-	private Clinic clinic;
+	
 	
 
 	@OneToOne(cascade = CascadeType.ALL)

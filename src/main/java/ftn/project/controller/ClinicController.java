@@ -31,7 +31,7 @@ public class ClinicController {
 	@GetMapping("/clinics")
 	public ModelAndView showClinics(@ModelAttribute("clinicDto")ClinicDto clinicDto,ModelMap model) {
 		model.addAttribute("clinicsDto",clinicService.allClinics());
-		model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
+	//	model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
 		return new ModelAndView("clinics","Model",clinicService.allClinics());
 	}
 	

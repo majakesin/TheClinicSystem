@@ -22,4 +22,7 @@ public class UserDto {
 	//polja za doktora
 	private String biographyDto;
 	private String markDto;
+	
+	//polje za select klinike
+	private Long clinicDto;
 }

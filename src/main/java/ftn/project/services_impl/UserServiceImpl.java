@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.catalina.mapper.Mapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,18 @@ import org.springframework.stereotype.Service;
 
 import ftn.project.dto.UserDto;
 import ftn.project.mapper.UserMapper;
+import ftn.project.model.Clinic;
 import ftn.project.model.User;
 import ftn.project.model.VerificationToken;
+import ftn.project.repository.ClinicRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.repository.VerificationTokenRepository;
 import ftn.project.services.UserService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@Data
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
@@ -34,6 +38,10 @@ public class UserServiceImpl implements UserService {
 	// user service
 	@Autowired
 	private UserRepository userRepository;
+
+	// dodala
+	
+	private final ClinicRepository clinicRepository;
 
 	@Autowired
 	private UserMapper userMapper;
@@ -151,7 +159,7 @@ public class UserServiceImpl implements UserService {
 					return "doctors";
 				} else if (u.getRole().equals("pacijent")) {
 					return "patientHome";
-				} else if(u.getRole().equals("med. sestra")) {
+				} else if (u.getRole().equals("med. sestra")) {
 					return "nurseProfile";
 				}
 
@@ -266,5 +274,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto getUserProfile(String username) {
 		return userMapper.UserToDto(userRepository.findByUsername(username));
 	}
+
+
 
 }
