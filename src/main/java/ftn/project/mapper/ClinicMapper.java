@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import ftn.project.dto.ClinicDto;
 import ftn.project.model.Clinic;
+import ftn.project.model.User;
 import lombok.Data;
 
 @Component
@@ -42,7 +42,7 @@ public class ClinicMapper {
 
 		clinic.setDescription(clinicDto.getDescriptionDto());
 		clinic.setMark(clinicDto.getMarkDto());
-
+		
 		return clinic;
 
 	}

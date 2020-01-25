@@ -1,11 +1,11 @@
 package ftn.project.repository;
 
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ftn.project.model.MedicalRecord;
 import ftn.project.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public Set<User> findAllByRole(String s); 
 	public User findAllById(Long idDto);
 	
+	List<User> findAllByClinic(Long clinicId);
 
 
 	User findByRole(String role); 

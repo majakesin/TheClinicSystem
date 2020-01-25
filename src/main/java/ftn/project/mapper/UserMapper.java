@@ -35,6 +35,7 @@ public class UserMapper {
 		
 		userDto.setCountryDto(user.getCountry());
 		userDto.setInsuranceNumberDto(user.getInsuranceNumber());
+		userDto.setClinicDto(user.getClinic());
 		
 		
 		return userDto;
@@ -62,7 +63,7 @@ public class UserMapper {
 		
 		user.setCountry(userDto.getCountryDto());
 		user.setInsuranceNumber(userDto.getInsuranceNumberDto());
-		
+		user.setClinic(userDto.getClinicDto());
 		
 		return user;
 	}
