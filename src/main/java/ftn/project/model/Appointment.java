@@ -57,6 +57,9 @@ public class Appointment {
 	@Column(name = "IsAccept", nullable = true)
 	private boolean isAccept;
 	
+	@Column(name="Pacijent",nullable=true)
+	private Long pacientId;
+	
 	@ManyToOne
 	@JoinColumn(name="appointment_record_id",nullable=true)
 	private MedicalRecord record;

@@ -11,7 +11,7 @@ public interface RequestService {
 
 	Set<RequestDto> allRequests();
 
-	void acceptRequest( Long id);
+	void acceptRequest( Long id,String pacientUsername);
 
 	void rejectRequest( Long id);
 	

@@ -28,27 +28,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
 
-	@Autowired
-	private RequestRepository requestRepository;
+	private final RequestRepository requestRepository;
 
-	@Autowired
-	private RequestMapper requestMapper;
+	private final RequestMapper requestMapper;
 
-	@Autowired
-	private UserMapper userMapper;
+	private final UserMapper userMapper;
 
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	private final MedicalRecordsRepository medicalRecordsRepository;
 
 	// za slanje zahteva za pregled
 
-	@Autowired
-	private SchedulingRequestRepository sRequestRepository;
-
-	@Autowired
-	private AppointmentMapper appointmentMapper;
+	
+	private final SchedulingRequestRepository sRequestRepository;
+	
+	private final AppointmentMapper appointmentMapper;
 
 	@Override
 	public Set<RequestDto> allRequests() {
@@ -56,11 +51,15 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void acceptRequest(Long id) {
+	public void acceptRequest(Long id,String username) {
 		// TODO Auto-generated method stub
 		Appointment registerRequest = sRequestRepository.findById(id).get();
 		registerRequest.setBusy(true);
 		registerRequest.setAccept(true);
+		
+		User user=userRepository.findByUsername(username);
+		registerRequest.setPacientId(user.getId());
+		
 		sRequestRepository.save(registerRequest);
 
 	}

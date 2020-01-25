@@ -42,6 +42,7 @@
 	<td><c:out value="${patient.nameDto}"/> </td>
 	<td><c:out value="${patient.surnameDto}"/> </td>
 	<td><c:out value="${patient.insuranceNumberDto}"/> </td>
+	<td><a href="${pageContext.request.contextPath}/doctors/records/${patient.idDto}">Pregled pacijenta</a>
 	</tr>
 	</c:forEach>
 	</table>

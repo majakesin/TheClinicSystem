@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ftn.project.dto.RecordsDto;
 import ftn.project.dto.UserDto;
+import ftn.project.mapper.MedicalRecordsMapper;
 import ftn.project.mapper.UserMapper;
 import ftn.project.model.User;
 import ftn.project.model.VerificationToken;
@@ -34,9 +36,10 @@ public class UserServiceImpl implements UserService {
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
 	// user service
-	@Autowired
-	private UserRepository userRepository;
+	
+	private final UserRepository userRepository;
 
+	private final MedicalRecordsMapper medicalRecordsMapper;
 	
 	private final UserMapper userMapper;
 
@@ -61,7 +64,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UserDto getUserById(Long idDto) {
-
 		return userMapper.UserToDto(userRepository.findAllById(idDto));
 
 	}
@@ -72,7 +74,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<UserDto> allMedicalStaff() {
-		// TODO Auto-generated method stub
 		return userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
 	}
 
@@ -145,17 +146,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String autentification(UserDto userDto) {
-		for (User u : userRepository.findAll()) {
+		List<User> users =userRepository.findAll();
+		for (User u : users) {
 			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
 				if (u.getRole().equals("Clinic Centar Administrator")) {
 					return "administrators";
 				} else if (u.getRole().equals("Clinic Administrator")) {
-					return "doctors";
+					return "clinics";
 				} else if (u.getRole().equals("pacijent")) {
 					return "patientHome";
 				} else if(u.getRole().equals("med. sestra")) {
 					return "nurseProfile";
+				} else if(u.getRole().equals("doktor")) {
+					return "doctors";
 				}
+				
 
 			}
 		}
@@ -267,6 +272,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto getUserProfile(String username) {
 		return userMapper.UserToDto(userRepository.findByUsername(username));
+	}
+
+	@Override
+	public RecordsDto getUserRecords(Long userId) {
+		return medicalRecordsMapper.recordsToDto(userRepository.findById(userId).get().getMedicalRecord());
 	}
 
 }
