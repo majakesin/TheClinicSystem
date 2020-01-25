@@ -39,6 +39,7 @@ public class DoctorController {
 	@PostMapping("/doctors/create")
 	public String createClinic(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("doktor");
+		userDto.setPrviLoginDto(false);
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}

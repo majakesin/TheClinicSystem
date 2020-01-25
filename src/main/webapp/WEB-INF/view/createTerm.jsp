@@ -57,8 +57,11 @@
 				<td><form:label path="dateDto">Tip pregleda:</form:label></td>
 				<td>
 					<form:select class="form-control" path="typeDto">
-						<form:option value="Operacija"></form:option>
-						<form:option value="Pregled"></form:option>
+						<form:option value="Ginekologija"></form:option>
+						<form:option value="Urologija"></form:option>
+						<form:option value="Stomatologija"></form:option>
+						<form:option value="Hirurgija"></form:option>
+						<form:option value="Kardiologija"></form:option>
 					</form:select>
 				</td>
 			</tr>

@@ -81,6 +81,7 @@ public class NurseController {
 	@PostMapping("/nurse/create")
 	public String createNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("med. sestra");
+		userDto.setPrviLoginDto(false);
 		userService.createUser(userDto);
 		return "redirect:/nurse";
 	}

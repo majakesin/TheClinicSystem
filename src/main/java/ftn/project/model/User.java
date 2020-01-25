@@ -73,6 +73,13 @@ public class User implements UserDetails {
 	@Column(name = "Mark", nullable = true)
 	private String mark;
 	
+	//polje za doktora,sestru i administratora klinike
+	@Column(name="PrviLogin" , nullable=true)
+	private Boolean prviLogin;
+	
+	@Column(name="PomocnaSifra" , nullable=true)
+	private String pomocnaSifra;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name="AdministratorsClinics",joinColumns = {
 	@JoinColumn(name = "admin_id", referencedColumnName = "id" ) }, inverseJoinColumns = {

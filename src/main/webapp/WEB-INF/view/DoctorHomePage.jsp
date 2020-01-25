@@ -15,8 +15,9 @@
 	
 	<li class="nav-item "><a  class="nav-link text-light" href="/patientSearch/doctor"><i class="fa fa-users" aria-hidden="true"></i> Pacijenti</a></li>
 	<li class="nav-item "><a  class="nav-link text-light" href="/godisnjiOdmorRezervisanje"><i class="fa fa-sun-o" aria-hidden="true"></i> Odmor </a></li>
-	<li class="nav-item "><a  class="nav-link text-light" href=#><i class="fa fa-calendar" aria-hidden="true"></i> Radni kalendar </a></li>
+	<li class="nav-item "><a  class="nav-link text-light" href="/calendar"><i class="fa fa-calendar" aria-hidden="true"></i> Radni kalendar </a></li>
 	<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Zakazivanje</a></li>
 	<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
+	<li class="nav-item "><a class="nav-link text-light" class="btn btn-outline-success" href="/odjava"><i class="fa fa-sign-out" aria-hidden="true"></i></i> Odjava</a></li>
 </body>
 </html>

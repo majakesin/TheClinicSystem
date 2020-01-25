@@ -20,7 +20,7 @@ public class OperationServiceImpl implements OperationService {
 		emailService.sendMail("prolomercegovac@yahoo.com","Operacija odobrena","Operacija odobrena");
 
 
-
+	}
 	
 
 }

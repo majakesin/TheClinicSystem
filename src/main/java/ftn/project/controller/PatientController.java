@@ -44,11 +44,15 @@ public class PatientController {
 	}
 	@PostMapping("/patient/create")
 	public String createPatient(@Valid @ModelAttribute("userDto") UserDto userDto) {
-	
+
+			if(userDto.getPasswordDto().equals(userDto.getPomocnaSifraDto())) {
+				userDto.setPomocnaSifraDto(null);
 			userDto.setRoleDto("pacijent");
 			requestService.saveRequest(userDto);
 			
       return"redirect:/logovanje";
+			}
+		return "redirect:/registracija";
 	}
 	
  
