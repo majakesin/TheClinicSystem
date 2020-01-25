@@ -172,13 +172,13 @@ public class UserServiceImpl implements UserService {
 					return "administrators";
 				} else if (u.getRole().equals("Clinic Administrator")) {
 
-					return "clinics";
+					
 
 					 if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
 					 }
 					 else {
-					return "doctors";
+						 return "clinics";
 					 }
 
 				} else if (u.getRole().equals("pacijent")) {
@@ -186,7 +186,7 @@ public class UserServiceImpl implements UserService {
 					
 					return "patientHome";
 
-				} else if (u.getRole().equals("med. sestra")) {
+				
 
 					
 				} else if(u.getRole().equals("med. sestra")) {
@@ -195,13 +195,14 @@ public class UserServiceImpl implements UserService {
 					 }
 					 else {
 
-					return "nurseProfile";
-
-				} else if(u.getRole().equals("doktor")) {
-					return "doctors";
-
+						 return "nurseProfile";
 					 }
-				}else if(u.getRole().equals("doktor")){
+				}
+				else if(u.getRole().equals("doktor")) {
+					return "doctors";
+				}
+					 
+				else if(u.getRole().equals("doktor")){
 					if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
 					 }
