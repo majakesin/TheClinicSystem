@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import ftn.project.dto.RecordsDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.User;
 
@@ -35,6 +36,7 @@ public interface UserService extends UserDetailsService,IUserService  {
 	
 	String autentification(UserDto userDto);
 	
+	RecordsDto getUserRecords(Long userId);
 	
 
 

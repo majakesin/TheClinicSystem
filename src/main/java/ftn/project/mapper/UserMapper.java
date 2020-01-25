@@ -17,9 +17,14 @@ public class UserMapper {
 	public UserDto UserToDto(User user) {
 		UserDto userDto = new UserDto();
 		userDto.setIdDto(user.getId());
+
+
+	
+
 		
 		userDto.setPrviLoginDto(user.getPrviLogin());
 		userDto.setPomocnaSifraDto(user.getPomocnaSifra());
+
 		userDto.setUsernameDto(user.getUsername());
 		userDto.setPasswordDto(user.getPassword());
 		userDto.setEmailDto(user.getEmail());

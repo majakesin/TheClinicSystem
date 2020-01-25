@@ -3,6 +3,8 @@ package ftn.project.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -84,8 +86,9 @@ public class SchedulingRequestController {
 	}
 
 	@GetMapping("/appointmentRequests/{idDto}")
-	public String getSelectedTerms(@PathVariable("idDto") Long idDto) {
-		requestService.acceptRequest(idDto);
+	public String getSelectedTerms(@PathVariable("idDto") Long idDto,HttpServletRequest request) {
+		String username=(String)request.getSession().getAttribute("logUsername");
+		requestService.acceptRequest(idDto,username);
 		return "redirect:/freeTerms";
 	}
 }
