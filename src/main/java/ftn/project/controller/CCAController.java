@@ -33,13 +33,19 @@ public class CCAController {
 	
 	@PostMapping("/administrators/create")
 	public String createAdministrator(@Valid @ModelAttribute("userDto") UserDto userDto) {
+		userDto.setPrviLoginDto(false);
 		userService.createUser(userDto);
+
 		if(userDto.roleDto.equals("Clinic Centar Administrator")) {
 			
 			return "redirect:/cca";
 		}else
 			
 		return "redirect:/ca";
+
+		
+//		return "redirect:/administrators";
+
 	}
 	@GetMapping("/administrators/user/delete/{idDto}")
 	public String deleteUser(@PathVariable("idDto") Long idDto, ModelMap model) {

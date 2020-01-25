@@ -30,6 +30,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Service
+
+
+@Data
+
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
@@ -39,12 +43,17 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+
 	// dodala
 	
 	private final ClinicRepository clinicRepository;
 
-	@Autowired
-	private UserMapper userMapper;
+//	@Autowired
+//	private UserMapper userMapper;
+
+	
+	private final UserMapper userMapper;
+
 
 	// spring security
 	@Autowired
@@ -154,13 +163,38 @@ public class UserServiceImpl implements UserService {
 		for (User u : userRepository.findAll()) {
 			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
 				if (u.getRole().equals("Clinic Centar Administrator")) {
+					
 					return "administrators";
 				} else if (u.getRole().equals("Clinic Administrator")) {
+					 if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
 					return "doctors";
+					 }
 				} else if (u.getRole().equals("pacijent")) {
+					
+					
 					return "patientHome";
+
 				} else if (u.getRole().equals("med. sestra")) {
+
+					
+				} else if(u.getRole().equals("med. sestra")) {
+					 if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
+
 					return "nurseProfile";
+					 }
+				}else if(u.getRole().equals("doktor")){
+					if(u.getPrviLogin()==false) {
+						 return "izmeniSifru";
+					 }
+					 else {
+					return "patientSearch/doctor";
+					 }
 				}
 
 			}
@@ -184,8 +218,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 
 	public UserDto getUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.UserToDto(userRepository.findByUsername(username));
 	}
 
 	@Override

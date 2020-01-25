@@ -17,7 +17,9 @@ public class UserMapper {
 	public UserDto UserToDto(User user) {
 		UserDto userDto = new UserDto();
 		userDto.setIdDto(user.getId());
-
+		
+		userDto.setPrviLoginDto(user.getPrviLogin());
+		userDto.setPomocnaSifraDto(user.getPomocnaSifra());
 		userDto.setUsernameDto(user.getUsername());
 		userDto.setPasswordDto(user.getPassword());
 		userDto.setEmailDto(user.getEmail());
@@ -44,6 +46,8 @@ public class UserMapper {
 
 		user.setId(userDto.getIdDto());
 
+		user.setPrviLogin(userDto.getPrviLoginDto());
+		user.setPomocnaSifra(userDto.getPomocnaSifraDto());
 		user.setUsername(userDto.getUsernameDto());
 		user.setPassword(userDto.getPasswordDto());
 		user.setEmail(userDto.getEmailDto());

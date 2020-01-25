@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+
 import ftn.project.services.ClinicService;
+
+import ftn.project.dto.VacationRequestDto;
+
 import ftn.project.services.UserService;
+import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,7 +30,11 @@ import lombok.Data;
 public class DoctorController {
 
 	private final UserService userService;
+
 	private final ClinicService clinicService;
+
+	private final VacationRequestService vqService;
+
 
 	@GetMapping("/doctors")
 	public ModelAndView showUsers(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
@@ -39,7 +48,11 @@ public class DoctorController {
 	@PostMapping("/doctors/create")
 	public String createClinic(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("doktor");
+
 		
+
+		userDto.setPrviLoginDto(false);
+
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}
@@ -84,4 +97,56 @@ public class DoctorController {
 		request.getSession().setAttribute("doctorsDto", userService.searchDoctor(doctorDto.nameDto, doctorDto.surnameDto, doctorDto.getMarkDto()));
 		return "redirect:/doctorsSearch";
 	}
+	
+	
+	//pretraga pacijenata HomePageDoktor
+	@GetMapping("/patientSearch/doctor")
+	public ModelAndView searchPatientHomePageDoctor(HttpServletRequest request, @ModelAttribute("patientDto") UserDto patientDto, ModelMap model) {
+		ModelAndView mav=new ModelAndView("PatientSearchDoctor");
+		
+		Set<UserDto> pacijenti=(Set<UserDto>)request.getSession().getAttribute("patientsDto");
+		
+		if(pacijenti==null) {
+			mav.addObject("patientsDto", userService.allUserByRole("pacijent"));
+		}
+		else {
+	
+		mav.addObject("patientsDto", pacijenti);
+		}
+		return mav;
+
+	}
+	@PostMapping("/patient/searchD")
+	public String searchPatientR(HttpServletRequest request,@ModelAttribute("patientDto") UserDto patientDto,ModelMap model) {
+		request.getSession().setAttribute("patientsDto", userService.searchPatient(patientDto.nameDto, patientDto.surnameDto, patientDto.getInsuranceNumberDto()));
+		return "redirect:/patientSearch/doctor";
+		
+	}
+	
+	//rezervisanje godisnjeg odmora
+	
+	@GetMapping("/godisnjiOdmorRezervisanje")
+	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
+		String username = (String) request.getSession().getAttribute("logUsername");
+		if(username!=null) {
+		UserDto userTemp = userService.getUserByUsername(username);
+		
+		vacReqDto.setEmailDto(userTemp.emailDto);
+		vacReqDto.setNameDto(userTemp.nameDto);
+		vacReqDto.setSurnameDto(userTemp.getSurnameDto());
+		vacReqDto.setUsernameDto(username);
+		vacReqDto.setRoleDto("doktor"); }
+	
+		return new ModelAndView("zakazivanjeGodisnjeg");
+
+	}
+	
+	@PostMapping("/kreirajZahtevGodisnji")
+	public String kreirajZahtev(@Valid @ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto) {
+		
+		vqService.createVacReq(vacReqDto);
+		return "redirect:/godisnjiOdmorRezervisanje";
+	}
+	
+	
 }

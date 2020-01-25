@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+
 import ftn.project.services.ClinicService;
+
+import ftn.project.dto.VacationRequestDto;
+
 import ftn.project.services.UserService;
+import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,8 +30,13 @@ import lombok.Data;
 public class NurseController {
 
 	
+
 	private final UserService userService;
 	private final ClinicService clinicService;
+
+	
+	private final VacationRequestService vqService;
+
 
 	@GetMapping("/nurse")
 	public ModelAndView showNursePage(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
@@ -81,6 +91,7 @@ public class NurseController {
 	@PostMapping("/nurse/create")
 	public String createNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
 		userDto.setRoleDto("med. sestra");
+		userDto.setPrviLoginDto(false);
 		userService.createUser(userDto);
 		return "redirect:/nurse";
 	}
@@ -105,6 +116,30 @@ public class NurseController {
 		return "redirect:/nurseProfile";
 	}
 	
+	
+	//godisnji odmor
+	@GetMapping("/godisnjiOdmorRezervisanjeSestra")
+	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
+		String username = (String) request.getSession().getAttribute("logUsername");
+		if(username!=null) {
+		UserDto userTemp = userService.getUserByUsername(username);
+		
+		vacReqDto.setEmailDto(userTemp.emailDto);
+		vacReqDto.setNameDto(userTemp.nameDto);
+		vacReqDto.setSurnameDto(userTemp.getSurnameDto());
+		vacReqDto.setUsernameDto(username);
+		vacReqDto.setRoleDto("med. sestra"); }
+	
+		return new ModelAndView("zakazivanjeGodisnjegSestra");
+
+	}
+	
+	@PostMapping("/kreirajZahtevGodisnjiSestra")
+	public String kreirajZahtev(@Valid @ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto) {
+		
+		vqService.createVacReq(vacReqDto);
+		return "redirect:/godisnjiOdmorRezervisanje";
+	}
 	
 	
 }

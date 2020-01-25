@@ -27,6 +27,7 @@ public class AppointmentMapper {
 		appointment.setType(appointmentDto.getTypeDto());
 		appointment.setPrice(appointmentDto.getPriceDto());
 		appointment.setDiscount(appointmentDto.getDiscountDto());
+		appointment.setDoctor(appointmentDto.getDoctorDto());
 		
 		
 		return appointment;
@@ -42,6 +43,7 @@ public class AppointmentMapper {
 		appointmentDto.setTypeDto(appointment.getType());
 		appointmentDto.setPriceDto(appointment.getPrice());
 		appointmentDto.setDiscountDto(appointment.getDiscount());
+		appointmentDto.setDoctorDto(appointment.getDoctor());
 		
 		return appointmentDto;
 	}

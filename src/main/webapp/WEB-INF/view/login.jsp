@@ -185,13 +185,25 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 		<h1>Dobrodošli</h1>
 		
 		<form:form method="POST"  class="form" action="/patient/login/${username}" modelAttribute="userDto">
+			
+			<div class="input-group mb-2">
+	 		<div class="input-group-prepend">
+     		<div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
+    	 	</div>
 			<form:input class="form-control" id="usernameDto" placeholder="Korisničko ime" path="usernameDto" required="required"/>
+			</div>
 			<br>
+			<div class="input-group mb-2">
+	 		<div class="input-group-prepend">
+     		<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
+    	 	</div>
 			<form:input class="form-control" type="password" placeholder="Lozinka" path="passwordDto" required="required"/>
+			</div>
 			<br>
+			 
 			<input type="submit"  id="login" value= "Uloguj se">
 			<br>
-			<a href="/registracija">Registruj se</a>
+			<a href="/registracija" >Registruj se</a>
 			</form:form>
 		
 	</div>

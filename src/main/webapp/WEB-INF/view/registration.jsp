@@ -79,7 +79,7 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 }
 
 .container{
-	max-width: 400px;
+	
 	margin: 0 auto;
 	padding: 0px 0;
 	height: 100%;
@@ -139,11 +139,9 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 		width: 150px;
 		cursor: pointer;
 		font-size: 18px;
-		transition-duration: 0.25s;
 		
-		&:hover{
-			background-color: rgb(245, 247, 249);
-		}
+		
+	
 	}
 
 
@@ -161,45 +159,107 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 </style>
 </head>
 <body>
-
-	<div class="wrapper">
-	<div class="container">
-	<h1>Registracija</h1>
 	
+	<div class="wrapper">
+	<br><br><br><br>
+	<div class="container">
+	<h1 class="nice">Registracija</h1>
+	<br>
 	<form:form method="POST" action="/patient/create" modelAttribute="userDto">
 				
-				
+		<div class="row">
+		<div class="col-md-6">
 		
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
+    	 		</div>
 				<form:input class="form-control" placeholder=" * Korisničko ime" path="usernameDto" required="required" />
-			
+				</div>
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
+    	 		</div>
+				
 				<form:input class="form-control" type="password" placeholder=" * Lozinka"  path="passwordDto"  required="required"/>
-		
+				</div>
+				
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
+    	 		</div>	
+				<form:input  type="password" class="form-control" placeholder="* Ponovi lozinku" path="pomocnaSifraDto" required="required"/>
+				</div>
+				
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
+    	 		</div>
+				
 				<form:input class="form-control" placeholder=" Ime " path="nameDto" />
-			
+				</div>
+	
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
+    	 		</div>			
 			
 				<form:input  class="form-control"  placeholder= " Prezime" path="surnameDto" />
-			
-				<form:input class="form-control" placeholder= " Adresa" path="addressDto" />
-			
-
-				<form:input class="form-control" placeholder=" Grad" path="cityDto" />
-			
+				</div>
 				
+			
+		</div>
+		
+		<div class="col-md-6">
+		
+		
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+    	 		</div>
+				<form:input class="form-control" placeholder=" Grad" path="cityDto" />
+				</div>
+				
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+    	 		</div>
+				<form:input class="form-control" placeholder= " Adresa" path="addressDto" />
+				</div>
+				
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-globe" aria-hidden="true"></i></div>
+    	 		</div>
 				<form:input class="form-control" placeholder = " Država" path="countryDto" />
+				</div>
 			
-			
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-id-badge" aria-hidden="true"></i></div>
+    	 		</div>
 				
 				<form:input class="form-control" path="insuranceNumberDto" placeholder =" * Broj osiguranika " required="required" />
-			
+				</div>
+				
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></div>
+    	 		</div>
 				
 				<form:input  class="form-control" placeholder=" Telefon" path="phoneDto" />
-			
+				</div>
+				<div class="input-group mb-2">
+    		 	<div class="input-group-prepend">
+    			<div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+    	 		</div>
 				<form:input class="form-control"  type="email" placeholder= " * Email" path="emailDto" required="required"/>
-			
-				<br>
+				</div>
+			</div>
+				<br><br><br>
 				 <input  type="submit" id="Registracija" value="Registruj se" />
 				
-				
+		</div>		
 	</form:form>
 	</div>
 	</div>

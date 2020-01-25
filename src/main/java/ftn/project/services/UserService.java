@@ -47,7 +47,7 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto);
 
-
+	
 	
 
 }
