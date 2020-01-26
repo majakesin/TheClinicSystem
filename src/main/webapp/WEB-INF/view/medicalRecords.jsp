@@ -118,7 +118,13 @@
 	<tr>
 	</tr>
 	<tr>
-	</table>    
+	<tr>
+		<td><a class="btn btn-outline-success"
+									href="/doctors/records/edit">Izmeni pacijentov zdravstveni karton</a></td>
+	</tr>
+	</table>
+	
+	   
 	<br> <br> <br>
 	 
 </div>  
