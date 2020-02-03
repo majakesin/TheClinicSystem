@@ -3,6 +3,7 @@ package ftn.project.services;
 import java.util.Set;
 
 import ftn.project.dto.AppointmentDto;
+import ftn.project.dto.ClinicDto;
 import ftn.project.dto.RequestDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.RegisterRequest;
@@ -33,4 +34,6 @@ public interface RequestService {
 	Set<AppointmentDto> allNotAccepted();	
 	
 	void acceptUserRequest(Long idDto);
+	
+	
 }
