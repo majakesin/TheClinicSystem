@@ -9,9 +9,10 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "Prescription")
 public class Prescription {
@@ -23,10 +24,21 @@ public class Prescription {
 	@Column(name = "Certified", nullable = false)
 	private boolean certified;
 
+	@Column(name = "isExaminationFinished", nullable = true)
+	private boolean isExamination;
+	
 	@Column(name = "DrugCode", nullable = false)
 	private String drugCode;
 
 	@Column(name = "DrugName", nullable = false)
 	private String drugName;
+	
+	@Column(name = "Describe", nullable = true)
+	private String describe;
 
+	@Column(name="Pacient",nullable=true)
+	private Long pacientId;
+	
+	@Column(name="Nurse",nullable=true)
+	private Long nurseId;
 }

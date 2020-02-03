@@ -9,12 +9,17 @@ import org.springframework.stereotype.Component;
 import ftn.project.dto.CalendarDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.Calendar;
+import ftn.project.services.UserService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 @Component
 public class CalendarMapper {
 
+	private final UserService userSerivce;
+	
 	public Calendar calendarDtoToCalendar(CalendarDto calendarDto) {
 		Calendar calendar = new Calendar();
 		calendar.setDoctorId(calendarDto.getMedicalId());
@@ -54,10 +59,18 @@ public class CalendarMapper {
 	public CalendarDto appointmentToCalendarDto(Appointment appointment){
 		
 		CalendarDto calendarDto=new CalendarDto();
+		
 		String start=appointment.getDate();
 		start.replaceAll("-", "/");
 		calendarDto.setStart(start);
-		calendarDto.setTitle(appointment.getType());
+		String pacientName="";
+		String pacientSurname="";
+		if(appointment.getPacientId()!=null) {
+			pacientName=(userSerivce.getUserById(appointment.getPacientId())).getNameDto();
+			pacientSurname=(userSerivce.getUserById(appointment.getPacientId())).getSurnameDto();
+			calendarDto.setUrl("/doctors/records/"+(userSerivce.getUserById(appointment.getPacientId()).getIdDto()));
+		}
+		calendarDto.setTitle(pacientName+" "+pacientSurname+ " soba : "+appointment.getRoom()+" "+ appointment.getTime()+"h");
 		
 		
 		return calendarDto;

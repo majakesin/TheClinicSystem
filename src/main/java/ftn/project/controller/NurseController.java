@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+
+import ftn.project.services.ClinicService;
+
 import ftn.project.dto.VacationRequestDto;
+
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
@@ -26,12 +30,18 @@ import lombok.Data;
 public class NurseController {
 
 	
-	private UserService userService;
+
+	private final UserService userService;
+	private final ClinicService clinicService;
+
+	
 	private final VacationRequestService vqService;
+
 
 	@GetMapping("/nurse")
 	public ModelAndView showNursePage(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
 		model.addAttribute("nurseDto", userService.allNurse());
+		model.addAttribute("allClinics",clinicService.allClinics());
 		return new ModelAndView("nurseAdd", "Model", userService.allNurse());
 
 	}

@@ -40,6 +40,8 @@ public class MedicalRecord {
 	@Column(name = "Allergy", nullable = true)
 	private String allergy;
 	
+	@Column(name="Anamnesis",nullable=true)
+	private Long anamnesisId;
 	
 	@OneToMany(mappedBy = "record")
 	private Set<Appointment> appointments;

@@ -23,5 +23,9 @@ public interface ClinicService {
 
 	public ClinicDto getClinicProfile(String ussername);
 	
+	//pretraga klinike
+	Set<ClinicDto> searchClinicByTerm(String dateDto, String typeDto );
+	Set<ClinicDto> searchClinic(String adressDto, double markDto );
+	
 	
 }
