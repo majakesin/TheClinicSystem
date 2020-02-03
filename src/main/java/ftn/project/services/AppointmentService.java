@@ -12,5 +12,6 @@ public interface AppointmentService {
 
 	Set<AppointmentRequestDto> allAppointments();
 	
-	
+	//da mi iscita sve termine
+	public Set<AppointmentDto> allAppointment();
 }
