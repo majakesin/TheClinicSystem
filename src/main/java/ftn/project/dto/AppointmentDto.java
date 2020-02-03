@@ -18,5 +18,6 @@ public class AppointmentDto {
 	public String priceDto;
 	public Long doctorDto;
 	public String discountDto;
+	public Long roomId;
 	
 }

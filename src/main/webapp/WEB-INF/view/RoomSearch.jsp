@@ -50,6 +50,7 @@
 	<tr>
 	<td><c:out value="${room.nameDto}"/> </td>
 	<td><c:out value="${room.hallNumberDto}"/> </td>
+	<td><a href="${pageContext.request.contextPath}/rooms/reservate/${room.idDto}">Rezervisi</a>
 	
 	</tr>
 	</c:forEach>

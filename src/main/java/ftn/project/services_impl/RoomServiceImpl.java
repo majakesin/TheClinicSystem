@@ -71,5 +71,15 @@ public class RoomServiceImpl implements RoomService {
 		return sobe;
 		
 	}
+
+	@Override
+	public Set<RoomDto> emptyRooms() {
+		return roomMapper.setRoomToDto(roomRepository.findAllByFree(true));
+	}
+
+	@Override
+	public RoomDto getRoom(Long id) {
+		return roomMapper.roomToDto(roomRepository.findById(id).get());
+	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -146,6 +147,11 @@ public class DoctorController {
 		
 		vqService.createVacReq(vacReqDto);
 		return "redirect:/godisnjiOdmorRezervisanje";
+	}
+	
+	@Scheduled(cron = "${greeting.cron}")
+	public void hello() {
+		System.out.println("Hello");
 	}
 	
 	

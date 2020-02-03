@@ -27,7 +27,7 @@ $(document).ready(function(){
 	  
 	  $.ajax({
 			type : "POST",
-			url : "/operations/sendmail",
+			url : "/clinic/admin/operations/reservate",
 			dataType:"json",
 			contentType: "application/json; charset=utf-8",
 			data:JSON.stringify({"operationIds" :list}),

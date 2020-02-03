@@ -19,4 +19,8 @@ public interface RoomService {
 	public void deleteRoom(Long idDto);
 
 	public Set<RoomDto> searchRooms(String nameDto, String hallNumberDto);
+	
+	public Set<RoomDto> emptyRooms();
+	
+	RoomDto getRoom(Long id);
 }

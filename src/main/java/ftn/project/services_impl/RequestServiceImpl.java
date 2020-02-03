@@ -19,7 +19,7 @@ import ftn.project.model.RegisterRequest;
 import ftn.project.model.User;
 import ftn.project.repository.MedicalRecordsRepository;
 import ftn.project.repository.RequestRepository;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.services.RequestService;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +41,7 @@ public class RequestServiceImpl implements RequestService {
 	// za slanje zahteva za pregled
 
 	
-	private final SchedulingRequestRepository sRequestRepository;
+	private final AppoitmentRepository sRequestRepository;
 	
 	private final AppointmentMapper appointmentMapper;
 
@@ -136,6 +136,11 @@ public class RequestServiceImpl implements RequestService {
 		userRepository.save(user);
 		requestRepository.delete(reg);
 		
+	}
+
+	@Override
+	public RequestDto getRequest(Long id) {
+		return requestMapper.requestToDto(requestRepository.findById(id).get());
 	}
 
 	

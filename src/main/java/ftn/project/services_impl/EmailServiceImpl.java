@@ -56,6 +56,7 @@ public class EmailServiceImpl implements EmailService {
 
 
 			message.setSubject(subjekat);
+			message.setContent(tekst,"text/html; charset=utf-8");
 			message.setText(tekst);
 			
 
