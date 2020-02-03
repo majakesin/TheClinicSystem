@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
 import ftn.project.dto.VacationRequestDto;
+import ftn.project.repository.UserRepository;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
@@ -29,10 +30,26 @@ public class DoctorController {
 	private final VacationRequestService vqService;
 
 	@GetMapping("/doctors")
-	public ModelAndView showUsers(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public ModelAndView showUsers(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		
+		String username = (String) request.getSession().getAttribute("logUsername");
+		if(username==null) {
+			return new ModelAndView("badUser");
+		}
+		else {
+		UserDto tempUser =  userService.getUserByUsername(username);
+		
+		if(tempUser.getRoleDto().equals("Clinic Administrator") ) {
+		
 		model.addAttribute("doctorsDto", userService.allMedicalStaff());
 		return new ModelAndView("doctors", "Model", userService.allMedicalStaff());
 
+		}
+		
+		else {
+			return new ModelAndView("badUser");
+		}
+		}
 	}
 	
 
