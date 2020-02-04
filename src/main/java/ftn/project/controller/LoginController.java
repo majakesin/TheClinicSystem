@@ -23,6 +23,13 @@ public class LoginController {
 	
 	private final UserService userService;
 	
+	@GetMapping("/badUser")
+	public ModelAndView showUser(ModelMap model) {
+		
+		return new ModelAndView("badUser");
+	}
+	
+	
 	@GetMapping("/izmeniSifru")
 	public ModelAndView izmeniStranica(HttpServletRequest request,ModelMap model) {
 		String username = (String) request.getSession().getAttribute("logUsername");
@@ -65,7 +72,7 @@ public class LoginController {
 	
 	@GetMapping("/odjava")
 	public String odjaviSe(HttpServletRequest request,ModelMap model) {
-		//request.getSession().setAttribute("logUsername", null);
+		request.getSession().setAttribute("logUsername", null);
 		request.getSession().invalidate();
 			
 				return  "redirect:/logovanje";
