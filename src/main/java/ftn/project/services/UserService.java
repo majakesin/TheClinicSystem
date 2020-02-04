@@ -2,6 +2,8 @@ package ftn.project.services;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +46,16 @@ public interface UserService extends UserDetailsService,IUserService  {
 	Set<UserDto> searchPatient(String nameDto, String surnameDto, String insuranceNumberDto);
 
 	Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto);
-
 	
+	//za autorizaciju korisnika
+	void Autorizacija(HttpServletRequest request);
+
+	public boolean getCA();
+	public boolean getCCA();
+	public boolean getPacijent();
+	public boolean getDoktor();
+	public boolean getSestra();
+	public boolean getNull();
 	
 
 }
