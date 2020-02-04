@@ -1,6 +1,7 @@
 package ftn.project.repository;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,4 +14,8 @@ public interface SchedulingRequestRepository extends JpaRepository<Appointment, 
 	public List<Appointment> findAllByisAccept(boolean isAccept);
 	
 	List<Appointment>findAllByDoctor(Long doctor);
+	
+	public Set<Appointment> findByDateAndType(String date, String type);
+	public Set<Appointment> findByDate(String date);
+	public Set<Appointment> findByType(String type);
 }

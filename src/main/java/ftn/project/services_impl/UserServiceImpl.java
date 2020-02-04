@@ -4,7 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import javax.servlet.http.HttpServletRequest;
+
+
+import org.apache.catalina.mapper.Mapper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,10 +22,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ftn.project.dto.RecordsDto;
 import ftn.project.dto.UserDto;
+import ftn.project.mapper.MedicalRecordsMapper;
 import ftn.project.mapper.UserMapper;
+import ftn.project.model.Clinic;
 import ftn.project.model.User;
 import ftn.project.model.VerificationToken;
+import ftn.project.repository.ClinicRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.repository.VerificationTokenRepository;
 import ftn.project.services.UserService;
@@ -29,7 +37,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Service
+
+
 @Data
+
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
@@ -44,11 +55,24 @@ public class UserServiceImpl implements UserService {
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
 	// user service
-	@Autowired
-	private UserRepository userRepository;
+	
+	private final UserRepository userRepository;
+
+
+	private final MedicalRecordsMapper medicalRecordsMapper;
+
+
+	// dodala
+	
+	private final ClinicRepository clinicRepository;
+
+//	@Autowired
+//	private UserMapper userMapper;
+
 
 	
 	private final UserMapper userMapper;
+
 
 	// spring security
 	@Autowired
@@ -71,7 +95,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UserDto getUserById(Long idDto) {
-
 		return userMapper.UserToDto(userRepository.findAllById(idDto));
 
 	}
@@ -82,7 +105,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Set<UserDto> allMedicalStaff() {
-		// TODO Auto-generated method stub
 		return userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
 	}
 
@@ -155,38 +177,54 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String autentification(UserDto userDto) {
-		for (User u : userRepository.findAll()) {
+		List<User> users =userRepository.findAll();
+		for (User u : users) {
 			if (u.getUsername().equals(userDto.getUsernameDto()) && u.getPassword().equals(userDto.getPasswordDto())) {
 				if (u.getRole().equals("Clinic Centar Administrator")) {
 					
 					return "administrators";
 				} else if (u.getRole().equals("Clinic Administrator")) {
+
+					
+
 					 if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
 					 }
 					 else {
-					return "doctors";
+						 return "clinics";
 					 }
+
 				} else if (u.getRole().equals("pacijent")) {
 					
 					
 					return "patientHome";
+
+				
+
 					
 				} else if(u.getRole().equals("med. sestra")) {
 					 if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
 					 }
 					 else {
-					return "nurseProfile";
+
+						 return "nurseProfile";
 					 }
-				}else if(u.getRole().equals("doktor")){
+				}
+				else if(u.getRole().equals("doktor")) {
+					return "doctors";
+				}
+					 
+				else if(u.getRole().equals("doktor")){
 					if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
 					 }
 					 else {
 					return "patientSearch/doctor";
 					 }
+
 				}
+				
 
 			}
 		}
@@ -299,6 +337,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.UserToDto(userRepository.findByUsername(username));
 	}
 
+
 	
 	//autorizacija korisnika
 	@Override
@@ -388,5 +427,15 @@ public class UserServiceImpl implements UserService {
 		return prazno;
 	}
 	
+
+
+	@Override
+	public RecordsDto getUserRecords(Long userId) {
+		return medicalRecordsMapper.recordsToDto(userRepository.findById(userId).get().getMedicalRecord());
+	}
+
+
+
+
 
 }

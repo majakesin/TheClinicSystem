@@ -1,5 +1,7 @@
 package ftn.project.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
+import ftn.project.services.AppointmentService;
 import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import lombok.Data;
@@ -26,6 +30,10 @@ public class ClinicController {
 	private final ClinicService clinicService;
 	
 	private final UserService userService;
+	
+	private final AppointmentService appointmentService;
+	
+	Set<ClinicDto> termini=null;
 	
 	
 	@GetMapping("/clinics")
@@ -41,7 +49,7 @@ public class ClinicController {
 			if(userService.getCCA()){
 		
 		model.addAttribute("clinicsDto",clinicService.allClinics());
-		model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
+	//	model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
 		return new ModelAndView("clinics","Model",clinicService.allClinics());
 			}else {
 				return new ModelAndView("badUser");
@@ -129,4 +137,64 @@ public class ClinicController {
 	return "redirect:/clinicsProfileCA";
 	
 	}
+	
+	//pretraga klinika po vise kriterijuma
+	
+	//za pretragu klinika po datumu i tipu PREGLEDA
+		@GetMapping("/clincsSearchDateType")
+		public ModelAndView searchClinicByTerm(HttpServletRequest request, @ModelAttribute("termDto") AppointmentDto termDto, ModelMap model) {
+			
+			ModelAndView mav= new ModelAndView("listOfClinics");
+			request.getSession().setAttribute("clinicsDto",null);
+			termini =(Set<ClinicDto>)request.getSession().getAttribute("termsDto");
+			
+			if(termini==null) {
+				mav.addObject("termsDto", clinicService.allClinics() );
+			} else {
+				mav.addObject("termsDto", termini);
+			}
+			return mav;
+		}
+		
+		@PostMapping("/terms/search")
+		public String searchClinicByTerms(HttpServletRequest request, @ModelAttribute("termDto") AppointmentDto termDto, ModelMap model ) {
+			request.getSession().setAttribute("termsDto", clinicService.searchClinicByTerm(termDto.dateDto, termDto.typeDto));
+			return "redirect:/clincsSearchDateType";
+		}
+		
+		
+		//za pretragu klinika po adresi i oceni KLINIKE
+		@GetMapping("/clinicsSearch")
+		public ModelAndView searchClinic(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, ModelMap model) {
+			
+			ModelAndView mav= new ModelAndView("listOfClinics2");
+					
+			Set<ClinicDto> klinike =(Set<ClinicDto>)request.getSession().getAttribute("clinicsDto");
+					
+			if(termini == null) {
+				
+				if(klinike==null) {
+					mav.addObject("clinicsDto",clinicService.allClinics()  );
+				} else {
+					mav.addObject("clinicsDto", klinike);
+				}
+				
+			}  else {
+				if(klinike==null) {
+					mav.addObject("clinicsDto",termini  );
+				} else {
+					mav.addObject("clinicsDto", klinike);
+				}
+			} 
+			
+			
+					
+					return mav;
+				}
+		
+		@PostMapping("/clinics/search")
+		public String searchClinics(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, ModelMap model ) {
+			request.getSession().setAttribute("clinicsDto", clinicService.searchClinic(clinicDto.adressDto, clinicDto.markDto));
+			return "redirect:/clinicsSearch";
+		}
 }

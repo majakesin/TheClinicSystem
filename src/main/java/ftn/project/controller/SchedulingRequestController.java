@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
+import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
 import ftn.project.services.AppointmentService;
+import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.RoomService;
 import ftn.project.services.UserService;
@@ -26,14 +28,15 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class SchedulingRequestController {
 
-	private final AppointmentService appointmentService;
+	
 	
 	private final RequestService requestService;
 	
 	private final UserService userService;
 	
 	private final RoomService roomService;
-
+	
+	
 	@GetMapping("/createTerm")
 	public ModelAndView createTerm(HttpServletRequest request,@ModelAttribute("appointmentDto") AppointmentDto appointmentDto, ModelMap model) {
 		userService.Autorizacija(request);
@@ -176,6 +179,7 @@ public class SchedulingRequestController {
 	}
 
 	@GetMapping("/appointmentRequests/{idDto}")
+
 	public String getSelectedTerms(HttpServletRequest request,@PathVariable("idDto") Long idDto) {
 		userService.Autorizacija(request);
 		
@@ -186,8 +190,13 @@ public class SchedulingRequestController {
 		else {
 			//autorizacija
 			if(userService.getCA()){
-		
+		String username=(String)request.getSession().getAttribute("logUsername");
 		requestService.acceptRequest(idDto);
+
+
+		
+		
+
 		return "redirect:/freeTerms";
 			}else {
 				return "redirect:/badUser";
@@ -195,4 +204,6 @@ public class SchedulingRequestController {
 				
 			}
 	}
+	
+	
 }

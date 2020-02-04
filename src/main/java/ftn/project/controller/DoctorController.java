@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
+
+import ftn.project.services.ClinicService;
+
 import ftn.project.dto.VacationRequestDto;
+
 import ftn.project.repository.UserRepository;
+
+
+
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
@@ -27,11 +34,15 @@ import lombok.Data;
 public class DoctorController {
 
 	private final UserService userService;
+
+	private final ClinicService clinicService;
+
 	private final VacationRequestService vqService;
 	
 	
 	
 	
+
 
 	@GetMapping("/doctors")
 	public ModelAndView showUsers(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
@@ -47,6 +58,7 @@ public class DoctorController {
 			if(userService.getCA()){
 		
 		model.addAttribute("doctorsDto", userService.allMedicalStaff());
+		model.addAttribute("allClinics",clinicService.allClinics());
 		return new ModelAndView("doctors", "Model", userService.allMedicalStaff());
 
 		}
@@ -63,7 +75,11 @@ public class DoctorController {
 		
 
 		userDto.setRoleDto("doktor");
+
+		
+
 		userDto.setPrviLoginDto(false);
+
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}
