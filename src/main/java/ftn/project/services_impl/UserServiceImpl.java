@@ -4,7 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+import javax.servlet.http.HttpServletRequest;
+
+
 import org.apache.catalina.mapper.Mapper;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +43,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+	
+	//polja za autorizaciju
+	private boolean CCA;
+	private boolean CA;
+	private boolean doc;
+	private boolean sis;
+	private boolean pac;
+	private boolean prazno;
 
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -325,10 +338,102 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	
+	//autorizacija korisnika
+	@Override
+	public void Autorizacija(HttpServletRequest request) {
+		
+		
+		String username = (String) request.getSession().getAttribute("logUsername");
+		if(username==null) {
+			prazno=true;
+			return;
+		}else {
+			prazno=false;
+			
+		}
+		UserDto tempUser = userMapper.UserToDto(userRepository.findByUsername(username));
+		
+		
+		if(tempUser.getRoleDto().equals("Clinic Administrator") ) {
+			CA=true;
+			return;
+		}else {
+			CA=false;
+		}
+		
+		if(tempUser.getRoleDto().equals("Clinic Centar Administrator") ) {
+			CCA=true;
+			return;
+		}else {
+			CCA=false;
+		}
+		
+		if(tempUser.getRoleDto().equals("pacijent") ) {
+			pac=true;
+			return;
+		}else {
+			pac=false;
+		}
+		
+		if(tempUser.getRoleDto().equals("doktor") ) {
+			doc=true;
+			return;
+		}else {
+			doc=false;
+		}
+		
+
+		if(tempUser.getRoleDto().equals("med. sestra") ) {
+			sis=true;
+		}else {
+			sis=false;
+		}
+	}
+
+	@Override
+	public boolean getCA() {
+		// TODO Auto-generated method stub
+		return CA;
+	}
+
+	@Override
+	public boolean getCCA() {
+		// TODO Auto-generated method stub
+		return CCA;
+	}
+
+	@Override
+	public boolean getPacijent() {
+		// TODO Auto-generated method stub
+		return pac;
+	}
+
+	@Override
+	public boolean getDoktor() {
+		// TODO Auto-generated method stub
+		return doc;
+	}
+
+	@Override
+	public boolean getSestra() {
+		// TODO Auto-generated method stub
+		return sis;
+	}
+
+	@Override
+	public boolean getNull() {
+		// TODO Auto-generated method stub
+		return prazno;
+	}
+	
+
+
 	@Override
 	public RecordsDto getUserRecords(Long userId) {
 		return medicalRecordsMapper.recordsToDto(userRepository.findById(userId).get().getMedicalRecord());
 	}
+
 
 
 

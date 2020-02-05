@@ -7,11 +7,11 @@
 <head>
 </head>
 <body>
-		 	<br><br><br><br><br><br><br><br><br><br><br>
+		 	<br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<div class="d-flex justify-content-center" id="con">
 			
-			<h3 style="text-align:center; color:red;">	Niste uneli ispravnu lozinku ili korisničko ime.</h3>
-			<br style="text-align:center;"><h3>Molimo Vas pokušajte ponovo. </h3>
+			<h3 style="text-align:center; color:red;">	NEAUTORIZOVAN PRISTUP!</h3>
+			
 			
 			<h3 style="text-align:center;"><a href="/logovanje">Vratite se natrag</a></h3>
 			</div>

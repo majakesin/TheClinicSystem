@@ -18,26 +18,17 @@
 <div>
 	<div class="row">
 	<div class="col-md">
-	<form:form method="POST" action="/terms/search"
-		modelAttribute="termDto">
+	<form:form method="POST" action="/clinics/search"
+		modelAttribute="clinicDto">
 	<table class="table" style="width:600">
 	<tr style="background-color: #53e3a6;">
-	<td> <form:input type="date" id="dateDto" class="form-control" placeholder="Datum pregleda" path="dateDto" /> </td>
+	<td> <form:input type="text" id="adressDto" class="form-control" placeholder="Adresa klinike" path="adressDto" /> </td>
 	
-	<td>
-					<form:select class="form-control" path="typeDto">
-						<form:option value="None"></form:option>
-						<form:option value="Ginekologija"></form:option>
-						<form:option value="Urologija"></form:option>
-						<form:option value="Stomatologija"></form:option>
-						<form:option value="Hirurgija"></form:option>
-						<form:option value="Kardiologija"></form:option>
-					</form:select>
-				</td>
+	<td> <form:input type="text" id="markDto" class="form-control" placeholder="Ocena klinike" path="markDto" /> </td>
 	
 	<td> <input type="submit" class="btn btn-outline-success"> </td>
 	
-	<td><a class="btn btn-outline-success" href="/clinicsSearch">Dodaj kriterijum pretrage</a>  </td>
+	
 	
 	</table>
 	</form:form>
@@ -54,7 +45,7 @@
 	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Prosečna ocena</h6> </td>
 
 	</tr>
-	<c:forEach var="var" items="${termsDto}">
+	<c:forEach var="var" items="${clinicsDto}">
 	<tr>
 	<td><c:out value="${var.nameDto}"/> </td>
 	<td><c:out value="${var.adressDto}"/> </td>

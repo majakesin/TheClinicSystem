@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.RoomDto;
 import ftn.project.services.OperationService;
 import ftn.project.services.RoomService;
+import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,14 +25,33 @@ import lombok.Data;
 @Controller
 public class RoomController  {
 
-	private RoomService roomService;
+
 	
 	private OperationService operationService;
 
+	private final RoomService roomService;
+	private final UserService userService;
+
+
 	@GetMapping("/rooms")
-	public ModelAndView showClinics(@ModelAttribute("roomDto")RoomDto roomDto,ModelMap model) {
+	public ModelAndView showClinics(HttpServletRequest request,@ModelAttribute("roomDto")RoomDto roomDto,ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getCA()){
+
+		
 		model.addAttribute("roomsDto",roomService.allRooms());
 		return new ModelAndView("roomCA","Model",roomService.allRooms());
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 	@PostMapping("/room/create")
@@ -51,14 +70,38 @@ public class RoomController  {
 
 
 	@GetMapping("room/delete/{idDto}")
-	public String deleteRoom(@PathVariable("idDto") Long idDto, ModelMap model) {
+	public String deleteRoom(HttpServletRequest request,@PathVariable("idDto") Long idDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return "redirct;/badUser";
+		}
+		else {
+			//autorizacija
+			if(userService.getCA()){
+		
 		roomService.deleteRoom(idDto);
 		return "redirect:/rooms";
+			}else {
+				return "redirct;/badUser";
+			}
+	}
 	}
 	
 	
 	@GetMapping("/roomsSearch")
 	public ModelAndView searchDoctor(HttpServletRequest request, @ModelAttribute("roomDto") RoomDto roomDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getCA()){
+		
 		ModelAndView mav= new ModelAndView("RoomSearch");
 		
 		Set<RoomDto> sobe=roomService.emptyRooms();
@@ -77,6 +120,10 @@ public class RoomController  {
 ////			mav.addObject("roomsDto", sobe);
 //		}
 		return mav;
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 	@PostMapping("/room/search")
