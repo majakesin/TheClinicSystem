@@ -63,7 +63,6 @@ public class RoomController  {
 	
 	@PostMapping("/room/edit")
 	public String editRoom(@Valid @ModelAttribute("roomDto") RoomDto roomDto) {
-		
 		roomService.create(roomDto);
 		return "redirect:/rooms";
 	}
@@ -109,8 +108,8 @@ public class RoomController  {
 		//Set<RoomDto> sobe=(Set<RoomDto>)request.getSession().getAttribute("roomsDto");
 		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
 		if(sobe.isEmpty()) {
-			operationService.fullRooms(idTerm);
-			mav.setViewName("redirect:/clinic/admin/operations/"+idTerm);
+			request.getSession().setAttribute("allFull", true);
+			mav.setViewName("redirect:/clinic/admin/operations/changeAppointment");
 			return mav;
 		}
 //		

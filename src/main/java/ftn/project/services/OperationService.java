@@ -6,8 +6,14 @@ public interface OperationService {
 
 	void scheduleOperation();
 	
-	void createOperation(OperationDto operationDto);
+	void createOperation(OperationDto operationDto,boolean isOperation);
+	
+	void automaticSystem();
 	
 	Long fullRooms(Long id);
+	
+	void changeOperation(Long idTerm,String time,String date,Long room);
+	
+	void createExamination(Long idTerm,String time,String date,Long room);
 	
 }

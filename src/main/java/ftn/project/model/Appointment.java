@@ -38,6 +38,9 @@ public class Appointment implements Comparable<Appointment>{
 
 	@Column(name = "Type", nullable = true)
 	private String type;
+	
+	@Column(name="OperationType",nullable=false)
+	private String operationType;
 
 //	@OneToOne
 //    @MapsId
