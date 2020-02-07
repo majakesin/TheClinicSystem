@@ -75,7 +75,7 @@ private final ClinicService clinicService;
 		}
 		else {
 			//autorizacija
-			if(userService.getCCA()){
+			if(userService.getCA()){
 		
 		String username=(String)request.getSession().getAttribute("logUsername");
 		model.addAttribute("clinicDto", clinicService.getClinicProfile(username));

@@ -246,10 +246,7 @@ public class DoctorController {
 		return "redirect:/godisnjiOdmorRezervisanje";
 	}
 	
-	@Scheduled(cron = "${greeting.cron}")
-	public void hello() {
-		System.out.println("Hello");
-	}
+	
 	
 	
 }
