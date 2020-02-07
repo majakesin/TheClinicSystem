@@ -115,8 +115,8 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public AppointmentDto getAppointmentById(Long idDto) {
-		return null;
+	public Appointment getAppointmentById(Long idDto) {
+		return	sRequestRepository.findById(idDto).get();
 	}
 
 	@Override

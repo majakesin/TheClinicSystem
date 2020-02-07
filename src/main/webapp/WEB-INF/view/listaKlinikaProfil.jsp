@@ -1,34 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 
+
 <meta charset="UTF-8">
-
-
-
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
-<title>Free Terms</title>
-
-
+<title></title>
 </head>
 <body>
-
-	<div >
-		<%@ include file="patientProfileTemplate.jsp"%>
+	<div>
+		<%@ include file="patientHome.jsp" %>
 	</div>
-	
-	
-<div class="container">
-	<div class="row">
-	 <div class="col-sm">
-		<br> <br> <br>
-	<form:form modelAttribute="appointmentDto">
+	<ul  class="nav nav-tabs justify-content-center nav-fill"  >
+		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/clincsSearchDateType" > Zakaži pregled</a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/listaKlinikaProfil"> Profili klinika</a></li>
 		
+	</ul>
+	<div class="container">
 		<table class="table">
 		
 		<tr style="background-color: #53e3a6;">
@@ -39,7 +30,7 @@
 			<td>Adresa</td>
 			<td>Ocena</td>
 			<td>Telefon</td>
-			<td>Termini </td>
+			<td></td>
 			
 			<td> </td>
 			
@@ -52,7 +43,7 @@
 					<td><c:out value="${klinika.markDto}" /></td>
 					<td><c:out value="${klinika.phoneDto}" /></td>
 					<td><a class="btn btn-outline-info"
-									href="/clinic/terms/${klinika.idDto}">Izaberi termin</a></td>
+									href="/profilKlinikePacijent/${klinika.idDto}">Profil</a></td>
 					
 					
 					
@@ -63,16 +54,8 @@
 		</tr>
 
 	</table>
-		
-	</form:form>
+	
 	
 	</div>
-	
-	</div>
-	</div>
-	
-	
-	
-	
 </body>
 </html>

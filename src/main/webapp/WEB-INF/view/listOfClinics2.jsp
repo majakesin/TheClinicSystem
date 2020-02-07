@@ -43,13 +43,14 @@
 	<td><h6 style="color:white;  letter-spacing: 4px; text-align=center;">Naziv klinike </h6></td>
 	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Adresa klinike </h6> </td>
 	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Prosečna ocena</h6> </td>
-
+	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Zakaži</h6> </td>
 	</tr>
 	<c:forEach var="var" items="${clinicsDto}">
 	<tr>
 	<td><c:out value="${var.nameDto}"/> </td>
 	<td><c:out value="${var.adressDto}"/> </td>
 	<td><c:out value="${var.markDto}"/> </td>
+	<td><a class="btn btn-outline-info" href="/zakaziNepredefinisani2/${var.idDto}">Zakaži</a></td>
 	</tr>
 	</c:forEach>
 	</table>

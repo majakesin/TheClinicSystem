@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 
 import ftn.project.dto.ClinicDto;
 import ftn.project.model.Clinic;
-import ftn.project.model.User;
 import lombok.Data;
 
 @Component
 @Data
 public class ClinicMapper {
 
+	private UserMapper userMapper;
+	
 	public ClinicDto ClinicToDto(Clinic clinic) {
 
 		ClinicDto clinicDto = new ClinicDto();
@@ -27,8 +28,9 @@ public class ClinicMapper {
 
 		clinicDto.setDescriptionDto(clinic.getDescription());
 		clinicDto.setMarkDto(clinic.getMark());
-
+		
 		return clinicDto;
+		
 	}
 
 	public Clinic DtoToClinic(ClinicDto clinicDto) {

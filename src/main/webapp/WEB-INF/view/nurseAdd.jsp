@@ -51,7 +51,7 @@
 					<!--    <td><form:label path="clinicDto"> Izaberi kliniku:</form:label></td>  -->
 							<td colspan="2"><form:select class="form-control"
 									path="clinicDto">
-									
+									<form:option value="null">Izaberi kliniku</form:option>
 									<c:forEach items="${allClinics}" var="clinic">
 										<form:option value="${clinic.idDto}">${clinic.nameDto}</form:option>
 									</c:forEach>

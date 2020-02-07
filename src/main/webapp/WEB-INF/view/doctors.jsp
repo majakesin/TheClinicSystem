@@ -54,11 +54,13 @@
 				
 			</tr>
 			
+			
 			<tr>
-					<!--    <td><form:label path="clinicDto"> Izaberi kliniku:</form:label></td>  -->
-							<td colspan="2"><form:select class="form-control"
+			
+					
+							<td colspan="2"><form:select placeholder="Klinika" class="form-control"
 									path="clinicDto">
-									
+									<form:option value="null">Izaberi kliniku</form:option>
 									<c:forEach items="${allClinics}" var="clinic">
 										<form:option value="${clinic.idDto}">${clinic.nameDto}</form:option>
 									</c:forEach>
@@ -66,6 +68,23 @@
 						</tr>
 			
 			<tr>
+			<tr>
+				
+				
+							
+					<td colspan="2">		
+					<form:select class="form-control" placeholder="Tip Pregleda" path="tipPregledaDto">		
+						<form:option value="null">Izaberi tip pregleda</form:option>
+						<form:option value="Ginekologija"></form:option>
+						<form:option value="Urologija"></form:option>
+						<form:option value="Stomatologija"></form:option>
+						<form:option value="Hirurgija"></form:option>
+						<form:option value="Kardiologija"></form:option>
+					</form:select>
+					</td>	
+					</tr>
+				
+				
 				<td></td>
 				<td></td>
 				<td><input type="submit" class="btn btn-outline-danger" value="Kreiraj" /></td>

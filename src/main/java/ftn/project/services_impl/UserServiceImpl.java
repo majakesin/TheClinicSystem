@@ -211,10 +211,7 @@ public class UserServiceImpl implements UserService {
 						 return "nurseProfile";
 					 }
 				}
-				else if(u.getRole().equals("doktor")) {
-					return "doctors";
-				}
-					 
+				
 				else if(u.getRole().equals("doktor")){
 					if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";
@@ -291,6 +288,7 @@ public class UserServiceImpl implements UserService {
 		return pacijenti;
 	}
 
+	
 	public Set<UserDto> searchDoctor(String nameDto, String surnameDto, String markDto) {
 
 		Set<UserDto> doktori = null;
@@ -331,6 +329,124 @@ public class UserServiceImpl implements UserService {
 		}
 		return doktori;
 	}
+	
+	
+	//za NEPREDEFINISANE!
+	public Set<UserDto> searchDoctorsNepredefinsani(String nameDto, String surnameDto, String markDto,Set<UserDto> doktoriNpd) {
+
+		Set<UserDto> doktori = null;
+		if (nameDto != "" & surnameDto == "" & markDto == "") {
+			
+			Set<User> doktoriTemp = userRepository.findByName(nameDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktori) {
+					if(dokAll.getNameDto().equals(dokNpd.getNameDto())) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto == "" & surnameDto != "" & markDto == "") {
+			Set<User> doktoriTemp = userRepository.findBySurname(surnameDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktori) {
+					if(dokAll.getSurnameDto().equals(dokNpd.getSurnameDto())) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto == "" & surnameDto == "" & markDto != "") {
+			Set<User> doktoriTemp = userRepository.findByMark(markDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktori) {
+					if(dokAll.getMarkDto()==dokNpd.getMarkDto()) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto != "" & surnameDto != "" & markDto == "") {
+			Set<User> doktoriTemp = userRepository.findByNameAndSurname(nameDto, surnameDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktori) {
+					if(dokAll.getNameDto().equals(dokNpd.getNameDto()) && dokAll.getSurnameDto().equals(dokNpd.getSurnameDto())) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto != "" & surnameDto == "" & markDto != "") {
+			Set<User> doktoriTemp = userRepository.findByNameAndMark(nameDto, markDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokAll : doktori) {
+				for(UserDto dokNpd : doktoriNpd) {
+					if(dokAll.getNameDto().equals(dokNpd.getNameDto()) && dokAll.getMarkDto().equals(dokNpd.getMarkDto())) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto == "" & surnameDto != "" & markDto != "") {
+			Set<User> doktoriTemp = userRepository.findBySurnameAndMark(surnameDto, markDto);
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktori) {
+					if(dokAll.getSurnameDto().equals(dokNpd.getSurnameDto()) && dokAll.getMarkDto().equals(dokNpd.getMarkDto() )) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+
+		} else if (nameDto != "" & surnameDto != "" & markDto != "") {
+			Set<User> doktoriTemp = userRepository.findAllByRole("doktor");
+			doktori = userMapper.UserToDtoSet(doktoriTemp);
+			Set<UserDto> pomocna = new HashSet<UserDto> ();
+			for(UserDto dokNpd : doktoriNpd) {
+				for(UserDto dokAll : doktoriNpd) {
+					if(dokAll.getNameDto().equals(dokNpd.getNameDto())
+			&& dokAll.getSurnameDto().equals(dokNpd.getSurnameDto()) && dokAll.getMarkDto()==dokNpd.getMarkDto()) {
+						pomocna.add(dokNpd);
+					}
+				}
+			}
+			doktori.addAll(pomocna);
+			return doktori;
+		}
+		else if (nameDto == "" & surnameDto == "" & markDto == "") {
+			Set<UserDto> doktori1 = new HashSet<UserDto>();
+			
+			
+			doktori1.addAll(doktoriNpd);
+			return doktori1;
+		}
+		return doktori;
+	}
+	
+	
 
 	@Override
 	public UserDto getUserProfile(String username) {
@@ -433,6 +549,12 @@ public class UserServiceImpl implements UserService {
 	public RecordsDto getUserRecords(Long userId) {
 		return medicalRecordsMapper.recordsToDto(userRepository.findById(userId).get().getMedicalRecord());
 	}
+
+	
+
+
+
+	
 
 
 
