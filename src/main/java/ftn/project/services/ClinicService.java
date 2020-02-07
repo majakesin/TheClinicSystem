@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
+import ftn.project.model.User;
 
 
 @Service
@@ -24,8 +25,17 @@ public interface ClinicService {
 	public ClinicDto getClinicProfile(String ussername);
 	
 	//pretraga klinike
-	Set<ClinicDto> searchClinicByTerm(String dateDto, String typeDto );
+	
 	Set<ClinicDto> searchClinic(String adressDto, double markDto );
+
+	Set<ClinicDto> searchClinicByDoctor(String dateDto, String typeDto);
 	
+	//pretrage datuma klinika
+	UserDto getDoktoreSlobodne(String datum,User user);
+	UserDto getDoktoreSlobodneTP(String datum,String tip,User user);
+	UserDto getDoktoreTP(String tip,User user);
 	
+	//za zakazivanje nepredefinisanih
+	public Set<UserDto> vratiDoktori1 ();
+	public Set<UserDto> vratiDoktori2 ();
 }

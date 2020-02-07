@@ -3,6 +3,7 @@ package ftn.project.mapper;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class AppointmentMapper {
 	public AppointmentDto appointmentToDto(Appointment appointment) {
 		AppointmentDto appointmentDto = new AppointmentDto();
 		
-		appointmentDto.setIdDto(appointment.getId());
+    appointmentDto.setIdDto(appointment.getId());
 		appointmentDto.setDateDto(appointment.getDate());
 		appointmentDto.setTimeDto(appointment.getTime());
 		appointmentDto.setRoomDto(appointment.getRoom());
@@ -46,8 +47,13 @@ public class AppointmentMapper {
 		appointmentDto.setDiscountDto(appointment.getDiscount());
 		appointmentDto.setDoctorDto(appointment.getDoctor());
 		appointmentDto.setRoomId(appointment.getId());
+
 		appointmentDto.setOperationTypeDto(appointment.getOperationType());
 		appointmentDto.setPacientId(appointment.getPacientId());
+
+
+		
+
 		return appointmentDto;
 	}
 	

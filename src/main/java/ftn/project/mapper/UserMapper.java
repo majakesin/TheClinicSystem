@@ -17,9 +17,10 @@ public class UserMapper {
 	public UserDto UserToDto(User user) {
 		UserDto userDto = new UserDto();
 		userDto.setIdDto(user.getId());
-
-
-	
+		userDto.setTipPregledaDto(user.getTipPregleda());
+		userDto.setPocetakGodisnjegDto(user.getPocetakGodisnjeg());
+		userDto.setKrajGodisnjegDto(user.getKrajGodisnjeg());
+		userDto.setVremePregledaDto(user.getVremePregleda());
 
 		
 		userDto.setPrviLoginDto(user.getPrviLogin());
@@ -51,6 +52,13 @@ public class UserMapper {
 
 		user.setId(userDto.getIdDto());
 
+		
+		user.setTipPregleda(userDto.getTipPregledaDto());
+		//user.setGodisnji(userDto.getPomocnaGodisnjiDto());
+		
+		user.setPocetakGodisnjeg(userDto.getPocetakGodisnjegDto());
+		user.setKrajGodisnjeg(userDto.getKrajGodisnjegDto());
+		user.setVremePregleda(userDto.getVremePregledaDto());
 		user.setPrviLogin(userDto.getPrviLoginDto());
 		user.setPomocnaSifra(userDto.getPomocnaSifraDto());
 		user.setUsername(userDto.getUsernameDto());
@@ -86,6 +94,16 @@ public class UserMapper {
 	
 	public Set<UserDto> UserToDtoSet(Collection<User>users){
 		Set<UserDto>usersDto=new HashSet<UserDto>();
+		
+		for(User user:users) {
+			usersDto.add(this.UserToDto(user));
+		}
+		
+		return usersDto;
+	}
+
+	public Set<UserDto> UserToDtoSet1(Set<User> users) {
+	Set<UserDto>usersDto=new HashSet<UserDto>();
 		
 		for(User user:users) {
 			usersDto.add(this.UserToDto(user));

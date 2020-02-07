@@ -10,7 +10,7 @@
 
 	
 		<ul  class="nav nav-tabs justify-content-center nav-fill" style="background-color: #53e3a6;" >
-		<li class="nav-item "><a  class="nav-link text-light" href="/freeTerms"><i class="fa fa-file-text" aria-hidden="true"></i> Zakaži pregled</a></li>
+		<li class="nav-item "><a  class="nav-link text-light" href="/listaKlinika"><i class="fa fa-file-text" aria-hidden="true"></i> Zakaži predefinisani pregled</a></li>
 		<li class="nav-item "><a class="nav-link text-light" href=#><i class="fa fa-file-text" aria-hidden="true"></i> Lista zakazanih pregleda</a></li>
 
 		<li class="nav-item "><a class="nav-link text-light" href="/patientHome"><i class="fa fa-file-text" aria-hidden="true"></i> Početna stranica</a></li>
