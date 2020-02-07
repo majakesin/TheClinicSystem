@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.project.dto.UserDto;
 import ftn.project.dto.VacationRequestDto;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;

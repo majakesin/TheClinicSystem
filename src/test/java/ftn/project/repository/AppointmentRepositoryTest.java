@@ -12,6 +12,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ftn.project.model.Appointment;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestPropertySource("classpath:test.properties")
@@ -21,7 +23,14 @@ public class AppointmentRepositoryTest {
 	private  AppoitmentRepository appointmentRepository;
 	
 	@Test
-	public void saveAppointment() {
+	public void testSaveAppointment() {
+		appointmentRepository.save(new Appointment());
+		
+	}
+	
+	@Test
+	public void testFindAllByIsBussy() {
+		
 		
 	}
 	

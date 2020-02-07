@@ -19,7 +19,7 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
@@ -36,7 +36,7 @@ public class SchedulingRequestController {
 	private final RequestService requestService;
 	
 	@Autowired
-	private final SchedulingRequestRepository sRequestRepository;
+	private final AppoitmentRepository sRequestRepository;
 	
 	private final UserService userService;
 	
@@ -169,7 +169,7 @@ public class SchedulingRequestController {
 
 	//izmenjeno predefinisani
 	@GetMapping("/listaKlinika")
-	public ModelAndView listaKlinika(ModelMap model) {
+	public ModelAndView listaKlinika(ModelMap model,HttpServletRequest request) {
   	userService.Autorizacija(request);
   //autorizacija
 		if(userService.getNull()) {
