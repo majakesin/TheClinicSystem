@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.OperationDto;
 import ftn.project.dto.UserDto;
 import ftn.project.dto.VacationRequestDto;
+import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ import lombok.Data;
 public class CAController {
 
 	private final VacationRequestService vqService;
+	private final UserService userService;
 	
 	@GetMapping("/zahtevi/CA")
 	public ModelAndView prikaziZahteveGodisnji(ModelMap model) {
@@ -34,8 +36,13 @@ public class CAController {
 	@GetMapping("/VqReqRequests/accept/{idDto}")
 	public String prihvatiZahtevZaGodisnji(@PathVariable("idDto") Long idDto ) {
 		
-		VacationRequestDto vqTemp = vqService.getVQDtoById(idDto);
 		
+		VacationRequestDto vqTemp = vqService.getVQDtoById(idDto);
+		String username = vqTemp.getUsernameDto();
+		UserDto user = userService.getUserByUsername(username);
+		user.setPocetakGodisnjegDto(vqTemp.pocetakGodisnjegDto);
+		user.setKrajGodisnjegDto(vqTemp.krajGodisnjegDto);
+		userService.createUser(user);
 		vqService.posaljiMejlPotvrdan(vqTemp.emailDto, vqTemp.nameDto);
 		vqService.obrisiZahtev(idDto);
 		return "redirect:/zahtevi/CA";

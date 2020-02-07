@@ -1,5 +1,8 @@
 package ftn.project.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,8 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
 import ftn.project.mapper.RequestMapper;
+import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
 import lombok.AllArgsConstructor;
@@ -30,11 +35,20 @@ public class PatientController {
 	
 	private final UserService userService;
 	
+	
+	private ClinicService clinicService;
+	
+	
 	@Autowired
 	private RequestService requestService;
 	
 	@Autowired 
 	RequestMapper requestMapper;
+	
+	private Set<UserDto> pomocnaTemp = new HashSet<UserDto> ();
+	
+	
+	
 	
 	//pisi mapiranja metoda na engleskom
 	@GetMapping("/registracija")
@@ -104,4 +118,153 @@ public class PatientController {
 	}
 
 	
+	
+	//za zakazivanje nepredefinisanih termina
+	@GetMapping("/zakaziNepredefinisani1/{idDto}")
+	public ModelAndView vratiPacijenteNepredefinisani(HttpServletRequest request,@PathVariable("idDto") Long idDto,ModelMap model,@ModelAttribute("doctorDtoPretraga") UserDto doktorDto) {
+			ClinicDto clinicDto = clinicService.getClinicById(idDto);
+			model.addAttribute("clinicDto",clinicDto);
+			
+			
+			Set<UserDto >doktori = (Set<UserDto>) request.getSession().getAttribute("doktori1");
+			Set<UserDto> doktoriPr = (Set<UserDto>) request.getSession().getAttribute("doctorsDto");
+			Set<UserDto> pomocna = new HashSet<UserDto>();
+			if(doktoriPr==null) {
+			
+			
+			
+			if(doktori!=null) {
+			for(UserDto dok : doktori) {
+				if(dok.getClinicDto()==clinicDto.getIdDto()) {
+					pomocna.add(dok);
+				}
+			}
+			}
+			else {
+				for(UserDto dok : userService.allUserByRole("doktor")) {
+					if(dok.getClinicDto()==clinicDto.getIdDto()) {
+						pomocna.add(dok);
+					}
+				}
+			}
+			model.addAttribute("doctorsDto",pomocna);
+			
+			pomocnaTemp.addAll(pomocna);
+			}
+			else {
+				model.addAttribute("doctorsDto",doktoriPr);
+				pomocnaTemp.addAll(doktoriPr);
+			}
+			return new ModelAndView("DoktoriNepredefPregled","Model", clinicDto);
+			
+	
+			
+	}
+	
+	@GetMapping("/zakaziNepredefinisani2/{idDto}")
+	public ModelAndView vratiPacijenteNepredefinisani2(HttpServletRequest request,@PathVariable("idDto") Long idDto,ModelMap model,@ModelAttribute("doctorDtoP") UserDto doktorDto) {
+			ClinicDto clinicDto = clinicService.getClinicById(idDto);
+			model.addAttribute("clinicDto",clinicDto);
+			
+			
+			
+			Set<UserDto >doktori2 = (Set<UserDto>) request.getSession().getAttribute("doktori2");
+			Set<UserDto> doktori1 = (Set<UserDto>) request.getSession().getAttribute("doktori1");
+			Set<UserDto> doktoriPr = (Set<UserDto>) request.getSession().getAttribute("doctorsDto");
+			Set<UserDto> pomocna = new HashSet<UserDto>();
+			if(doktoriPr==null) {
+			if(doktori2!=null) {
+			for(UserDto dok : doktori2) {
+				if(dok.getClinicDto()==clinicDto.getIdDto()) {
+					pomocna.add(dok);
+				}
+			}
+			}
+			else {
+				
+				if(doktori1!=null) {
+					for(UserDto dok : doktori1) {
+						if(dok.getClinicDto()==clinicDto.getIdDto()) {
+							pomocna.add(dok);
+						}
+					
+					}
+				}
+					else {
+						for(UserDto dok : userService.allUserByRole("doktor")) {
+							if(dok.getClinicDto()==clinicDto.getIdDto()) {
+								pomocna.add(dok);
+							}
+						}
+					}
+			}
+			model.addAttribute("doctorsDto",pomocna);
+			
+			}
+			else {
+				model.addAttribute("doctorsDto",doktoriPr);
+				pomocnaTemp.addAll(doktoriPr);
+			}
+			return new ModelAndView("DoktorNepredf2","Model", clinicDto);
+			
+	
+			
+	}
+	
+	//pretraga Doktori1 
+	@PostMapping("/doctors/search1/{idDto}")
+	public String searchDoctors1(HttpServletRequest request,@PathVariable("idDto") Long idDto, @ModelAttribute("doctorDtoPretraga") UserDto doctorDto, ModelMap model ) {
+		
+		
+		
+		
+		
+		request.getSession().setAttribute("doctorsDto", userService.searchDoctorsNepredefinsani(doctorDto.nameDto, doctorDto.surnameDto, doctorDto.getMarkDto(),pomocnaTemp));
+		
+		return "redirect:/zakaziNepredefinisani1/"+idDto;
+	}
+	
+	//pretraga Doktori1 
+	@PostMapping("/doctors/search2/{idDto}")
+	public String searchDoctors2(HttpServletRequest request,@PathVariable("idDto") Long idDto, @ModelAttribute("doctorDtoPretraga") UserDto doctorDto, ModelMap model ) {
+		
+		
+		
+		
+		
+		request.getSession().setAttribute("doctorsDto", userService.searchDoctorsNepredefinsani(doctorDto.nameDto, doctorDto.surnameDto, doctorDto.getMarkDto(),pomocnaTemp));
+		
+		return "redirect:/zakaziNepredefinisani1/"+idDto;
+	}
+	
+	
+	//listaKlinikaProfil
+	@GetMapping("/listaKlinikaProfil")
+	public ModelAndView listaKlinika(ModelMap model) {
+		model.addAttribute("klinikeDto",clinicService.allClinics() );
+		return new ModelAndView("listaKlinikaProfil", "Model", clinicService.allClinics());
+
+	}
+	
+	@GetMapping("/profilKlinikePacijent/{idDto}")
+	public ModelAndView profilKlinike(ModelMap model,@PathVariable("idDto") Long idDto) {
+		ClinicDto clinic = clinicService.getClinicById(idDto);
+		model.addAttribute("clinicDto",clinic);
+		
+		return new ModelAndView("clinicProfilPatient","Model",clinic);
+	}
+	
+	@GetMapping("/listaDoktoraKlinike/{idDto}")
+	public ModelAndView pretragaDoktoraProfil( @ModelAttribute("doctorDto") UserDto doctorDto,ModelMap model,@PathVariable("idDto") Long idDto) {
+		Set<UserDto> doktori = userService.allUserByRole("doktor");
+		Set<UserDto> pomocna = new HashSet<UserDto>();
+		for(UserDto doc : doktori) {
+			if(doc.getClinicDto()==idDto) {
+				pomocna.add(doc);
+			}
+		}
+		model.addAttribute(pomocna);
+		
+		return new ModelAndView("PretragaDoktoraProfil","Model",pomocna);
+	}
 }

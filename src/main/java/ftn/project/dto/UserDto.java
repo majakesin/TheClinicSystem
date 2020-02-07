@@ -1,5 +1,8 @@
 package ftn.project.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.Data;
 
 @Data
@@ -18,6 +21,10 @@ public class UserDto {
 	private String countryDto;
 	private String insuranceNumberDto;
 	private String medicalRecordIdDto;
+	private String tipPregledaDto;
+	private String pocetakGodisnjegDto;
+	private String krajGodisnjegDto;
+	private String vremePregledaDto;
 	
 	//menjanjesifre
 	private Boolean prviLoginDto;
@@ -26,6 +33,7 @@ public class UserDto {
 	//polja za doktora
 	private String biographyDto;
 	private String markDto;
+	
 	
 	//polje za select klinike
 	private Long clinicDto;

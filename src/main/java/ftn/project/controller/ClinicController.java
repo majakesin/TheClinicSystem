@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class ClinicController {
 
-	private final ClinicService clinicService;
+private final ClinicService clinicService;
 	
 	private final UserService userService;
 	
@@ -89,19 +89,24 @@ public class ClinicController {
 			
 			ModelAndView mav= new ModelAndView("listOfClinics");
 			request.getSession().setAttribute("clinicsDto",null);
+			request.getSession().setAttribute("doctorsDto",null);
+			request.getSession().setAttribute("doktori2", null);
+			
 			termini =(Set<ClinicDto>)request.getSession().getAttribute("termsDto");
+			
 			
 			if(termini==null) {
 				mav.addObject("termsDto", clinicService.allClinics() );
 			} else {
 				mav.addObject("termsDto", termini);
-			}
+				} 
 			return mav;
 		}
 		
 		@PostMapping("/terms/search")
 		public String searchClinicByTerms(HttpServletRequest request, @ModelAttribute("termDto") AppointmentDto termDto, ModelMap model ) {
-			request.getSession().setAttribute("termsDto", clinicService.searchClinicByTerm(termDto.dateDto, termDto.typeDto));
+			request.getSession().setAttribute("termsDto", clinicService.searchClinicByDoctor(termDto.dateDto, termDto.typeDto));
+			request.getSession().setAttribute("doktori1",clinicService.vratiDoktori1());
 			return "redirect:/clincsSearchDateType";
 		}
 		
@@ -111,7 +116,7 @@ public class ClinicController {
 		public ModelAndView searchClinic(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, ModelMap model) {
 			
 			ModelAndView mav= new ModelAndView("listOfClinics2");
-					
+			 
 			Set<ClinicDto> klinike =(Set<ClinicDto>)request.getSession().getAttribute("clinicsDto");
 					
 			if(termini == null) {
@@ -138,6 +143,8 @@ public class ClinicController {
 		@PostMapping("/clinics/search")
 		public String searchClinics(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, ModelMap model ) {
 			request.getSession().setAttribute("clinicsDto", clinicService.searchClinic(clinicDto.adressDto, clinicDto.markDto));
+			request.getSession().setAttribute("doktori2", clinicService.vratiDoktori2());
 			return "redirect:/clinicsSearch";
 		}
+		
 }

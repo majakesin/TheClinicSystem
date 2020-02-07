@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
-import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
-import ftn.project.services.AppointmentService;
+import ftn.project.model.Appointment;
+import ftn.project.model.User;
+import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.RoomService;
@@ -32,9 +35,16 @@ public class SchedulingRequestController {
 	
 	private final RequestService requestService;
 	
+	@Autowired
+	private final SchedulingRequestRepository sRequestRepository;
+	
 	private final UserService userService;
 	
 	private final RoomService roomService;
+	
+	private final ClinicService clinicService;
+
+	private final UserRepository userRepository;
 	
 	
 	@GetMapping("/createTerm")
@@ -81,13 +91,47 @@ public class SchedulingRequestController {
 		return "redirect:/appointmentRequests";
 	}
 
-	@GetMapping("/freeTerms")
-	public ModelAndView showTerms(ModelMap model) {
-		model.addAttribute("termsDto", requestService.allFreeTerms());
-		return new ModelAndView("freeTerms", "Model", requestService.allFreeTerms());
+	//izmenjeno predefinisani
+	@GetMapping("/listaKlinika")
+	public ModelAndView listaKlinika(ModelMap model) {
+		model.addAttribute("klinikeDto",clinicService.allClinics() );
+		return new ModelAndView("freeTerms", "Model", clinicService.allClinics());
 
 	}
+	
+	
+	// izmenjeno predefinisani
+	@GetMapping("/clinic/terms/{idDto}")
+	public ModelAndView prikaziTermineKlinike(@PathVariable("idDto") Long idDto,ModelMap model) {
+		
+		Set<AppointmentDto> terminiSlobodni = requestService.allFreeTerms();
+		Set<AppointmentDto> terminiKlinikeSl = new HashSet<AppointmentDto> ();
+			for(AppointmentDto termin : terminiSlobodni) {
+				Long id = termin.getDoctorDto();
+				UserDto doc = userService.getUserById(id);
+				if(doc.getClinicDto()==idDto) {
+					terminiKlinikeSl.add(termin);
+				}
+				
+			}
+			model.addAttribute("terminiDto",terminiKlinikeSl);
+			return new ModelAndView("predefinisaniPregledi","Model",terminiKlinikeSl);
+	}
 
+	//zakaziTermin
+	@GetMapping("/zakazan/{idDto}")
+	public String zakazanTerminPredefinisan(@PathVariable("idDto") Long idDto,HttpServletRequest request) {
+		String username=(String)request.getSession().getAttribute("logUsername");
+		Appointment app = requestService.getAppointmentById(idDto);
+		app.setBusy(true);
+		app.setAccept(true);
+		
+		User user=userRepository.findByUsername(username);
+		
+		sRequestRepository.save(app);
+		return "redirect:/listaKlinika";
+	}
+	
 	@GetMapping("/appointmentRequests/{idDto}")
 	public String getSelectedTerms(@PathVariable("idDto") Long idDto,HttpServletRequest request) {
 		String username=(String)request.getSession().getAttribute("logUsername");
