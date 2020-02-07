@@ -1,5 +1,6 @@
 package ftn.project.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,24 @@ public class CCAController {
 	private final ClinicService clinicService;
 	
 	@GetMapping("/administrators")
-	public ModelAndView showUsers(@ModelAttribute("userDto")UserDto userDto,ModelMap model) {
+	public ModelAndView showUsers(HttpServletRequest request,@ModelAttribute("userDto")UserDto userDto,ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getCCA()){
+		
 		model.addAttribute("usersDto",userService.allUsers());
 		
 		return new ModelAndView("administratorRegistration","Model",userService.allUsers());
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 	@PostMapping("/administrators/create")
@@ -48,9 +63,22 @@ public class CCAController {
 
 	}
 	@GetMapping("/administrators/user/delete/{idDto}")
-	public String deleteUser(@PathVariable("idDto") Long idDto, ModelMap model) {
+	public String deleteUser(HttpServletRequest request,@PathVariable("idDto") Long idDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return "redirect:/badUser";
+		}
+		else {
+			//autorizacija
+			if(userService.getCCA()){
 		userService.deleteUser(idDto);
 		return "redirect:/administrators";
+			}else {
+				return "redirect:/badUser";
+			}
+			}
 	}
 	
 	

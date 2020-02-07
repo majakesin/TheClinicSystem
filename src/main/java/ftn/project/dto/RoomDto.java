@@ -12,5 +12,7 @@ public class RoomDto {
 
 
 	private String hallNumberDto;
+	
+	private boolean isFree;
 
 }

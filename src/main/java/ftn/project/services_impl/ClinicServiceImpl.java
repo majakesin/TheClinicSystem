@@ -15,8 +15,13 @@ import ftn.project.mapper.UserMapper;
 import ftn.project.model.Appointment;
 import ftn.project.model.Clinic;
 import ftn.project.model.User;
+
+
+import ftn.project.repository.AppointmentRepository;
+import ftn.project.repository.AppoitmentRepository;
+
 import ftn.project.repository.ClinicRepository;
-import ftn.project.repository.SchedulingRequestRepository;
+
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
@@ -44,7 +49,7 @@ public class ClinicServiceImpl implements ClinicService {
 	private ClinicMapper clinicMapper;
 	
 	private final UserRepository userRepository;
-	private final SchedulingRequestRepository appointmentRepository;
+	private final AppoitmentRepository appointmentRepository;
 	
 	//liste za pretragu klinike
 	private Set<ClinicDto> klinike1 =new HashSet<ClinicDto> ();

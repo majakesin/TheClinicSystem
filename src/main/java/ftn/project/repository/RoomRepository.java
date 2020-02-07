@@ -19,4 +19,6 @@ public interface RoomRepository extends JpaRepository<Room,Long>{
 	
 
 	public Set<Room> findByHallNumber(String hallNumberDto);
+	
+	public Set<Room> findAllByFree(boolean isFree);
 }

@@ -15,6 +15,8 @@ import ftn.project.model.MedicalRecord;
 @Component
 public class MedicalRecordsValidator implements Validator {
 	
+	
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return RecordsDto.class.equals(clazz);
@@ -30,6 +32,8 @@ public class MedicalRecordsValidator implements Validator {
 		
 		RecordsDto record=(RecordsDto)target;
 		Pattern pattertn=Pattern.compile("/^[+]?((\\d+(\\.\\d*)?)|(\\.\\d+))$/");
+		
+		
 		
 //		if(!pattertn.matcher(Double.toString(record.getHeightDto())).matches()) {
 //			errors.rejectValue("heightDto","medicalRecords.height.invalid");

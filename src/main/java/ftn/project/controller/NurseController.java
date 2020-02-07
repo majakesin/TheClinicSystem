@@ -39,16 +39,40 @@ public class NurseController {
 
 
 	@GetMapping("/nurse")
-	public ModelAndView showNursePage(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public ModelAndView showNursePage(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getCA()){
+		
 		model.addAttribute("nurseDto", userService.allNurse());
 		model.addAttribute("allClinics",clinicService.allClinics());
 		return new ModelAndView("nurseAdd", "Model", userService.allNurse());
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 
 	}
 	
 	
 	@GetMapping("/patientSearch/nurse")
 	public ModelAndView searchPatient(HttpServletRequest request, @ModelAttribute("patientDto") UserDto patientDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getSestra()){
+		
 		ModelAndView mav=new ModelAndView("patientSearchNurse");
 		
 		Set<UserDto> pacijenti=(Set<UserDto>)request.getSession().getAttribute("patientsDto");
@@ -61,6 +85,10 @@ public class NurseController {
 		mav.addObject("patientsDto", pacijenti);
 		}
 		return mav;
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 
 	}
 	
@@ -74,17 +102,44 @@ public class NurseController {
 	
 	@GetMapping("/nurseProfile/edit/{idDto}")
 	public ModelAndView showNurseProfileEdit(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto,@PathVariable("idDto") Long idDto, ModelMap model ) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getSestra()){
 		
 		model.addAttribute("userDto", userService.getUserById(idDto));
 		return new ModelAndView("nurseProfileEdit", "Model",userService.getUserById(idDto));
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 
 	}
 	
 	@GetMapping("/nurseProfile")
 	public ModelAndView showNurseProfile(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getSestra()){
+		
 		String username=(String)request.getSession().getAttribute("logUsername");
 		model.addAttribute("userDto", userService.getUserProfile(username));
 		return new ModelAndView("nurseProfile", "Model", userService.allNurse());
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 
 	}
 	
@@ -97,16 +152,44 @@ public class NurseController {
 	}
 	
 	@GetMapping("/nurse/edit/{idDto}")
-	public String getEditPage(@PathVariable("idDto") Long idDto, ModelMap model) {
+	public String getEditPage(HttpServletRequest request,@PathVariable("idDto") Long idDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return "redirect:/badUser";
+		}
+		else {
+			//autorizacija
+			if(userService.getSestra()){
+		
 		model.addAttribute("userDto",userService.getUserById(idDto));
 		return "nurseEdit";
+			}else {
+				return "redirect:/badUser";
+			}
+			}
 	}
 	
 
 	@GetMapping("/nurse/delete/{idDto}")
-	public String deleteNurse(@PathVariable("idDto") Long idDto, ModelMap model) {
+	public String deleteNurse(HttpServletRequest request,@PathVariable("idDto") Long idDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return "redirect:badUser";
+		}
+		else {
+			//autorizacija
+			if(userService.getCA()){
+		
 		userService.deleteUser(idDto);
 		return "redirect:/nurse";
+			}else {
+				return "redirect:badUser";
+			}
+			}
 	}
 	
 	@PostMapping("/nurse/edit/create")
@@ -120,6 +203,16 @@ public class NurseController {
 	//godisnji odmor
 	@GetMapping("/godisnjiOdmorRezervisanjeSestra")
 	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getSestra()){
+		
 		String username = (String) request.getSession().getAttribute("logUsername");
 		if(username!=null) {
 		UserDto userTemp = userService.getUserByUsername(username);
@@ -131,6 +224,10 @@ public class NurseController {
 		vacReqDto.setRoleDto("med. sestra"); }
 	
 		return new ModelAndView("zakazivanjeGodisnjegSestra");
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 
 	}
 	

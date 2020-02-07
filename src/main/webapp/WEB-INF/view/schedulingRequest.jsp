@@ -83,8 +83,7 @@ body
 					<td><c:out value="${request.priceDto}" /></td>
 					<td><c:out value="${request.discountDto}" /></td>
 					
-					<td><a  class="btn btn-outline-success" href="/appointmentRequests/accept/${request.idDto}">Prihvati</a></td>
-					<td><a  class="btn btn-outline-success" href="/appointmentRequests/reject/${request.idDto}">Odbij</a></td>
+					<td><a  class="btn btn-outline-success" href="clinic/admin/operations/${request.idDto}">Rezervisi salu</a></td>
 				</tr>
 			</c:forEach>  
                     

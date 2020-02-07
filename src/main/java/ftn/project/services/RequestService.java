@@ -19,6 +19,8 @@ public interface RequestService {
 	
 	void saveRequest(UserDto userDto);
 	
+	RequestDto getRequest(Long id);
+	
 	//za slanje zahteva za pregled
 	
 	Set<AppointmentDto> allSchedulingRequest();

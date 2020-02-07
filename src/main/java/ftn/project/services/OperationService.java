@@ -1,12 +1,13 @@
 package ftn.project.services;
 
-import java.util.Collection;
-
-import ftn.project.dto.RoomDto;
-import ftn.project.dto.UserDto;
+import ftn.project.dto.OperationDto;
 
 public interface OperationService {
 
 	void scheduleOperation();
+	
+	void createOperation(OperationDto operationDto);
+	
+	Long fullRooms(Long id);
 	
 }

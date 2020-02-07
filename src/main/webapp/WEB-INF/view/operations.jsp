@@ -29,36 +29,20 @@
 	</ul>
 	
 	<br />
-	<input type="text" class="form-control" id="myInput"
-		placeholder="Search for terms..">
-	<table class="table" id="appointmentTable">
-
-		<tr style="background-color: #53e3a6;">
-			<th colspan=8 style=""><h6
-					style="color: white; letter-spacing: 4px;">TERMINI</h6></th>
-		</tr>
+	<div>
+	<table class="table">
 		<tr>
-			<td>Datum</td>
-			<td>Vreme</td>
-			<td>Soba</td>
-			<td>Tip</td>
-		</tr>
-		<tr>
-			<c:forEach var="term" items="${appointmentsList}">
-				<tr>
-					<td><c:out value="${term.dateDto}" /></td>
-					<td><c:out value="${term.timeDto}" /></td>
-					<td><c:out value="${term.roomDto}" /></td>
-					<td><c:out value="${term.typeDto}" /></td>
-				</tr>
-			</c:forEach>
-		</tr>
-
+		<td><a href="${pageContext.request.contextPath}/roomsSearch">Rezervisi salu</a></td></tr>
 	</table>
-
-	<br />
-	<br />
-
+	<br/>
+	<br/>
+	
+	<table class="table">
+		<tr><td>Rezervisana sala</td></tr>
+		<tr><td>${selectedRoom.nameDto} broj:${selectedRoom.hallNumberDto}</td></tr>
+	</table>
+	
+	</div>
 	<input type="text" class="form-control" id="myInput2"
 		placeholder="Search for doctors..">
 	<table class="table" id="doctorsTable">
@@ -81,14 +65,14 @@
 					<td><c:out value="${user.nameDto}" /></td>
 					<td><c:out value="${user.surnameDto}" /></td>
 					<td><c:out value="${user.biographyDto}" /></td>
-					<td><input type="checkbox" value="${user.nameDto}"></td>
+					<td><input type="checkbox" value="${user.idDto}"></td>
 				</tr>
 			</c:forEach>
 		</tr>
 
 	</table>
 
-	<input type="button" id="createOperation" value="Zakazi operaciju" />
+	<input type="button" class="btn btn-outline-danger" id="createOperation" value="Zakazi operaciju" />
 
 
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

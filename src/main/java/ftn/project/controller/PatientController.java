@@ -81,31 +81,70 @@ public class PatientController {
 		return "redirect:/"+userService.autentification(us);
 	}
 	
-	@GetMapping("/badUser")
-	public String showBad() {
-	
-		return "badUser";
-	}
+
 
 	@GetMapping("/patientHome")
-	public ModelAndView home(@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public ModelAndView home(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getPacijent()){
+		
 		
 		return new ModelAndView("patientHome");
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 	@GetMapping("/patientProfile")
 	public ModelAndView profil(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getPacijent()){
+		
 		String username=(String)request.getSession().getAttribute("logUsername");
 		model.addAttribute("userDto", userService.getUserProfile(username));
 		
 		return new ModelAndView("patientProfile", "Model", userService.allUsers());
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 		
 	}
 	
 	@GetMapping("/patientProfile/edit/{idDto}")
-	public ModelAndView getEditPatient(@PathVariable("idDto") Long idDto,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public ModelAndView getEditPatient(HttpServletRequest request,@PathVariable("idDto") Long idDto,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+		userService.Autorizacija(request);
+		
+		//autorizacija
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getPacijent()){
+		
+		
 		model.addAttribute("userDto",userService.getUserById(idDto));
 		return new ModelAndView("patientEdit");
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 

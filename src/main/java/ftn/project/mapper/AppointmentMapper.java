@@ -29,22 +29,24 @@ public class AppointmentMapper {
 		appointment.setPrice(appointmentDto.getPriceDto());
 		appointment.setDiscount(appointmentDto.getDiscountDto());
 		appointment.setDoctor(appointmentDto.getDoctorDto());
-		
+		appointment.setRoomId(appointmentDto.getRoomId());
 		
 		return appointment;
 	}
 	
-	public AppointmentDto appointmentToDto(Appointment optional) {
+	public AppointmentDto appointmentToDto(Appointment appointment) {
 		AppointmentDto appointmentDto = new AppointmentDto();
 		
-		appointmentDto.setIdDto(optional.getId());
-		appointmentDto.setDateDto(optional.getDate());
-		appointmentDto.setTimeDto(optional.getTime());
-		appointmentDto.setRoomDto(optional.getRoom());
-		appointmentDto.setTypeDto(optional.getType());
-		appointmentDto.setPriceDto(optional.getPrice());
-		appointmentDto.setDiscountDto(optional.getDiscount());
-		appointmentDto.setDoctorDto(optional.getDoctor());
+    appointmentDto.setIdDto(appointment.getId());
+		appointmentDto.setDateDto(appointment.getDate());
+		appointmentDto.setTimeDto(appointment.getTime());
+		appointmentDto.setRoomDto(appointment.getRoom());
+		appointmentDto.setTypeDto(appointment.getType());
+		appointmentDto.setPriceDto(appointment.getPrice());
+		appointmentDto.setDiscountDto(appointment.getDiscount());
+		appointmentDto.setDoctorDto(appointment.getDoctor());
+		appointmentDto.setRoomId(appointment.getId());
+
 		
 		return appointmentDto;
 	}

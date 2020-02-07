@@ -32,5 +32,8 @@ public class Room {
 	@Column(name = "HallNumber", nullable = false)
 	private String hallNumber;
 	
+	@Column(name="Free",nullable=false)
+	private boolean free;
+	
 
 }
