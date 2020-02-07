@@ -25,8 +25,12 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<CalendarDto> allCalendars(Long id) {
 		// TODO Auto-generated method stub
 		List<CalendarDto>calendarsDto=new ArrayList<CalendarDto>();
+
 		List<Appointment> appointDto=schendulingRepository.findAllByDoctor(id);
 		
+
+
+
 		for(Appointment apoint:appointDto) {
 			calendarsDto.add(calendarMapper.appointmentToCalendarDto(apoint));
 		}
