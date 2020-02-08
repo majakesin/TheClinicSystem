@@ -104,6 +104,10 @@ public class ClinicSchedulingRequestTest {
 		assertEquals(appointment.getId(),33L);
 		
 	}
+	@Test
+	public void testCreateTermsReturnCreatedTerm() {
+		
+	}
 	
 	
 	
