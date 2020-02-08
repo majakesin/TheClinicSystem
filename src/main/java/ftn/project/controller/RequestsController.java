@@ -111,6 +111,6 @@ public class RequestsController {
 	@GetMapping("/activate/user/{idDto}")
 	private String activateUser(@PathVariable("idDto") Long idDto) {
 		requestService.acceptUserRequest(idDto);
-		return "redirect:/badUser";
+		return "redirect:/logovanje";
 	}
 }
