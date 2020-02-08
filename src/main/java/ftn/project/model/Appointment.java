@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Data
-
 @Entity
 @Table(name = "Appointment")
 public class Appointment implements Comparable<Appointment>{
@@ -39,7 +38,7 @@ public class Appointment implements Comparable<Appointment>{
 	@Column(name = "Type", nullable = true)
 	private String type;
 	
-	@Column(name="OperationType",nullable=false)
+	@Column(name="OperationType",nullable=true)
 	private String operationType;
 
 //	@OneToOne

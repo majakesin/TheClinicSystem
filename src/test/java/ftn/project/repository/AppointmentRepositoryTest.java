@@ -15,11 +15,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ftn.project.model.Appointment;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@TestPropertySource("classpath:test.properties")
+@SpringBootTest
 public class AppointmentRepositoryTest {
 
-	@MockBean
+	@Autowired
 	private  AppoitmentRepository appointmentRepository;
 	
 	@Test

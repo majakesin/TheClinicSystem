@@ -217,7 +217,7 @@ public class SchedulingRequestController {
 		app.setAccept(true);
 		
 		User user=userRepository.findByUsername(username);
-		
+		app.setPacientId(user.getId());
 		sRequestRepository.save(app);
 		return "redirect:/listaKlinika";
 	}
