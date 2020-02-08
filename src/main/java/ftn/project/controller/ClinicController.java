@@ -163,7 +163,13 @@ private final ClinicService clinicService;
 		@PostMapping("/terms/search")
 		public String searchClinicByTerms(HttpServletRequest request, @ModelAttribute("termDto") AppointmentDto termDto, ModelMap model ) {
 			request.getSession().setAttribute("termsDto", clinicService.searchClinicByDoctor(termDto.dateDto, termDto.typeDto));
-			request.getSession().setAttribute("doktori1",clinicService.vratiDoktori1());
+			//ide dio gdje setujem direktno datum da to posle znam za zakazivanje :)
+			Set<UserDto> doktori1 = clinicService.vratiDoktori1();
+			for(UserDto doc: doktori1) {
+				doc.setDatumPregledaDto(termDto.dateDto);
+			}
+			
+			request.getSession().setAttribute("doktori1",doktori1);
 			return "redirect:/clincsSearchDateType";
 		}
 		
@@ -200,6 +206,7 @@ private final ClinicService clinicService;
 		@PostMapping("/clinics/search")
 		public String searchClinics(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, ModelMap model ) {
 			request.getSession().setAttribute("clinicsDto", clinicService.searchClinic(clinicDto.adressDto, clinicDto.markDto));
+			
 			request.getSession().setAttribute("doktori2", clinicService.vratiDoktori2());
 			return "redirect:/clinicsSearch";
 		}

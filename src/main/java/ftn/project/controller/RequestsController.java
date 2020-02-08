@@ -28,6 +28,9 @@ public class RequestsController {
 
 	private final EmailService emailService;
 
+	
+	//ovo je sve za USERA!!
+	
 	@GetMapping("/requests")
 	public ModelAndView showUsers(HttpServletRequest request, ModelMap model) {
 		userService.Autorizacija(request);

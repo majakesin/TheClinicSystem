@@ -55,7 +55,8 @@ public class User implements UserDetails {
 	@Column(name = "City", nullable = true)
 	private String city;
 
-	
+	@Column(name="DatumPregleda" , nullable = true)
+	private String datumPregleda;
 	
 	@Column(name="TipPregleda" , nullable=true)
 	private String tipPregleda;

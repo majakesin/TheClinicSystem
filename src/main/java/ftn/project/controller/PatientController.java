@@ -263,7 +263,8 @@ public class PatientController {
 		return "redirect:/zakaziNepredefinisani1/"+idDto;
 	}
 	
-	//pretraga Doktori1 
+	//pretraga Doktori2;
+	
 	@PostMapping("/doctors/search2/{idDto}")
 	public String searchDoctors2(HttpServletRequest request,@PathVariable("idDto") Long idDto, @ModelAttribute("doctorDtoPretraga") UserDto doctorDto, ModelMap model ) {
 		
@@ -302,7 +303,7 @@ public class PatientController {
 				pomocna.add(doc);
 			}
 		}
-		model.addAttribute(pomocna);
+		model.addAttribute("doctorsDto",pomocna);
 		
 		return new ModelAndView("PretragaDoktoraProfil","Model",pomocna);
 	}

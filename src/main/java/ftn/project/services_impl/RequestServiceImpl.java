@@ -45,6 +45,7 @@ public class RequestServiceImpl implements RequestService {
 	
 	private final AppointmentMapper appointmentMapper;
 
+	// to je za prijavu
 	@Override
 	public Set<RequestDto> allRequests() {
 		return requestMapper.setToDtoSet(requestRepository.findAll());

@@ -21,7 +21,7 @@ public class UserMapper {
 		userDto.setPocetakGodisnjegDto(user.getPocetakGodisnjeg());
 		userDto.setKrajGodisnjegDto(user.getKrajGodisnjeg());
 		userDto.setVremePregledaDto(user.getVremePregleda());
-
+		userDto.setDatumPregledaDto(user.getDatumPregleda());
 		
 		userDto.setPrviLoginDto(user.getPrviLogin());
 		userDto.setPomocnaSifraDto(user.getPomocnaSifra());
@@ -38,7 +38,7 @@ public class UserMapper {
 		
 		userDto.setBiographyDto(user.getBiography());
 		userDto.setMarkDto(user.getMark());
-		
+		userDto.setVremePregledaDto(user.getVremePregleda());
 		userDto.setCountryDto(user.getCountry());
 		userDto.setInsuranceNumberDto(user.getInsuranceNumber());
 		userDto.setClinicDto(user.getClinic());
@@ -73,7 +73,8 @@ public class UserMapper {
 		user.setRole(userDto.getRoleDto());
 		user.setBiography(userDto.getBiographyDto());
 		user.setMark(userDto.getMarkDto());
-		
+		user.setVremePregleda(userDto.getVremePregledaDto());
+		user.setDatumPregleda(userDto.getDatumPregledaDto());
 		user.setCountry(userDto.getCountryDto());
 		user.setInsuranceNumber(userDto.getInsuranceNumberDto());
 		user.setClinic(userDto.getClinicDto());
