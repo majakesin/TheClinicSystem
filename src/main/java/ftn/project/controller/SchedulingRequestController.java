@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,8 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppointmentRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
@@ -34,9 +34,8 @@ public class SchedulingRequestController {
 	
 	
 	private final RequestService requestService;
-	
-	@Autowired
-	private final SchedulingRequestRepository sRequestRepository;
+
+	private final AppoitmentRepository sRequestRepository;
 	
 	private final UserService userService;
 	
@@ -169,7 +168,7 @@ public class SchedulingRequestController {
 
 	//izmenjeno predefinisani
 	@GetMapping("/listaKlinika")
-	public ModelAndView listaKlinika(ModelMap model) {
+	public ModelAndView listaKlinika(HttpServletRequest request, ModelMap model) {
   	userService.Autorizacija(request);
   //autorizacija
 		if(userService.getNull()) {
@@ -208,7 +207,7 @@ public class SchedulingRequestController {
 			return new ModelAndView("predefinisaniPregledi","Model",terminiKlinikeSl);
 	}
 
-	//zakaziTermin
+	//zakaziTerminPredefinisan
 	@GetMapping("/zakazan/{idDto}")
 	public String zakazanTerminPredefinisan(@PathVariable("idDto") Long idDto,HttpServletRequest request) {
 		String username=(String)request.getSession().getAttribute("logUsername");
@@ -217,6 +216,7 @@ public class SchedulingRequestController {
 		app.setAccept(true);
 		
 		User user=userRepository.findByUsername(username);
+		app.setPacientId(user.getId());
 		
 		sRequestRepository.save(app);
 		return "redirect:/listaKlinika";
@@ -249,5 +249,91 @@ public class SchedulingRequestController {
 			}
 	}
 	
+	@GetMapping("/kreirajNP1/{idDto}")
+	public ModelAndView kreirajNP1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
+		
+		model.addAttribute("doktor",userService.getUserById(idDto));
+		
+		return new ModelAndView("zakaziNPD1","Model",userService.getUserById(idDto));
+	}
 	
+	
+	//zakaziPregledNepredfinisan1
+	@PostMapping("/zakazanNP1/{idDto}")
+	public String zakazanTerminNEPredefinisan1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+		UserDto doktor = userService.getUserById(idDto);
+		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
+		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
+		AppointmentDto app = new AppointmentDto();
+		app.setDateDto(userVreme.getDatumPregledaDto());
+		app.setTimeDto(userVreme.getVremePregledaDto());
+		app.setTypeDto(doktor.getTipPregledaDto());
+		app.setDoctorDto(doktor.getIdDto());
+		app.setPatientIdDto(pacijent.getIdDto());
+		app.setAcceptDto(true);
+		
+		requestService.createTerm(app);
+		
+		return "redirect:/clincsSearchDateType";
+	
+		
+	}	
+	
+	@GetMapping("/kreirajNP2/{idDto}")
+	public ModelAndView kreirajNP2(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
+		
+		model.addAttribute("doktor",userService.getUserById(idDto));
+		
+		return new ModelAndView("zakazanNPD2","Model",userService.getUserById(idDto));
+	}
+	
+	@GetMapping("/kreirajNepredef2/{idDto}")
+	public ModelAndView kreirajNP2Profi(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
+		
+		model.addAttribute("doktor",userService.getUserById(idDto));
+		
+		return new ModelAndView("ZakazanProfil","Model",userService.getUserById(idDto));
+	}
+	
+	//zakaziPregledNepredfinisan1
+	@PostMapping("/zakazanNP2/{idDto}")
+	public String zakazanTerminNEPredefinisan2(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+		UserDto doktor = userService.getUserById(idDto);
+		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
+		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
+		AppointmentDto app = new AppointmentDto();
+		app.setDateDto(userVreme.getDatumPregledaDto());
+		app.setTimeDto(userVreme.getVremePregledaDto());
+		app.setTypeDto(doktor.getTipPregledaDto());
+		app.setDoctorDto(doktor.getIdDto());
+		app.setPatientIdDto(pacijent.getIdDto());
+		app.setAcceptDto(true);
+		
+		requestService.createTerm(app);
+		
+		return "redirect:/clincsSearchDateType";
+	
+		
+	}
+	
+	//zakaziPregledNepredfinisan1
+		@PostMapping("/zakazanNPD3/{idDto}")
+		public String zakazanTerminNEPredefinisan3(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+			UserDto doktor = userService.getUserById(idDto);
+			String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
+			UserDto pacijent = userService.getUserByUsername(usernamePacijent);
+			AppointmentDto app = new AppointmentDto();
+			app.setDateDto(userVreme.getDatumPregledaDto());
+			app.setTimeDto(userVreme.getVremePregledaDto());
+			app.setTypeDto(doktor.getTipPregledaDto());
+			app.setDoctorDto(doktor.getIdDto());
+			app.setPatientIdDto(pacijent.getIdDto());
+			app.setAcceptDto(true);
+			
+			requestService.createTerm(app);
+			
+			return "redirect:/listaKlinikaProfil";
+		
+			
+		}
 }

@@ -196,6 +196,11 @@ public class ClinicServiceImpl implements ClinicService {
 		if(klinike1.isEmpty()) {
 			
 			Set<UserDto> doktori = userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
+			String datumPregleda=null;
+			for(UserDto doc : doktori1) {
+				datumPregleda = doc.getDatumPregledaDto();
+				break;
+			}
 			
 			if(adressDto=="" & markDto==0.0) {
 				List<Clinic> klinikeTemp=clinicRepository.findAll();
@@ -203,7 +208,10 @@ public class ClinicServiceImpl implements ClinicService {
 				klinike2.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
 				doktori2.clear();
 				
-				doktori2.addAll(doktori);
+				for(UserDto doc : doktori) {
+					doc.setDatumPregledaDto(datumPregleda);
+					doktori2.add(doc);
+				}
 			
 				return klinike2;
 				
@@ -215,6 +223,7 @@ public class ClinicServiceImpl implements ClinicService {
 				for(ClinicDto clinic : klinike2) {
 					for(UserDto user : doktori) {
 						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
 							doktori2.add(user);
 						}
 					}
@@ -229,6 +238,7 @@ public class ClinicServiceImpl implements ClinicService {
 				for(ClinicDto clinic : klinike2) {
 					for(UserDto user : doktori) {
 						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
 							doktori2.add(user);
 						}
 					}
@@ -244,6 +254,7 @@ public class ClinicServiceImpl implements ClinicService {
 				for(ClinicDto clinic : klinike2) {
 					for(UserDto user : doktori1) {
 						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
 							doktori2.add(user);
 						}
 					}

@@ -21,10 +21,7 @@ public class UserDto {
 	private String countryDto;
 	private String insuranceNumberDto;
 	private String medicalRecordIdDto;
-	private String tipPregledaDto;
-	private String pocetakGodisnjegDto;
-	private String krajGodisnjegDto;
-	private String vremePregledaDto;
+	
 	
 	//menjanjesifre
 	private Boolean prviLoginDto;
@@ -33,7 +30,11 @@ public class UserDto {
 	//polja za doktora
 	private String biographyDto;
 	private String markDto;
-	
+	private String tipPregledaDto;
+	private String pocetakGodisnjegDto;
+	private String krajGodisnjegDto;
+	private String vremePregledaDto;
+	private String datumPregledaDto;
 	
 	//polje za select klinike
 	private Long clinicDto;

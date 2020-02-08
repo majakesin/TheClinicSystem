@@ -191,7 +191,7 @@ public class UserServiceImpl implements UserService {
 						 return "izmeniSifru";
 					 }
 					 else {
-						 return "clinics";
+						 return "doctors";
 					 }
 
 				} else if (u.getRole().equals("pacijent")) {
