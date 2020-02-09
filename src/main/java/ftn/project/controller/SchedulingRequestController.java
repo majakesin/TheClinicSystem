@@ -96,6 +96,7 @@ public class SchedulingRequestController {
 	public String createTerms(@Validated @ModelAttribute("appointmentDto") AppointmentDto appointmentDto,BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
+			
 			Set<UserDto> medical=new HashSet<UserDto>();
 			model.addAttribute("termsDto", requestService.allSchedulingRequest());
 			model.addAttribute("allRooms",roomService.allRooms());

@@ -158,10 +158,12 @@ public class RoomController {
 	@GetMapping("/rooms/reservate/{id}")
 	public String reservateRoom(@PathVariable("id") Long id, HttpServletRequest request) {
 		Long idTerm = (Long) request.getSession().getAttribute("idTerms");
-		request.getSession().setAttribute("selectedRoom", id);
-		AppointmentDto appDto = appointmentService.getAppointement(idTerm);
+		request.getSession().setAttribute("selectedRoom", id)
+
+		AppointmentDto appDto=appointmentService.getAppointement(idTerm);
 		UserDto pacient = userService.getUserById(appDto.getPacientId());
-		if (appDto.operationTypeDto.equals("Pregled")) {
+		if(appDto.operationTypeDto.equals("Pregled")) {
+
 			appDto.setRoomId(id);
 
 			emailService.sendMail(pacient.getEmailDto(),

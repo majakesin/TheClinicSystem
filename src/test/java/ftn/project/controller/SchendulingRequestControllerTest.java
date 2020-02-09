@@ -47,7 +47,7 @@ public class SchendulingRequestControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
-	@Test
+	@Test 
 	public void testGetCreateTerm() throws Exception {
 		session.setAttribute("logUsername", "clinic");
 		mockMvc.perform(get("/createTerm")
@@ -60,6 +60,8 @@ public class SchendulingRequestControllerTest {
 		
 		assertThat(session.getAttribute("logUsername")).isNotNull();
 	}
+	
+	
 
 	@Test
 	public void testGetClinicList() throws Exception {

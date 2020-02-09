@@ -551,6 +551,18 @@ public class UserServiceImpl implements UserService {
 		return medicalRecordsMapper.recordsToDto(userRepository.findById(userId).get().getMedicalRecord());
 	}
 
+
+	@Override
+	public Set<UserDto> getByNameAndRole(String string,String role) {
+		return userMapper.UserToDtoSet(userRepository.findByNameAndRole(string,role));
+	}
+
+	@Override
+	public Set<UserDto> getAllUserByUsername(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 
