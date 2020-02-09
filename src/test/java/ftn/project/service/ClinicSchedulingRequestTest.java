@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ftn.project.dto.AppointmentDto;
@@ -48,6 +51,8 @@ public class ClinicSchedulingRequestTest {
 	
 	@Autowired
 	private AppointmentService appointmentService;
+	
+	
 	
 	@Test
 	public void testClinicsReturnSizeOfSet() {
