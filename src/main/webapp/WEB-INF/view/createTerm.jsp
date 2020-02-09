@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td><form:label path="timeDto">Vreme:</form:label></td>
-				<td><form:input type="time" class="form-control" placeholder="Vreme" path="timeDto" /></td>
+				<td><form:input type="time" class="without_ampm form-control"  path="timeDto" /></td>
 
 			<tr>
 				<td><form:label path="roomDto">Soba:</form:label></td>
