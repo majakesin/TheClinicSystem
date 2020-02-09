@@ -2,8 +2,8 @@
 Projekat iz predmeta Internet softverske arhitekture i Projektovanje softvera za školsku 2019/2020 godinu.
 
 Za pokretanje projekta neophodno je imati instalirano:
-1) [Eclipse ] (https://www.eclipse.org/)
-2) [Spring Tools 4 aka Spring Tool Suite 4 ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
+1) [Eclipse](https://www.eclipse.org/)
+2) [Spring Tools 4 aka Spring Tool Suite 4](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
 3) [Lombok](https://projectlombok.org/)
 4) [Maven](https://maven.apache.org/)
 
@@ -18,7 +18,7 @@ spring.jpa.hibernate.ddl-auto =update
 spring.datasource.username=sa
 spring.datasource.password=
 ```
-Prilikom pokretanja projekta neophodno je na [localhost h2] (http://localhost:8081/h2-console)  prijaviti se sa prethodno unetim kredencijalima:
+Prilikom pokretanja projekta neophodno je na [localhost h2](http://localhost:8081/h2-console)  prijaviti se sa prethodno unetim kredencijalima:
 ```bash
 JDBC URL:jdbc:h2:file:~/TheClinicSystem
 ```
