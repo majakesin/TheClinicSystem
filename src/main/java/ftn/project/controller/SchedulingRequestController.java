@@ -18,7 +18,7 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
-SchedulingTermsByFilteringClinics
+
 import ftn.project.repository.AppointmentRepository;
 
 import ftn.project.repository.AppoitmentRepository;
@@ -78,7 +78,7 @@ public class SchedulingRequestController {
 	@PostMapping("/createTerm/create")
 	public String createTerms(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto,Model model) {
 		requestService.createTerm(appointmentDto);
-		
+		roomService.takeRoomPredef(appointmentDto);
 		return "redirect:/createTerm";
 	}
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.BusyTermDto;
 import ftn.project.dto.RoomDto;
+import ftn.project.mapper.AppointmentMapper;
 import ftn.project.mapper.RoomMapper;
 import ftn.project.model.Appointment;
 import ftn.project.model.BusyTerms;
@@ -45,6 +46,8 @@ public class RoomServiceImpl implements RoomService {
 	private final AppointmentService appointmentService;
 
 	private final AppoitmentRepository appointmentRepository;
+	
+	private final AppointmentMapper appointmentMapper;
 
 	@Override
 	public Set<RoomDto> allRooms() {
@@ -164,6 +167,22 @@ public class RoomServiceImpl implements RoomService {
 		roomRepository.save(room);
 		
 		
+	}
+
+	@Override
+	public void takeRoomPredef(AppointmentDto app) {
+		Appointment appoint=appointmentMapper.dtoToAppointment(app);
+		Room room=roomRepository.findById(app.getRoomId()).get();
+		List<BusyTerms>busyList=new ArrayList<BusyTerms>();
+		BusyTerms bt=new BusyTerms();
+		bt.setDate(appoint.getDate());
+		bt.setTime(appoint.getTime());
+		busyList.add(bt);
+		room.getTerms().add(bt);
+		appoint.setRoomId(room.getId());
+		busyTermsRepository.save(bt);
+		appointmentRepository.save(appoint);
+		roomRepository.save(room);
 	}
 
 }

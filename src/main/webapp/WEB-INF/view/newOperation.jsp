@@ -20,42 +20,7 @@
 </head>
 <body>
 
-	<div>
-		<%@ include file="DoctorHomePage.jsp"%>
-	</div>
 
-
-	<div class="container">
-		<div class="row">
-			<div class="col-sm">
-				<br> <br> <br>
-				<form:form method="POST"
-					action="/doctors/records/pacient/examination/free/room"
-					modelAttribute="roomDto">
-					<table>
-
-
-						<tr>
-						<td>Izaberi sobu</td>
-							<td><form:select class="form-control" path="idDto">
-									<c:forEach items="${allRooms}" var="room">
-										<form:option value="${room.idDto}">${room.nameDto} br:${room.hallNumberDto}</form:option>
-									</c:forEach>
-								</form:select></td>
-						</tr>
-
-						<tr>
-							<td></td>
-							<td></td>
-							<td><input type="submit" class="btn btn-outline-danger"
-								value="Oslobodi" /></td>
-						</tr>
-					</table>
-					
-				</form:form>
-			</div>
-		</div>
-	</div>
 	<br>
 	<br>
 	<div class="container">

@@ -15,7 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.RoomDto;
+import ftn.project.dto.UserDto;
+import ftn.project.model.User;
 import ftn.project.services.AppointmentService;
+import ftn.project.services.EmailService;
 import ftn.project.services.OperationService;
 import ftn.project.services.RoomService;
 import ftn.project.services.UserService;
@@ -30,7 +33,7 @@ public class RoomController  {
 
 	
 	private OperationService operationService;
-
+	private final EmailService emailService;
 	private final RoomService roomService;
 	private final UserService userService;
 	private final AppointmentService appointmentService;
@@ -140,8 +143,10 @@ public class RoomController  {
 		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
 		request.getSession().setAttribute("selectedRoom", id);
 		AppointmentDto appDto=appointmentService.getAppointement(idTerm);
+		UserDto pacient = userService.getUserById(appDto.getIdDto());
 		if(appDto.operationTypeDto.equals("Pregled")) {
 			appDto.setRoomId(id);
+			emailService.sendMail(pacient.getEmailDto(),"Postovani vas pregled je zakazan "+"soba "+appDto.getRoomId(), appDto.getOperationTypeDto());
 			roomService.TakeRoom(appDto);
 			return "redirect:/appointmentRequests";
 		}
