@@ -25,7 +25,7 @@ JDBC URL:jdbc:h2:file:~/TheClinicSystem
 i uneti u tabelu USER sledeci upit 
 
 ```bash
-values(1,null,null,null,null,null,null,'admin@yahoo.com',true,null,null,null,'admin','admin','415152',null,'admin',false,'Clinic Centar Administrator','admin',null,'admin',null)
+insert into user values(1,null,null,null,null,null,null,'admin@yahoo.com',true,null,null,null,'admin','admin','415152',null,'admin',false,'Clinic Centar Administrator','admin',null,'admin',null)
 ```
 Posle pokretanja programa na **Run As > Spring Boot App**
 
