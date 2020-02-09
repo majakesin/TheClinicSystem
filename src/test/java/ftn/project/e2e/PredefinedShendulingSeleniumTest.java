@@ -34,9 +34,8 @@ public class PredefinedShendulingSeleniumTest {
 	    driver.get("http://localhost:8081/logovanje");
 	    driver.manage().window().fullscreen();
 	    driver.findElement(By.id("usernameDto")).click();
-	    driver.findElement(By.id("usernameDto")).sendKeys("clinic");
-	    driver.findElement(By.cssSelector(".wrapper")).click();
 	    driver.findElement(By.id("usernameDto")).sendKeys("paci");
+	    driver.findElement(By.cssSelector(".wrapper")).click();
 	    driver.findElement(By.id("passwordDto")).click();
 	    driver.findElement(By.id("passwordDto")).sendKeys("123");
 	    driver.findElement(By.id("login")).click();

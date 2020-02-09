@@ -47,12 +47,8 @@ public class UserController {
 	@Autowired
 	private  RequestService requestService;
 	
-	private final ZakaziTerminValidator zakaziValidator;
 	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(zakaziValidator);
-	}
+	
 
 	@GetMapping("/kreirajNP1/{idDto}")
 	public ModelAndView kreirajNP1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {

@@ -68,8 +68,8 @@ public class SchendulingSeleniumTest {
 		driver.findElement(By.id("timeDto")).click();
 		driver.findElement(By.id("timeDto")).sendKeys("07:00");
 		driver.findElement(By.id("timeDto")).click();
-		driver.findElement(By.id("roomDto")).click();
-		driver.findElement(By.id("roomDto")).click();
+		driver.findElement(By.id("roomId")).click();
+		driver.findElement(By.id("roomId")).click();
 		{
 			WebElement element = driver.findElement(By.id("roomId"));
 			Actions builder = new Actions(driver);
