@@ -63,7 +63,7 @@ public class CalendarMapper {
 	public CalendarDto appointmentToCalendarDto(Appointment appointment){
 		
 		CalendarDto calendarDto=new CalendarDto();
-		//Room room= roomRepository.fi
+		
 		String start=appointment.getDate();
 		start.replaceAll("-", "/");
 		calendarDto.setStart(start);
@@ -74,7 +74,7 @@ public class CalendarMapper {
 			pacientSurname=(userSerivce.getUserById(appointment.getPacientId())).getSurnameDto();
 			calendarDto.setUrl("/doctors/records/"+(userSerivce.getUserById(appointment.getPacientId()).getIdDto()));
 		}
-		calendarDto.setTitle(pacientName+" "+pacientSurname+ " soba : "+" "+ appointment.getTime()+"h");
+		calendarDto.setTitle(pacientName+" "+pacientSurname+ " "+ appointment.getTime()+"h "+appointment.getOperationType());
 		
 		
 		return calendarDto;
