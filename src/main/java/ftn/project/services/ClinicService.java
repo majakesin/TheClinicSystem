@@ -25,6 +25,13 @@ public interface ClinicService {
 	public ClinicDto getClinicProfile(String ussername);
 	
 	//pretraga klinike
+	public String getAdresa();
+	
+	public String getTip();
+	
+	public String getDatum();
+	
+	public Double getOcena();
 	
 	Set<ClinicDto> searchClinic(String adressDto, double markDto );
 

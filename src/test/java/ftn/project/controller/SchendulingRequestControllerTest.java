@@ -46,7 +46,7 @@ public class SchendulingRequestControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
-	@Test
+	@Test 
 	public void testGetCreateTerm() throws Exception {
 		session.setAttribute("logUsername", "clinic");
 		mockMvc.perform(get("/createTerm")
@@ -57,6 +57,8 @@ public class SchendulingRequestControllerTest {
 				.andExpect(model().attributeExists("termsDto"))
 				.andExpect(model().attributeExists("allRooms"));
 	}
+	
+	
 
 	@Test
 	public void testGetClinicList() throws Exception {
