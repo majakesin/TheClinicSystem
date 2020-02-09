@@ -9,7 +9,7 @@ import ftn.project.dto.CalendarDto;
 import ftn.project.mapper.CalendarMapper;
 import ftn.project.model.Appointment;
 import ftn.project.model.Calendar;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.services.CalendarService;
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CalendarServiceImpl implements CalendarService {
 
-	private final SchedulingRequestRepository schendulingRepository;
+	private final AppoitmentRepository schendulingRepository;
 	
 	private final CalendarMapper calendarMapper;
 	
@@ -25,10 +25,16 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<CalendarDto> allCalendars(Long id) {
 		// TODO Auto-generated method stub
 		List<CalendarDto>calendarsDto=new ArrayList<CalendarDto>();
+
 		List<Appointment> appointDto=schendulingRepository.findAllByDoctor(id);
+		
+
+
+
 		for(Appointment apoint:appointDto) {
 			calendarsDto.add(calendarMapper.appointmentToCalendarDto(apoint));
 		}
+		
 		return calendarsDto;
 		
 	}

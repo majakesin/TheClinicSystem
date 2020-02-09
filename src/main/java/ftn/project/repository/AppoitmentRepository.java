@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ftn.project.model.Appointment;
 
-public interface SchedulingRequestRepository extends JpaRepository<Appointment, Long> {
+public interface AppoitmentRepository extends JpaRepository<Appointment, Long> {
 
 	public List<Appointment> findAllByIsBusy(boolean isBusy);
 	
@@ -15,11 +15,16 @@ public interface SchedulingRequestRepository extends JpaRepository<Appointment, 
 	
 	List<Appointment>findAllByDoctor(Long doctor);
 	
+	List<Appointment>findAllByPacientId(Long pacient);
+
+	List<Appointment>findAllByOperationTypeAndRoomId(String opType,Long id);
+	
+
+	
+	List<Appointment>findAllByRoomId(Long id);
+
 	public Set<Appointment> findByDateAndType(String date, String type);
 	public Set<Appointment> findByDate(String date);
 	public Set<Appointment> findByType(String type);
-		
-	
-	
-	
+
 }

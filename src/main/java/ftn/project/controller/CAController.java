@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.project.dto.UserDto;
 import ftn.project.dto.VacationRequestDto;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
@@ -58,8 +59,13 @@ public class CAController {
 			//autorizacija
 			if(userService.getCA()){
 		
-		VacationRequestDto vqTemp = vqService.getVQDtoById(idDto);
 		
+		VacationRequestDto vqTemp = vqService.getVQDtoById(idDto);
+		String username = vqTemp.getUsernameDto();
+		UserDto user = userService.getUserByUsername(username);
+		user.setPocetakGodisnjegDto(vqTemp.pocetakGodisnjegDto);
+		user.setKrajGodisnjegDto(vqTemp.krajGodisnjegDto);
+		userService.createUser(user);
 		vqService.posaljiMejlPotvrdan(vqTemp.emailDto, vqTemp.nameDto);
 		vqService.obrisiZahtev(idDto);
 		return "redirect:/zahtevi/CA";

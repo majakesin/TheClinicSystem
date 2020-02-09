@@ -32,30 +32,30 @@
 		<table class="table">
 		
 		<tr style="background-color: #53e3a6;">
-			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> SLOBODNI TERMINI PREGLEDA </h6> </th>
+			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;"> KLINIKE </h6> </th>
 		</tr>
 		<tr>
-			<td>Datum</td>
-			<td>Vreme</td>
-			<td>Sala</td>
-			<td>Tip pregleda</td>
-			<td>Cena</td>
-			<td>Popust</td>
+			<td>Naziv</td>
+			<td>Adresa</td>
+			<td>Ocena</td>
+			<td>Telefon</td>
+			<td>Termini </td>
 			
 			<td> </td>
 			
 		</tr>
 		<tr>
-			<c:forEach var="term" items="${termsDto}">
+			<c:forEach var="klinika" items="${klinikeDto}">
 				<tr>
-			  		<td><c:out value="${term.dateDto}" /></td> 
-			 		<td><c:out value="${term.timeDto}" /></td> 
-					<td><c:out value="${term.roomDto}" /></td>
-					<td><c:out value="${term.typeDto}" /></td>
-					<td><c:out value="${term.priceDto}" /></td>
-					<td><c:out value="${term.discountDto}" /></td>
+			  		<td><c:out value="${klinika.nameDto}" /></td> 
+			 		<td><c:out value="${klinika.adressDto}" /></td> 
+					<td><c:out value="${klinika.markDto}" /></td>
+					<td><c:out value="${klinika.phoneDto}" /></td>
+					<td><a class="btn btn-outline-info"
+									href="/clinic/terms/${klinika.idDto}">Izaberi termin</a></td>
 					
-					<td><a class="btn btn-outline-success" href="/appointmentRequests/${term.idDto}">Zakaži</a></td>
+					
+					
 					
 				
 				</tr>

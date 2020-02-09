@@ -9,7 +9,7 @@ import ftn.project.dto.AppointmentRequestDto;
 import ftn.project.mapper.AppointmentMapper;
 import ftn.project.mapper.AppointmentRequestMapper;
 import ftn.project.repository.AppointmentRepository;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.services.AppointmentService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 	private final AppointmentRequestMapper appointmentMapper;
 	
-	private final SchedulingRequestRepository sRequestRepository;
+	private final AppoitmentRepository appointmentRepo;
+	
+	private final AppointmentRepository sRequestRepository;
 	private final AppointmentMapper appointmentsMapper;
 	
 	@Override
@@ -32,8 +34,21 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public Set<AppointmentDto> allAppointment() {
-		
-		return appointmentsMapper.setToDtoSet(sRequestRepository.findAll());
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public Set<AppointmentDto> allAppointmentsByPacient() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AppointmentDto getAppointement(Long idTerm) {
+		return appointmentsMapper.appointmentToDto(appointmentRepo.findById(idTerm).get());
+	}
+
+	
 
 }

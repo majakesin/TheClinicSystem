@@ -3,7 +3,6 @@ package ftn.project.validation;
 
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -14,7 +13,7 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.mapper.AppointmentMapper;
 import ftn.project.mapper.UserMapper;
-import ftn.project.repository.SchedulingRequestRepository;
+import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import lombok.Data;
 
@@ -22,7 +21,7 @@ import lombok.Data;
 @Component
 public class SchedulingValidator implements Validator {
 
-	private SchedulingRequestRepository srRepository;
+	private AppoitmentRepository srRepository;
 	private AppointmentMapper appointmentMapper;
 	private UserMapper userMapper;
 	private UserRepository userRepository;

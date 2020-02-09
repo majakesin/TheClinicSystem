@@ -13,10 +13,16 @@
     <div>
 		<%@ include file="patientHome.jsp" %>
 	</div>
+		<ul  class="nav nav-tabs justify-content-center nav-fill"  >
+		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/clincsSearchDateType" > Zakaži pregled</a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/listaKlinikaProfil"> Profili klinika</a></li>
+		
+	</ul>
 <br> <br>
 
 <div>
 	<div class="row">
+	
 	<div class="col-md">
 	<form:form method="POST" action="/terms/search"
 		modelAttribute="termDto">
@@ -42,6 +48,12 @@
 	</table>
 	</form:form>
 	</div>
+	<div class="alert alert-danger" role="alert">
+		<h4 class="alert-heading">
+		Ako označite vikend kao datum vaš zahtev biće odbijen.
+		</h4>
+ 		Vikend je neradan!
+	</div>
 	</div>
 	
 	<div class="row">
@@ -52,13 +64,14 @@
 	<td><h6 style="color:white;  letter-spacing: 4px; text-align=center;">Naziv klinike </h6></td>
 	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Adresa klinike </h6> </td>
 	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Prosečna ocena</h6> </td>
-
+	<td><h6 style="color:white; letter-spacing: 4px; text-align=center;">Zakaži</h6> </td>
 	</tr>
 	<c:forEach var="var" items="${termsDto}">
 	<tr>
 	<td><c:out value="${var.nameDto}"/> </td>
 	<td><c:out value="${var.adressDto}"/> </td>
 	<td><c:out value="${var.markDto}"/> </td>
+	<td><a class="btn btn-outline-info" href="/zakaziNepredefinisani1/${var.idDto}">Zakaži</a></td>
 	</tr>
 	</c:forEach>
 	</table>

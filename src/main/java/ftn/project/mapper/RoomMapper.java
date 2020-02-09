@@ -20,6 +20,7 @@ public class RoomMapper {
 		roomDto.setIdDto(room.getId());
 		roomDto.setHallNumberDto(room.getHallNumber());
 		roomDto.setNameDto(room.getName());
+		roomDto.setFree(room.isFree());
 		
 		return roomDto;
 		
@@ -31,7 +32,7 @@ public class RoomMapper {
 		room.setId(roomDto.getIdDto());
 		room.setHallNumber(roomDto.getHallNumberDto());
 		room.setName(roomDto.getNameDto());
-		
+		room.setFree(roomDto.isFree());
 		return room;
 	}
 	

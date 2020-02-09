@@ -1,5 +1,6 @@
 package ftn.project.services_impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,35 +9,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftn.project.dto.ClinicDto;
+import ftn.project.dto.UserDto;
 import ftn.project.mapper.ClinicMapper;
+import ftn.project.mapper.UserMapper;
 import ftn.project.model.Appointment;
 import ftn.project.model.Clinic;
 import ftn.project.model.User;
 
+
+import ftn.project.repository.AppointmentRepository;
+import ftn.project.repository.AppoitmentRepository;
+
 import ftn.project.repository.ClinicRepository;
-import ftn.project.repository.SchedulingRequestRepository;
+
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
+import ftn.project.services.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+
 
 @Data
 @RequiredArgsConstructor
 @Service
+
 public class ClinicServiceImpl implements ClinicService {
 
 	@Autowired
 	private ClinicRepository clinicRepository;
 	
+	
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	
 	@Autowired
 	private ClinicMapper clinicMapper;
 	
 	private final UserRepository userRepository;
-	private final SchedulingRequestRepository appointmentRepository;
+	private final AppoitmentRepository appointmentRepository;
 	
 	//liste za pretragu klinike
 	private Set<ClinicDto> klinike1 =new HashSet<ClinicDto> ();
+	private Set<UserDto> doktori1= new HashSet<UserDto>();
 	private Set<ClinicDto> klinike2 = new HashSet<ClinicDto>();
+	private Set<UserDto> doktori2= new HashSet<UserDto> ();
 
 	
 	public void deleteClinic(Long id) {
@@ -77,59 +96,91 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	//pretraga klinike
 	@Override
-	public Set<ClinicDto> searchClinicByTerm(String dateDto, String typeDto) {
+	public Set<ClinicDto> searchClinicByDoctor(String dateDto, String typeDto) {
 		
 	
-		User doktor= new User();
-		Set<Clinic> klinikeTemp= new HashSet<Clinic>();
-		Clinic klinika=new Clinic();
+		
+		
 		
 			
 			if(dateDto == "" & typeDto.equals("None")) {
 				List<Clinic> k=clinicRepository.findAll();
+		
 				klinike1.clear();
+				doktori1.clear();
+				
 				klinike1.addAll(clinicMapper.ClinicToDtoSet(k));
+				doktori1.addAll(userMapper.UserToDtoSet(userRepository.findAllByRole("doktor")));
 				return klinike1;
 				
 			}else if(dateDto != "" & !typeDto.equals("None")) {
-				Set<Appointment> termini= appointmentRepository.findByDateAndType(dateDto, typeDto);
-				for(Appointment a : termini) {
-					if(!a.isBusy()) {
-						doktor=userRepository.findAllById(a.getDoctor());
-						klinika= clinicRepository.findById(doktor.getClinic()).get();
-						klinikeTemp.add(klinika);
-					}
-				}
+				
+				Set<User> doktori = userRepository.findAllByRole("doktor");
 				klinike1.clear();
-				klinike1.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori1.clear();
+				for(User doc : doktori) {
+					UserDto temp =getDoktoreSlobodneTP(dateDto,typeDto, doc);
+					if(!temp.getUsernameDto().equals("nepostojeci")) {
+						Long idKlinike = temp.getClinicDto();
+						
+						Clinic tempClinic = clinicRepository.findById(idKlinike).get();
+						ClinicDto tempClinicDto = clinicMapper.ClinicToDto(tempClinic);
+						klinike1.add(tempClinicDto);
+						doktori1.add(temp);
+					}
+				
+				}
+				
+				
 				return klinike1;
 				
 			}else if(dateDto != "" & typeDto.equals("None")) {
-				Set<Appointment> termini= appointmentRepository.findByDate(dateDto);
-				for(Appointment a : termini) {
-					if(!a.isBusy()) {
-						doktor=userRepository.findAllById(a.getDoctor());
-						klinika= clinicRepository.findById(doktor.getClinic()).get();
-						klinikeTemp.add(klinika);
-					}
-				}
+				Set<User> doktori = userRepository.findAllByRole("doktor");
 				klinike1.clear();
-				klinike1.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori1.clear();
+				for(User doc : doktori) {
+					UserDto temp =getDoktoreSlobodne(dateDto, doc);
+					if(!temp.getUsernameDto().equals("nepostojeci")) {
+						
+						Long idKlinike = temp.getClinicDto();
+						
+						Clinic tempClinic = clinicRepository.findById(idKlinike).get();
+						ClinicDto tempClinicDto = clinicMapper.ClinicToDto(tempClinic);
+						klinike1.add(tempClinicDto);
+						doktori1.add(temp);
+					}
+				
+				}
+				
 				return klinike1;
 			
 			}else if(dateDto == "" & !typeDto.equals("None")) {
-				Set<Appointment> termini= appointmentRepository.findByType(typeDto);
-				for(Appointment a : termini) {
-					if(!a.isBusy()) {
-						doktor=userRepository.findAllById(a.getDoctor());
-						klinika= clinicRepository.findById(doktor.getClinic()).get();
-						klinikeTemp.add(klinika);
-					}
-				}
+				Set<User> doktori = userRepository.findAllByRole("doktor");
 				klinike1.clear();
-				klinike1.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori1.clear();
+				for(User doc : doktori) {
+					UserDto temp = getDoktoreTP(typeDto, doc);
+					if(!temp.getUsernameDto().equals("nepostojeci")) {
+						Long idKlinike = temp.getClinicDto();
+						
+						Clinic tempClinic = clinicRepository.findById(idKlinike).get();
+						ClinicDto tempClinicDto = clinicMapper.ClinicToDto(tempClinic);
+						klinike1.add(tempClinicDto);
+						doktori1.add(temp);
+					}
+				
+				}
+				
 				return klinike1;
 				
 			}
@@ -144,30 +195,71 @@ public class ClinicServiceImpl implements ClinicService {
 	
 		if(klinike1.isEmpty()) {
 			
-			
+			Set<UserDto> doktori = userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));
+			String datumPregleda=null;
+			for(UserDto doc : doktori1) {
+				datumPregleda = doc.getDatumPregledaDto();
+				break;
+			}
 			
 			if(adressDto=="" & markDto==0.0) {
 				List<Clinic> klinikeTemp=clinicRepository.findAll();
 				klinike2.clear();
 				klinike2.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori2.clear();
+				
+				for(UserDto doc : doktori) {
+					doc.setDatumPregledaDto(datumPregleda);
+					doktori2.add(doc);
+				}
+			
 				return klinike2;
 				
 			}else if(adressDto!="" & markDto!=0.0) {
 				Set<Clinic> klinikeTemp=clinicRepository.findByAdressAndMark(adressDto, markDto);
 				klinike2.clear();
 				klinike2.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori2.clear();
+				for(ClinicDto clinic : klinike2) {
+					for(UserDto user : doktori) {
+						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
+							doktori2.add(user);
+						}
+					}
+				}
 				return klinike2;
 				
 			}else if(adressDto!="" & markDto==0.0) {
 				Set<Clinic> klinikeTemp=clinicRepository.findByAdress(adressDto);
 				klinike2.clear();
 				klinike2.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori2.clear();
+				for(ClinicDto clinic : klinike2) {
+					for(UserDto user : doktori) {
+						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
+							doktori2.add(user);
+						}
+					}
+				}	
+				
 				return klinike2;
 				
 			}else if(adressDto=="" & markDto!=0.0) {
 				Set<Clinic> klinikeTemp=clinicRepository.findByMark(markDto);
 				klinike2.clear();
 				klinike2.addAll(clinicMapper.ClinicToDtoSet(klinikeTemp));
+				doktori2.clear();
+				for(ClinicDto clinic : klinike2) {
+					for(UserDto user : doktori1) {
+						if(user.getClinicDto()==clinic.getIdDto()) {
+							user.setDatumPregledaDto(datumPregleda);
+							doktori2.add(user);
+						}
+					}
+				}	
+				
 				return klinike2;
 				
 			}
@@ -177,11 +269,14 @@ public class ClinicServiceImpl implements ClinicService {
 			
 		}else {
 				
-			
+				klinike2.clear();
 			 
 				if(adressDto=="" & markDto==0.0) {
 					
 					klinike2.addAll(klinike1);
+					doktori2.clear();
+					
+					doktori2.addAll(doktori1);
 					return klinike2;
 					
 				}else if(adressDto!="" & markDto!=0.0) {
@@ -191,6 +286,15 @@ public class ClinicServiceImpl implements ClinicService {
 						klinike2.add(c);
 					}
 				}
+					doktori2.clear();
+					
+					for(ClinicDto clinic : klinike2) {
+						for(UserDto user : doktori1) {
+							if(user.getClinicDto()==clinic.getIdDto()) {
+								doktori2.add(user);
+							}
+						}
+					}
 					return klinike2;
 					
 				}else if(adressDto!="" & markDto==0.0) {
@@ -199,6 +303,15 @@ public class ClinicServiceImpl implements ClinicService {
 						klinike2.add(c);
 					}
 				}
+					doktori2.clear();
+					
+					for(ClinicDto clinic : klinike2) {
+						for(UserDto user : doktori1) {
+							if(user.getClinicDto()==clinic.getIdDto()) {
+								doktori2.add(user);
+							}
+						}
+					}
 					return klinike2;
 					
 				}else if(adressDto=="" & markDto!=0.0) {
@@ -207,6 +320,15 @@ public class ClinicServiceImpl implements ClinicService {
 						klinike2.add(c);
 					}
 				}
+					doktori2.clear();
+					
+					for(ClinicDto clinic : klinike2) {
+						for(UserDto user : doktori1) {
+							if(user.getClinicDto()==clinic.getIdDto()) {
+								doktori2.add(user);
+							}
+						}
+					}
 					return klinike2;
 				}
 			}
@@ -215,6 +337,114 @@ public class ClinicServiceImpl implements ClinicService {
 		return klinike2;
 	}
 
+	// PRETRAGA USER
 	
+	@Override
+	public UserDto getDoktoreSlobodne(String datum, User user) {
+		
+		UserDto temp = new UserDto();
+		temp.setUsernameDto("nepostojeci");
+		
+		String pocetakGod =user.getPocetakGodisnjeg();
+		String krajGodisnjeg = user.getKrajGodisnjeg();
+		
+		if(pocetakGod == null || krajGodisnjeg == null) {
+			return userMapper.UserToDto(user);
+		}
+		String [] pocGod = pocetakGod.split("-");
+		String []  krajGod = krajGodisnjeg.split("-");
+		String [] datumNiz = datum.split("-");
+		
+		int pocetak = Integer.parseInt(pocGod[2]);
+		int kraj = Integer.parseInt(krajGod[2]);
+		int dan = Integer.parseInt(datumNiz[2]);
+		
+		//ako godina nije ista onda je slobodan
+		if(Integer.parseInt(pocGod[0])!=Integer.parseInt(datumNiz[0])) {
+			return userMapper.UserToDto(user);
+		}
+		else if(Integer.parseInt(pocGod[1])!=Integer.parseInt(datumNiz[1])) {
+			
+			return userMapper.UserToDto(user);
+		} else if(dan>pocetak && dan<kraj) {
+			return temp;
+		}
+		else {
+			return userMapper.UserToDto(user);
+		}
+		
+		
+		
+	}
+	
+	@Override
+	public UserDto getDoktoreSlobodneTP(String datum, String tip, User user) {
+		
+		UserDto temp = new UserDto();
+		temp.setUsernameDto("nepostojeci");
+		
+		String pocetakGod =user.getPocetakGodisnjeg();
+		String krajGodisnjeg = user.getKrajGodisnjeg();
+		
+		if(pocetakGod == null || krajGodisnjeg == null) {
+			if(user.getTipPregleda().equals(tip)) {
+				return userMapper.UserToDto(user);
+			}
+			else {
+				return temp;
+			}
+		}
+		
+		String [] pocGod = pocetakGod.split("-");
+		String []  krajGod = krajGodisnjeg.split("-");
+		String [] datumNiz = datum.split("-");
+		
+		int pocetak = Integer.parseInt(pocGod[2]);
+		int kraj = Integer.parseInt(krajGod[2]);
+		int dan = Integer.parseInt(datumNiz[2]);
+		
+		//ako godina nije ista onda je slobodan
+		if(Integer.parseInt(pocGod[0])!=Integer.parseInt(datumNiz[0])) {
+			return userMapper.UserToDto(user);
+		}
+		else if(Integer.parseInt(pocGod[1])!=Integer.parseInt(datumNiz[1])) {
+			
+			return userMapper.UserToDto(user);
+		} else if(dan>pocetak && kraj<dan) {
+			return temp;
+		}
+		else {
+			if(user.getTipPregleda().equals(tip)) {
+				return userMapper.UserToDto(user);
+			}
+			else {
+				return temp;
+			}
+		}
+		
+	}
+
+	@Override
+	public UserDto getDoktoreTP(String tip,User user) {
+		UserDto temp = new UserDto();
+		temp.setUsernameDto("nepostojeci");
+		
+		if(user.getTipPregleda().equals(tip)) {
+			return userMapper.UserToDto(user);
+		}
+		else {
+			return temp;
+		}
+	}
+	
+	public Set<UserDto> vratiDoktori1 () {
+		return doktori1;
+	}
+
+	@Override
+	public Set<UserDto> vratiDoktori2() {
+		// TODO Auto-generated method stub
+		return doktori2;
+	}
 
 }

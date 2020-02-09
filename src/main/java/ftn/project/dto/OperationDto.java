@@ -6,5 +6,9 @@ import lombok.Data;
 
 @Data
 public class OperationDto {
-	private ArrayList<String> operationIds;
+	private ArrayList<Long> operationIds;
+	private Long termId;
+	private Long roomDto;
+	
+	
 }

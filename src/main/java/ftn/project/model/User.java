@@ -1,6 +1,7 @@
 package ftn.project.model;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +33,9 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name="VremePregleda",nullable=true)
+	private String vremePregleda;
+	
 	@Column(name = "Username", nullable = false)
 	private String username;
 
@@ -42,6 +45,7 @@ public class User implements UserDetails {
 	@Column(name = "Name", nullable = true)
 	private String name;
 
+	
 	@Column(name = "Surname", nullable = true)
 	private String surname;
 
@@ -51,6 +55,20 @@ public class User implements UserDetails {
 	@Column(name = "City", nullable = true)
 	private String city;
 
+	@Column(name="DatumPregleda" , nullable = true)
+	private String datumPregleda;
+	
+	@Column(name="TipPregleda" , nullable=true)
+	private String tipPregleda;
+	
+	
+	@Column(name="PocetakGodisnjeg",nullable=true)
+	private String  pocetakGodisnjeg;
+	
+	@Column(name="KrajGodisnjeg", nullable = true) 
+	private String  krajGodisnjeg;
+	
+	
 	@Column(name = "Country", nullable = true)
 	private String country;
 
@@ -125,6 +143,14 @@ public class User implements UserDetails {
 		return true;
 	}
 
+	
+	/*public void setGodisnji (Set<String> godisnji) {
+		pomocnaGodisnji.clear();
+		for(String god : godisnji) {
+			pomocnaGodisnji.add(god);
+			
+		}
+	}*/
 	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {

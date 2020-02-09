@@ -17,6 +17,14 @@ public class AppointmentDto {
 	public String typeDto;
 	public String priceDto;
 	public Long doctorDto;
+	public Long pacientId;
 	public String discountDto;
-	
+	public Long roomId;
+	public Long PatientIdDto;
+	public boolean isBusyDto;
+	public boolean isAcceptDto;
+
+
+	public String operationTypeDto;
+
 }

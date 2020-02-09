@@ -24,41 +24,27 @@
 	</div>
 	<ul  class="nav nav-tabs justify-content-center nav-fill"  >
 		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/appointmentRequests" ><i class="fa fa-calendar" aria-hidden="true"></i>Zahtevi </a></li>
-		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/operations"><i class="fa fa-scissors"></i> Operacije</a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="operationList"><i class="fa fa-scissors"></i> Operacije</a></li>
 		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/createTerm"><i class="fa fa-calendar" aria-hidden="true"></i>  Kreiraj termin</a></li>
 	</ul>
 	
 	<br />
-	<input type="text" class="form-control" id="myInput"
-		placeholder="Search for terms..">
-	<table class="table" id="appointmentTable">
-
-		<tr style="background-color: #53e3a6;">
-			<th colspan=8 style=""><h6
-					style="color: white; letter-spacing: 4px;">TERMINI</h6></th>
-		</tr>
+	<div>
+	<form action="/examination/rooms/create" method="POST">
+	<table class="table">
 		<tr>
-			<td>Datum</td>
-			<td>Vreme</td>
-			<td>Soba</td>
-			<td>Tip</td>
-		</tr>
+		<td><a href="${pageContext.request.contextPath}/roomsSearch">Rezervisi salu</a></td></tr>
 		<tr>
-			<c:forEach var="term" items="${appointmentsList}">
-				<tr>
-					<td><c:out value="${term.dateDto}" /></td>
-					<td><c:out value="${term.timeDto}" /></td>
-					<td><c:out value="${term.roomDto}" /></td>
-					<td><c:out value="${term.typeDto}" /></td>
-				</tr>
-			</c:forEach>
-		</tr>
-
+		
 	</table>
 
-	<br />
-	<br />
-
+	</form>
+	<table class="table">
+		<tr><td>Rezervisana sala</td></tr>
+		<tr><td>${selectedRoom.nameDto} broj:${selectedRoom.hallNumberDto}</td></tr>
+	</table>
+	
+	</div>
 	<input type="text" class="form-control" id="myInput2"
 		placeholder="Search for doctors..">
 	<table class="table" id="doctorsTable">
@@ -81,14 +67,14 @@
 					<td><c:out value="${user.nameDto}" /></td>
 					<td><c:out value="${user.surnameDto}" /></td>
 					<td><c:out value="${user.biographyDto}" /></td>
-					<td><input type="checkbox" value="${user.nameDto}"></td>
+					<td><input type="checkbox" value="${user.idDto}"></td>
 				</tr>
 			</c:forEach>
 		</tr>
 
 	</table>
 
-	<input type="button" id="createOperation" value="Zakazi operaciju" />
+	<input type="button" class="btn btn-outline-danger" id="createOperation" value="Zakazi operaciju" />
 
 
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

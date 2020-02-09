@@ -39,7 +39,7 @@ body
 	
 	 <ul  class="nav nav-tabs justify-content-center nav-fill"  >
 		<li class="nav-item "><a  class="nav-link " style="color:#53e3a6;" href="/appointmentRequests" ><i class="fa fa-calendar" aria-hidden="true"></i>Zahtevi </a></li>
-		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/operations"><i class="fa fa-scissors"></i> Operacije</a></li>
+		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/operationList"><i class="fa fa-scissors"></i> Operacije</a></li>
 		<li class="nav-item "><a class="nav-link " style="color:#53e3a6;" href="/createTerm"><i class="fa fa-calendar" aria-hidden="true"></i>  Kreiraj termin</a></li>
 	</ul>	
 		
@@ -83,8 +83,7 @@ body
 					<td><c:out value="${request.priceDto}" /></td>
 					<td><c:out value="${request.discountDto}" /></td>
 					
-					<td><a  class="btn btn-outline-success" href="/appointmentRequests/accept/${request.idDto}">Prihvati</a></td>
-					<td><a  class="btn btn-outline-success" href="/appointmentRequests/reject/${request.idDto}">Odbij</a></td>
+					<td><a  class="btn btn-outline-success" href="/examinationRooms/${request.idDto}">Rezervisi salu</a></td>
 				</tr>
 			</c:forEach>  
                     

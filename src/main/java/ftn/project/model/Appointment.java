@@ -2,25 +2,25 @@ package ftn.project.model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-
 @Entity
 @Table(name = "Appointment")
-public class Appointment {
+public class Appointment implements Comparable<Appointment>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +37,9 @@ public class Appointment {
 
 	@Column(name = "Type", nullable = true)
 	private String type;
+	
+	@Column(name="OperationType",nullable=true)
+	private String operationType;
 
 //	@OneToOne
 //    @MapsId
@@ -63,5 +66,21 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name="appointment_record_id",nullable=true)
 	private MedicalRecord record;
+	
+	@Column(name="Operation",nullable=true)
+	private Long operationId;
+	
+	@ManyToMany
+	@JoinTable(name="DoctorsOperations",joinColumns = @JoinColumn(name="operations_id"),inverseJoinColumns=
+	@JoinColumn(name="doctor_id"))
+	List<User>doctors;
+
+	@Column(name="RoomId",nullable=true)
+	private Long roomId;
+	
+	@Override
+	public int compareTo(Appointment o) {
+		return (this.getDate().compareTo(o.getDate()));
+	}
 
 }

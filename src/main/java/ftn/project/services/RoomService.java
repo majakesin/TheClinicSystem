@@ -1,13 +1,14 @@
 package ftn.project.services;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 
+import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.RoomDto;
-import ftn.project.model.Room;
 
 @Service
 public interface RoomService {
@@ -19,4 +20,14 @@ public interface RoomService {
 	public void deleteRoom(Long idDto);
 
 	public Set<RoomDto> searchRooms(String nameDto, String hallNumberDto);
+	
+	public Set<RoomDto> emptyRooms();
+	
+	public Set<RoomDto>getPacientsRooms(Long pacientId);
+	
+	RoomDto getRoom(Long id);
+	
+	public Set<RoomDto> isTermsInRoomTerms(Long idTerm);
+	
+	public void TakeRoom(AppointmentDto app);
 }

@@ -3,6 +3,7 @@ package ftn.project.mapper;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
@@ -28,15 +29,22 @@ public class AppointmentMapper {
 		appointment.setPrice(appointmentDto.getPriceDto());
 		appointment.setDiscount(appointmentDto.getDiscountDto());
 		appointment.setDoctor(appointmentDto.getDoctorDto());
-		
-		
+		appointment.setRoomId(appointmentDto.getRoomId());
+
+		appointment.setPacientId(appointmentDto.getPatientIdDto());
+		appointment.setBusy(appointmentDto.isBusyDto);
+		appointment.setAccept(appointmentDto.isAcceptDto);
+
+		appointment.setOperationType(appointmentDto.getOperationTypeDto());
+		appointment.setPacientId(appointmentDto.getPacientId());
+
 		return appointment;
 	}
 	
 	public AppointmentDto appointmentToDto(Appointment appointment) {
 		AppointmentDto appointmentDto = new AppointmentDto();
 		
-		appointmentDto.setIdDto(appointment.getId());
+    appointmentDto.setIdDto(appointment.getId());
 		appointmentDto.setDateDto(appointment.getDate());
 		appointmentDto.setTimeDto(appointment.getTime());
 		appointmentDto.setRoomDto(appointment.getRoom());
@@ -44,7 +52,20 @@ public class AppointmentMapper {
 		appointmentDto.setPriceDto(appointment.getPrice());
 		appointmentDto.setDiscountDto(appointment.getDiscount());
 		appointmentDto.setDoctorDto(appointment.getDoctor());
-		
+		appointmentDto.setRoomId(appointment.getId());
+
+		appointmentDto.setPatientIdDto(appointment.getPacientId());
+		appointmentDto.setBusyDto(appointment.isBusy());
+
+		appointmentDto.setAcceptDto(appointment.isAccept());
+
+
+		appointmentDto.setOperationTypeDto(appointment.getOperationType());
+		appointmentDto.setPacientId(appointment.getPacientId());
+
+
+
+
 		return appointmentDto;
 	}
 	

@@ -17,7 +17,6 @@ public interface UserService extends UserDetailsService,IUserService  {
 	void createUser(UserDto userDto);
 
 	
-	
 	void deleteUser(Long idDto);
 	
 	Set<UserDto> allUsers();
@@ -26,6 +25,7 @@ public interface UserService extends UserDetailsService,IUserService  {
 
 	Set<UserDto> allNurse();
 	
+	public Set<UserDto> searchDoctorsNepredefinsani(String nameDto, String surnameDto, String markDto,Set<UserDto> doktoriNpd);
 
 	UserDto getUserById(Long idDto);
 

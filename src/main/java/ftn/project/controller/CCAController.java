@@ -42,20 +42,20 @@ public class CCAController {
 		userService.Autorizacija(request);
 		
 		//autorizacija
-//		if(userService.getNull()) {
-//			return new ModelAndView("badUser");
-//		}
-//		else {
-//			//autorizacija
-//			if(userService.getCCA()){
+		if(userService.getNull()) {
+			return new ModelAndView("badUser");
+		}
+		else {
+			//autorizacija
+			if(userService.getCCA()){
 		
 		model.addAttribute("usersDto",userService.allUsers());
 		
 		return new ModelAndView("administratorRegistration","Model",userService.allUsers());
-//			}else {
-//				return new ModelAndView("badUser");
-//			}
-//			}
+			}else {
+				return new ModelAndView("badUser");
+			}
+			}
 	}
 	
 	@PostMapping("/administrators/create")

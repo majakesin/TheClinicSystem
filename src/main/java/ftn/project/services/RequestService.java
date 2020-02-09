@@ -6,6 +6,7 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.ClinicDto;
 import ftn.project.dto.RequestDto;
 import ftn.project.dto.UserDto;
+import ftn.project.model.Appointment;
 import ftn.project.model.RegisterRequest;
 
 public interface RequestService {
@@ -18,6 +19,8 @@ public interface RequestService {
 	
 	void saveRequest(UserDto userDto);
 	
+	RequestDto getRequest(Long id);
+	
 	//za slanje zahteva za pregled
 	
 	Set<AppointmentDto> allSchedulingRequest();
@@ -28,12 +31,12 @@ public interface RequestService {
 	void createTerm(AppointmentDto appointmentDto);
 	void deleteTerm(Long idDto);
 	
-	AppointmentDto getAppointmentById(Long idDto);
+	Appointment getAppointmentById(Long idDto);
 	
 	Set<AppointmentDto> allFreeTerms();	
 	Set<AppointmentDto> allNotAccepted();	
 	
 	void acceptUserRequest(Long idDto);
 	
-	
+	Set<AppointmentDto>allNotAcceptedOperation();
 }
