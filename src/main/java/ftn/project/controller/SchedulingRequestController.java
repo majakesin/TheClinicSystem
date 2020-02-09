@@ -18,7 +18,7 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
-SchedulingTermsByFilteringClinics
+
 import ftn.project.repository.AppointmentRepository;
 
 import ftn.project.repository.AppoitmentRepository;
