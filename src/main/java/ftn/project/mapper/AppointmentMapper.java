@@ -30,6 +30,7 @@ public class AppointmentMapper {
 		appointment.setDiscount(appointmentDto.getDiscountDto());
 		appointment.setDoctor(appointmentDto.getDoctorDto());
 		appointment.setRoomId(appointmentDto.getRoomId());
+
 		appointment.setPacientId(appointmentDto.getPatientIdDto());
 		appointment.setBusy(appointmentDto.isBusyDto);
 		appointment.setAccept(appointmentDto.isAcceptDto);
@@ -55,13 +56,15 @@ public class AppointmentMapper {
 
 		appointmentDto.setPatientIdDto(appointment.getPacientId());
 		appointmentDto.setBusyDto(appointment.isBusy());
+
 		appointmentDto.setAcceptDto(appointment.isAccept());
+
 
 		appointmentDto.setOperationTypeDto(appointment.getOperationType());
 		appointmentDto.setPacientId(appointment.getPacientId());
 
 
-		
+
 
 		return appointmentDto;
 	}

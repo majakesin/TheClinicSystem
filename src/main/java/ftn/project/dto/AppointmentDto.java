@@ -23,7 +23,7 @@ public class AppointmentDto {
 	public Long PatientIdDto;
 	public boolean isBusyDto;
 	public boolean isAcceptDto;
-	
+
 
 	public String operationTypeDto;
 

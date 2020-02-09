@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.RoomDto;
+import ftn.project.services.AppointmentService;
 import ftn.project.services.OperationService;
 import ftn.project.services.RoomService;
 import ftn.project.services.UserService;
@@ -31,6 +33,7 @@ public class RoomController  {
 
 	private final RoomService roomService;
 	private final UserService userService;
+	private final AppointmentService appointmentService;
 
 
 	@GetMapping("/rooms")
@@ -100,18 +103,17 @@ public class RoomController  {
 		else {
 			//autorizacija
 			if(userService.getCA()){
-		
+				
 		ModelAndView mav= new ModelAndView("RoomSearch");
-		
-		Set<RoomDto> sobe=roomService.emptyRooms();
-		mav.addObject("roomsDto", roomService.allRooms());
-		//Set<RoomDto> sobe=(Set<RoomDto>)request.getSession().getAttribute("roomsDto");
 		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
+		Set<RoomDto> sobe=roomService.isTermsInRoomTerms(idTerm);
+		mav.addObject("roomsDto",sobe);
+		//Set<RoomDto> sobe=(Set<RoomDto>)request.getSession().getAttribute("roomsDto");
 		if(sobe.isEmpty()) {
-			request.getSession().setAttribute("allFull", true);
 			mav.setViewName("redirect:/clinic/admin/operations/changeAppointment");
 			return mav;
 		}
+		
 //		
 //		if(sobe==null) {
 //			mav.addObject("roomsDto", roomService.allRooms());
@@ -137,6 +139,12 @@ public class RoomController  {
 	public String reservateRoom(@PathVariable ("id") Long id,HttpServletRequest request) {
 		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
 		request.getSession().setAttribute("selectedRoom", id);
+		AppointmentDto appDto=appointmentService.getAppointement(idTerm);
+		if(appDto.operationTypeDto.equals("Pregled")) {
+			appDto.setRoomId(id);
+			roomService.TakeRoom(appDto);
+			return "redirect:/appointmentRequests";
+		}
 		return "redirect:/clinic/admin/operations/"+idTerm;
 	}
 }
