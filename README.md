@@ -2,12 +2,12 @@
 Projekat iz predmeta Internet softverske arhitekture i Projektovanje softvera za školsku 2019/2020 godinu.
 
 Za pokretanje projekta neophodno je imati instalirano:
-1)[Eclipse](https://www.eclipse.org/)
-2)[Spring Tools 4 aka Spring Tool Suite 4 ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
-3)[Lombok](https://projectlombok.org/)
-4)[Maven](https://maven.apache.org/)
+1) [Eclipse] (https://www.eclipse.org/) okruzenje
+2) [Spring Tools 4 aka Spring Tool Suite 4 ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
+3) [Lombok](https://projectlombok.org/)
+4) [Maven](https://maven.apache.org/)
 
-##Pokretanje programa
+## Pokretanje programa
 
 Projekat je neophodno klonorati ili preuzeti sa [GitHub](https://github.com/markoercegovac/TheClinicSystem)-a
 
@@ -33,7 +33,7 @@ Aplikaciji se pristupa preko:
 [login page](http://localhost:8081/logovanje)
 
 Prijava je moguca sa kredencijalima:
-##admin:admin
+## admin:admin
 
 Tokom pokretanja programa savetuje se da se isključi **Antivirus** zbog uspešnog slanja mejlova i uspešnog rada samog programa.
 ## Autori
