@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public User findAllById(Long idDto);
 	public User findByEmail(String email);
 	
+	
 	List<User> findAllByClinic(Long clinicId);
 
 
@@ -45,5 +46,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public Set<User> findBySurnameAndMark(String surnameDto, String markDto);
 	
 	public Set<User> findByNameAndSurnameAndMark(String nameDto, String surnameDto, String markDto);
+
 	public Collection<User> findAllByRoleAndTipPregleda(String string, String string2);
+
+	public Set<User> findAllByUsername(String string);
+	public Set<User> findByNameAndRole(String name,String role);
+	
+
 }
