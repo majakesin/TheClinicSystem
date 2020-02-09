@@ -17,7 +17,7 @@ public interface AppoitmentRepository extends JpaRepository<Appointment, Long> {
 	
 	List<Appointment>findAllByPacientId(Long pacient);
 
-
+	List<Appointment>findAllByOperationTypeAndRoomId(String opType,Long id);
 	
 
 	

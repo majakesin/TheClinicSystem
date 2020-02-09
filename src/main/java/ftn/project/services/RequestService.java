@@ -38,5 +38,5 @@ public interface RequestService {
 	
 	void acceptUserRequest(Long idDto);
 	
-	
+	Set<AppointmentDto>allNotAcceptedOperation();
 }
