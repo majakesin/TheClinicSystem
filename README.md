@@ -2,7 +2,7 @@
 Projekat iz predmeta Internet softverske arhitekture i Projektovanje softvera za školsku 2019/2020 godinu.
 
 Za pokretanje projekta neophodno je imati instalirano:
-1) [Eclipse ] (https://www.eclipse.org/) okruzenje
+1) [Eclipse ] (https://www.eclipse.org/)
 2) [Spring Tools 4 aka Spring Tool Suite 4 ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
 3) [Lombok](https://projectlombok.org/)
 4) [Maven](https://maven.apache.org/)
@@ -11,7 +11,7 @@ Za pokretanje projekta neophodno je imati instalirano:
 
 Projekat je neophodno klonorati ili preuzeti sa [GitHub](https://github.com/markoercegovac/TheClinicSystem)-a
 
-Potrebna konfiguracija aplication.properties za bazu:
+Potrebna konfiguracija fajla **aplication.properties** za bazu:
 ```bash
 spring.datasource.url = jdbc:h2:file:~/TheClinicSystem;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
 spring.jpa.hibernate.ddl-auto =update
@@ -32,7 +32,7 @@ Posle pokretanja programa na **Run As > Spring Boot App**
 Aplikaciji se pristupa preko: 
 [login page](http://localhost:8081/logovanje)
 
-Prijava je moguca sa kredencijalima:**admin:admin**
+Prijava je moguca sa kredencijalima: **admin:admin**
 
 
 Tokom pokretanja programa savetuje se da se isključi **Antivirus** zbog uspešnog slanja mejlova i uspešnog rada samog programa.
