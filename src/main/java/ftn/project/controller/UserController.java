@@ -1,25 +1,27 @@
 package ftn.project.controller;
 
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
-import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
-import ftn.project.services.AppointmentService;
-import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
+import ftn.project.services.VacationRequestService;
+import ftn.project.validation.VacationValidator;
+import ftn.project.validation.ZakaziTerminValidator;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 @Data
@@ -36,6 +38,13 @@ public class UserController {
 	
 	@Autowired
 	private  RequestService requestService;
+	
+	private final ZakaziTerminValidator zakaziValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(zakaziValidator);
+	}
 
 	@GetMapping("/kreirajNP1/{idDto}")
 	public ModelAndView kreirajNP1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
@@ -48,7 +57,9 @@ public class UserController {
 	
 	//zakaziPregledNepredfinisan1
 	@PostMapping("/zakazanNP1/{idDto}")
-	public String zakazanTerminNEPredefinisan1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+	public String zakazanTerminNEPredefinisan1(@Validated @ModelAttribute("docVreme") UserDto userVreme ,BindingResult result, HttpServletRequest request,ModelMap model, @PathVariable("idDto") Long idDto) {
+		
+		
 		UserDto doktor = userService.getUserById(idDto);
 		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
 		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
@@ -61,6 +72,10 @@ public class UserController {
 		app.setPacientId(pacijent.getIdDto());
 		app.setPatientIdDto(pacijent.getIdDto());
 		app.setAcceptDto(true);
+		
+		if (result.hasErrors()) {
+			return "zakaziNPD1";
+		}
 		
 		requestService.createTerm(app);
 		
@@ -87,7 +102,9 @@ public class UserController {
 	
 	//zakaziPregledNepredfinisan1
 	@PostMapping("/zakazanNP2/{idDto}")
-	public String zakazanTerminNEPredefinisan2(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+	public String zakazanTerminNEPredefinisan2(@Validated @ModelAttribute("docVreme") UserDto userVreme ,BindingResult result, HttpServletRequest request,ModelMap model, @PathVariable("idDto") Long idDto) {
+		
+		
 		UserDto doktor = userService.getUserById(idDto);
 		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
 		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
@@ -101,6 +118,10 @@ public class UserController {
 		app.setPatientIdDto(pacijent.getIdDto());
 		app.setAcceptDto(true);
 		
+		if (result.hasErrors()) {
+			return "zakazanNPD2";
+		}
+		
 		requestService.createTerm(app);
 		
 		return "redirect:/clincsSearchDateType";
@@ -110,7 +131,8 @@ public class UserController {
 	
 	//zakaziPregledNepredfinisan1
 		@PostMapping("/zakazanNPD3/{idDto}")
-		public String zakazanTerminNEPredefinisan3(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
+		public String zakazanTerminNEPredefinisan3(@Validated @ModelAttribute("docVreme") UserDto userVreme ,BindingResult result, HttpServletRequest request,ModelMap model,@PathVariable("idDto") Long idDto) {
+		
 			UserDto doktor = userService.getUserById(idDto);
 			String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
 			UserDto pacijent = userService.getUserByUsername(usernamePacijent);
@@ -123,6 +145,11 @@ public class UserController {
 			app.setPacientId(pacijent.getIdDto());
 			app.setPatientIdDto(pacijent.getIdDto());
 			app.setAcceptDto(true);
+			
+			if (result.hasErrors()) {
+				return "ZakazanProfil";
+			}
+			
 			
 			requestService.createTerm(app);
 			

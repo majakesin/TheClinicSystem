@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import ftn.project.dto.UserDto;
 import ftn.project.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -15,6 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public Set<User> findAllByRole(String s); 
 	public User findAllById(Long idDto);
 	public User findByEmail(String email);
+	
 	
 	List<User> findAllByClinic(Long clinicId);
 
@@ -43,4 +45,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public Set<User> findBySurnameAndMark(String surnameDto, String markDto);
 	
 	public Set<User> findByNameAndSurnameAndMark(String nameDto, String surnameDto, String markDto);
+	public Set<User> findAllByUsername(String string);
+	public Set<User> findByNameAndRole(String name,String role);
+	
 }

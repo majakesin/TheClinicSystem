@@ -60,6 +60,12 @@ public interface UserService extends UserDetailsService,IUserService  {
 	public boolean getDoktor();
 	public boolean getSestra();
 	public boolean getNull();
+
+
+	Set<UserDto> getAllUserByUsername(String string);
+
+
+	Set<UserDto> getByNameAndRole(String string,String string1);
 	
 
 }

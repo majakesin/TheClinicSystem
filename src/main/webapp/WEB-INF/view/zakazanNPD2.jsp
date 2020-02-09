@@ -9,6 +9,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="ISO-8859-1">
 <title></title>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -50,7 +57,9 @@
 				</div>
 				
 				<div class="text-danger text-center mt-1"><h6>Potvrdi datum pregleda   :</h6></div>
-				<div class="text-danger text-center mt-1"><form:input type="date" class="form-control" path="datumPregledaDto"/></div>
+				<div class="text-danger text-center mt-1"><form:input type="date" class="form-control" path="datumPregledaDto"/>
+				<form:errors path="datumPregledaDto" cssClass="error" />
+				</div>
 			<div class="text-danger text-center mt-1"> <input type="submit" class="btn btn-outline-danger" value="Zakazi"></div>
 			</form:form>
 		</div>
