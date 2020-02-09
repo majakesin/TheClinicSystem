@@ -56,12 +56,32 @@ public class ClinicServiceImpl implements ClinicService {
 	private Set<UserDto> doktori1= new HashSet<UserDto>();
 	private Set<ClinicDto> klinike2 = new HashSet<ClinicDto>();
 	private Set<UserDto> doktori2= new HashSet<UserDto> ();
-
-	
+	private String adresa="";
+	private double ocena = 0.0;
+	private String tip = "None";
+	private String datum = "";
 	public void deleteClinic(Long id) {
 		clinicRepository.deleteById(id);
 	}
 
+	//za testiranje
+	public String getAdresa() {
+		return adresa;
+	}
+	
+	public String getTip() {
+		return tip;
+	}
+	
+	public String getDatum() {
+		return datum;
+	}
+	
+	public Double getOcena() {
+		return ocena;
+	}
+	
+	//
 	public void createClinic(ClinicDto clinicDto) {
 	//	User user=userRepository.findByUsername(clinicDto.getAdminDto());
 	//	Clinic clinic=clinicMapper.DtoToClinic(clinicDto);
@@ -108,8 +128,10 @@ public class ClinicServiceImpl implements ClinicService {
 	@Override
 	public Set<ClinicDto> searchClinicByDoctor(String dateDto, String typeDto) {
 		
-	
-		
+		//zbog testa
+		tip = typeDto;
+		datum = dateDto;
+			
 		
 		
 			
@@ -193,6 +215,10 @@ public class ClinicServiceImpl implements ClinicService {
 	@Override
 	public Set<ClinicDto> searchClinic(String adressDto, double markDto) {
 	
+		//zbog testa
+		adresa= adressDto;
+		ocena = markDto;
+		
 		if(klinike1.isEmpty()) {
 			
 			Set<UserDto> doktori = userMapper.UserToDtoSet(userRepository.findAllByRole("doktor"));

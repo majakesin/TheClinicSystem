@@ -32,4 +32,6 @@ public interface RoomService {
 	public void TakeRoom(AppointmentDto app);
 	
 	public void takeRoomPredef(AppointmentDto app);
+
+	
 }
