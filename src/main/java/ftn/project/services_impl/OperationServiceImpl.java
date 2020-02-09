@@ -48,10 +48,12 @@ public class OperationServiceImpl implements OperationService {
 	@Override
 	public void createOperation(OperationDto operationDto,boolean isOperation) {
 		Appointment appointment = appointmentRepository.findById(operationDto.getTermId()).get();
+		
 		appointment.setAccept(true);
 		List<User> doctors = userRepository.findAllById(operationDto.getOperationIds());
 		appointment.setDoctors(doctors);
 		appointment.setRoomId(operationDto.getRoomDto());
+		Room room = roomRepository.findById(operationDto.getRoomDto()).get();
 		if(isOperation) {
 			appointment.setDoctor(doctors.get(0).getId());
 		}
@@ -59,14 +61,14 @@ public class OperationServiceImpl implements OperationService {
 		for (User u : doctors) {
 			if (u.getEmail() != null) {
 				emailService.sendMail(u.getEmail(), "Postovani imate zakazanu " + appointment.getOperationType()
-						+ " , pogledajte vas radni kalendar", appointment.getOperationType());
+						+ " ,u sobi "+room.getHallNumber()+" pogledajte vas radni kalendar", appointment.getOperationType());
 			}
 		}
-		Room room = roomRepository.findById(operationDto.getRoomDto()).get();
+		
 		room.setFree(false);
 		roomRepository.save(room);
 		User pacient = userRepository.findById(appointment.getPacientId()).get();
-		emailService.sendMail(pacient.getEmail(), "Postovani vas termin je zakazan", appointment.getOperationType());
+		emailService.sendMail(pacient.getEmail(), "Postovani vas termin je zakazan za sobu "+room.getHallNumber(), appointment.getOperationType());
 	}
 
 	public void automaticSystem() {
@@ -113,6 +115,15 @@ public class OperationServiceImpl implements OperationService {
 				emailService.sendMail(us.getEmail(), "Pogledajte vas kalendar", "Obaveza");
 
 			}
+		}
+		List<Long>usersForEmail=new ArrayList<Long>();
+		for (Appointment appointEmail :appointmentsWithotRoom) {
+			usersForEmail.add(appointEmail.getPacientId());
+		}
+		
+		List<User>emailPaci=userRepository.findAllById(usersForEmail);
+		for(User uemail:emailPaci) {
+			emailService.sendMail(uemail.getEmail(), "Postovani vas termin je zakazan","Termin");
 		}
 	}
 

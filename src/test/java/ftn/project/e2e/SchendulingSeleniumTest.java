@@ -106,7 +106,7 @@ public class SchendulingSeleniumTest {
 		driver.get("http://localhost:8081/patientProfile");
 		driver.findElement(By.linkText("Zakaži predefinisani pregled")).click();
 		driver.findElement(By.linkText("Izaberi termin")).click();
-		driver.findElement(By.cssSelector(".col-sm-4:nth-child(2) .btn")).click();
+		
 
 	}
 
