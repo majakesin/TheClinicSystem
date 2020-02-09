@@ -168,7 +168,7 @@ public class RoomController  {
 		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
 		request.getSession().setAttribute("selectedRoom", id);
 		AppointmentDto appDto=appointmentService.getAppointement(idTerm);
-		UserDto pacient = userService.getUserById(appDto.getIdDto());
+		UserDto pacient = userService.getUserById(appDto.getPacientId());
 		if(appDto.operationTypeDto.equals("Pregled")) {
 			appDto.setRoomId(id);
 

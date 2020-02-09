@@ -73,6 +73,12 @@ public class PatientValidator implements Validator {
 			
 		}
 		
+		if(!userRepository.findByInsuranceNumber(user.getInsuranceNumberDto()).isEmpty()) {
+			errors.rejectValue("insuranceNumberDto","JedinstvenJMBG.invalid");
+		}else {
+			
+		}
+		
 		Pattern pattern=Pattern.compile("\\b[a-z0-9\\._\\-]+@[a-z0-9\\.\\-]+\\.[a-z]{2,7}\\b");
 		
 		
