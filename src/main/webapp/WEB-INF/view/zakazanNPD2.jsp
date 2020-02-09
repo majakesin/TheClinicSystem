@@ -31,21 +31,21 @@
 		
 		<form:select id="vreme" class="form-control" path="vremePregledaDto">
 						<option value="null"></option>
-						<option value="08:00:AM">08:00:AM</option>
-						<option value="08:30:AM">08:30:AM</option>
-						<option value="09:00:AM">09:00:AM</option>
-						<option value="09:30:AM">09:30:AM</option>
-						<option value="10:30:AM">10:30:AM</option>
-						<option value="11:00:AM">11:00:AM</option>
-						<option value="11:30:AM">11:30:AM</option>
-						<option value="12:00:PM">12:00:PM</option>
-						<option value="12:30:PM">12:30:PM</option>
-						<option value="01:00:PM">01:00:PM</option>
-						<option value="01:30:PM">01:30:PM</option>
-						<option value="02:00:PM">02:00:PM</option>
-						<option value="02:30:PM">02:30:PM</option>
-						<option value="03:00:PM">03:00:PM</option>
-						<option value="03:30:PM">03:30:PM</option>
+						<option value="08:00">08:00</option>
+						<option value="08:30">08:30</option>
+						<option value="09:00">09:00</option>
+						<option value="09:30">09:30</option>
+						<option value="10:30">10:30</option>
+						<option value="11:00">11:00</option>
+						<option value="11:30">11:30</option>
+						<option value="12:00">12:00</option>
+						<option value="12:30">12:30</option>
+						<option value="13:00">13:00</option>
+						<option value="13:30">13:30</option>
+						<option value="14:00">14:00</option>
+						<option value="14:30">14:30</option>
+						<option value="15:00">15:00</option>
+						<option value="15:30">15:30</option>
 					</form:select>
 				</div>
 				

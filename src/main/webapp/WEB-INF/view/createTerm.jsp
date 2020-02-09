@@ -47,8 +47,11 @@
 			</tr>
 			<tr>
 				<td><form:label path="timeDto">Vreme:</form:label></td>
+
+
 				<td><form:input type="time" class="form-control" placeholder="Vreme" path="timeDto" />
 				<form:errors path="timeDto" cssClass="error" /></td>
+
 
 			<tr>
 				<td><form:label path="roomDto">Soba:</form:label></td>
