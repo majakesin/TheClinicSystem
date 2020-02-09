@@ -3,7 +3,7 @@ Projekat iz predmeta Internet softverske arhitekture i Projektovanje softvera za
 
 Za pokretanje projekta neophodno je imati instalirano:
 1)[Eclipse](https://www.eclipse.org/)
-2)[Spring Tools 4 (aka Spring Tool Suite 4) ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
+2)[Spring Tools 4 aka Spring Tool Suite 4 ](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
 3)[Lombok](https://projectlombok.org/)
 4)[Maven](https://maven.apache.org/)
 
