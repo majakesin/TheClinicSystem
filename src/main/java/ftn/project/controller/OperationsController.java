@@ -31,63 +31,70 @@ import lombok.RequiredArgsConstructor;
 public class OperationsController {
 
 	private final UserService userService;
-	
+
 	private final RoomService roomService;
-	
+
 	private final RequestService requestService;
-	
+
 	private final OperationService operationService;
-	
+
 	private final AppointmentService appointmentService;
 
 	@GetMapping("/{id}")
-	public String getPage(@PathVariable("id")Long id,Model model,HttpServletRequest request) throws MailException, MessagingException {
+	public String getPage(@PathVariable("id") Long id, Model model, HttpServletRequest request)
+			throws MailException, MessagingException {
 		request.getSession().setAttribute("idTerms", id);
-		Long selectedRoom=(Long)request.getSession().getAttribute("selectedRoom");
-		if(selectedRoom!=null) {
-			
-			model.addAttribute("selectedRoom",roomService.getRoom(selectedRoom));
+		Long selectedRoom = (Long) request.getSession().getAttribute("selectedRoom");
+		if (selectedRoom != null) {
+
+			model.addAttribute("selectedRoom", roomService.getRoom(selectedRoom));
 		}
-		model.addAttribute("typeOfOperation",appointmentService.getAppointement(id).operationTypeDto);
-		
-		model.addAttribute("doctorsList",userService.allUserByRole("doktor"));
-		
+		model.addAttribute("typeOfOperation", appointmentService.getAppointement(id).operationTypeDto);
+
+		model.addAttribute("doctorsList", userService.allUserByRole("doktor"));
+
 		return "operations";
-		
+
 	}
-	
+
 	@Scheduled(cron = "${greeting.cron}")
 	public void automatic() {
 		operationService.automaticSystem();
 	}
-	
+
 	@GetMapping("/changeAppointment")
-	private String changeAppointment(Model model,HttpServletRequest request) {
-		model.addAttribute("appointmentDto",new AppointmentDto());
-		model.addAttribute("allRooms",roomService.allRooms());
+	private String changeAppointment(Model model, HttpServletRequest request) {
+		model.addAttribute("appointmentDto", new AppointmentDto());
+		model.addAttribute("allRooms", roomService.allRooms());
 		return "changeAppoitment";
 	}
-	
+
 	@PostMapping("/change/appointment")
-	private String saveAppoint(Model model,HttpServletRequest request,@ModelAttribute("appoitnmentDto")AppointmentDto appointDto) {
-		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
+	private String saveAppoint(Model model, HttpServletRequest request,
+			@ModelAttribute("appoitnmentDto") AppointmentDto appointDto) {
+		Long idTerm = (Long) request.getSession().getAttribute("idTerms");
 		request.getSession().setAttribute("selectedRoom", appointDto.getRoomId());
-		operationService.changeOperation(idTerm,appointDto.getTimeDto(), appointDto.getDateDto(), appointDto.getRoomId());
-		return "redirect:/clinic/admin/operations/"+idTerm;
+		appointDto.setIdDto(idTerm);
+		roomService.TakeRoom(appointDto);
+		operationService.changeOperation(idTerm, appointDto.getTimeDto(), appointDto.getDateDto(),
+				appointDto.getRoomId());
+		return "redirect:/clinic/admin/operations/" + idTerm;
 	}
-	
-	
+
 	@PostMapping("/reservate")
-	public String getIds(@RequestBody OperationDto operationDto,HttpServletRequest request) {
-		Long selectedRoom=(Long) request.getSession().getAttribute("selectedRoom");
-		Long idTerm=(Long)request.getSession().getAttribute("idTerms");
+	public String getIds(@RequestBody OperationDto operationDto, HttpServletRequest request) {
+		Long selectedRoom = (Long) request.getSession().getAttribute("selectedRoom");
+		Long idTerm = (Long) request.getSession().getAttribute("idTerms");
 		operationDto.setRoomDto(selectedRoom);
 		operationDto.setTermId(idTerm);
-		boolean isOperation=false;
-		if(appointmentService.getAppointement(idTerm).getOperationTypeDto().equalsIgnoreCase("Operacija")) {
-			isOperation=true;
-		}
-		operationService.createOperation(operationDto,isOperation);
-		return "operations";
+		boolean isOperation = false;
+
+		AppointmentDto appDto = appointmentService.getAppointement(idTerm);
+		appDto.setRoomId(selectedRoom);
+		roomService.TakeRoom(appDto);
+		
+
+		operationService.createOperation(operationDto, isOperation);
+		return "redirect:/operationList";
 	}
 }

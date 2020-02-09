@@ -125,7 +125,7 @@ public class RequestServiceImpl implements RequestService {
 	}
 	
 	public Set<AppointmentDto> allNotAccepted(){
-		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByRoomId(null));
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByOperationTypeAndRoomId("Pregled", null));
 	}
 
 	@Override
@@ -142,6 +142,11 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public RequestDto getRequest(Long id) {
 		return requestMapper.requestToDto(requestRepository.findById(id).get());
+	}
+
+	@Override
+	public Set<AppointmentDto> allNotAcceptedOperation() {
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByOperationTypeAndRoomId("Operacija", null));
 	}
 
 	

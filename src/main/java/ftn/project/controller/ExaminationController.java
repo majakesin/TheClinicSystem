@@ -131,6 +131,7 @@ public class ExaminationController {
 	public String freeRoom(@ModelAttribute("roomDto")RoomDto roomDto,HttpServletRequest request) {
 	
 		RoomDto tempDto=roomService.getRoom(roomDto.getIdDto());
+		
 		tempDto.setFree(true);
 		roomService.create(roomDto);
 		
@@ -143,6 +144,7 @@ public class ExaminationController {
 		appointmentDto.setDoctorDto(userService.getUserByUsername(username).idDto);
 		appointmentDto.setPacientId((Long) request.getSession().getAttribute("pacientId"));
 		requestService.createTerm(appointmentDto);
+		
 		return "redirect:/patientSearch/doctor";
 	}
 }
