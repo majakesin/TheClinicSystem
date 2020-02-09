@@ -4,24 +4,35 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
 import ftn.project.services.UserService;
-import ftn.project.services.VacationRequestService;
-import lombok.AllArgsConstructor;
+import ftn.project.validation.IzmeniSifruValidator;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class LoginController {
 	
 	
 	private final UserService userService;
+	private final IzmeniSifruValidator izmeniValidator; 
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(izmeniValidator);
+	}
+
 	
 	@GetMapping("/badUser")
 	public ModelAndView showUser(ModelMap model) {
@@ -39,12 +50,18 @@ public class LoginController {
 	}
 
 	@PostMapping("/izmeniSifruAkcija") 
-	public String izmeniAkcija(HttpServletRequest request,ModelMap model,@ModelAttribute("UserDto") UserDto userDto) {
+	public String izmeniAkcija(HttpServletRequest request, ModelMap model,@Validated @ModelAttribute("UserDto") UserDto userDto,BindingResult result) {
 		
 		String username = (String) request.getSession().getAttribute("logUsername");
 		UserDto temp=userService.getUserByUsername(username);
 		
-		if(userDto.getPomocnaSifraDto().equals(userDto.getPasswordDto())) {
+		if(result.hasErrors()) {
+			return "izmenaSifre";
+		}
+		
+	
+		
+	 	if(userDto.getPomocnaSifraDto().equals(userDto.getPasswordDto())) {
 			temp.setPomocnaSifraDto("");
 			temp.setPasswordDto(userDto.getPasswordDto());
 			temp.setPrviLoginDto(true);

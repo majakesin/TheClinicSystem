@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -29,11 +36,13 @@
 		<table>
 			<tr>
 				<td><form:label path="nameDto">Ime:</form:label></td>
-				<td><form:input class="form-control" placeholder="" path="nameDto" /></td>
+				<td><form:input class="form-control" placeholder="" path="nameDto" />
+				<form:errors path="nameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="hallNumberDto">Broj:</form:label></td>
-				<td><form:input class="form-control" placeholder="" path="hallNumberDto" /></td>
+				<td><form:input class="form-control" placeholder="" path="hallNumberDto" />
+				<form:errors path="hallNumberDto" cssClass="error" /></td>
 
 			<tr>
 				

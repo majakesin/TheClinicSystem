@@ -32,6 +32,13 @@ body {
 	background-repeat: no-repeat;
 }
 </style>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -49,17 +56,23 @@ body {
 						<tr>
 							<td><form:label path="nameDto">Ime:</form:label></td>
 							<td><form:input class="form-control" placeholder="Name"
-									path="nameDto" /></td>
+									path="nameDto" />
+								<form:errors path="nameDto" cssClass="error" />	
+									</td>
 						</tr>
 						<tr>
 							<td><form:label path="adressDto">Adresa:</form:label></td>
 							<td><form:input class="form-control" placeholder="Address"
-									path="adressDto" /></td>
+									path="adressDto" />
+								<form:errors path="adressDto" cssClass="error" />	
+														</td>
 						</tr>
 						<tr>
 							<td><form:label path="phoneDto">Telefon:</form:label></td>
 							<td><form:input class="form-control" placeholder="Phone"
-									path="phoneDto" /></td>
+									path="phoneDto" />
+								<form:errors path="phoneDto" cssClass="error" />	
+									</td>
 						</tr>
 						<tr>
 							<td><form:label path="descriptionDto">Opis:</form:label></td>

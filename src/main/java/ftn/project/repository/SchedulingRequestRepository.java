@@ -18,4 +18,8 @@ public interface SchedulingRequestRepository extends JpaRepository<Appointment, 
 	public Set<Appointment> findByDateAndType(String date, String type);
 	public Set<Appointment> findByDate(String date);
 	public Set<Appointment> findByType(String type);
+		
+	
+	
+	
 }

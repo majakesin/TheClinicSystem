@@ -7,25 +7,27 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
-
-import ftn.project.services.ClinicService;
-
 import ftn.project.dto.VacationRequestDto;
-
+import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
-import lombok.AllArgsConstructor;
+import ftn.project.validation.NurseValidator;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class NurseController {
 
@@ -35,7 +37,14 @@ public class NurseController {
 	private final ClinicService clinicService;
 
 	
-	private final VacationRequestService vqService;
+	
+	
+	private final NurseValidator nurseValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(nurseValidator);
+	}
 
 
 	@GetMapping("/nurse")
@@ -144,9 +153,12 @@ public class NurseController {
 	}
 	
 	@PostMapping("/nurse/create")
-	public String createNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
+	public String createNurse(@Validated @ModelAttribute("userDto") UserDto userDto,BindingResult result) {
 		userDto.setRoleDto("med. sestra");
 		userDto.setPrviLoginDto(false);
+		if(result.hasErrors()) {
+			return "nurseAdd";
+		}
 		userService.createUser(userDto);
 		return "redirect:/nurse";
 	}
@@ -193,50 +205,17 @@ public class NurseController {
 	}
 	
 	@PostMapping("/nurse/edit/create")
-	public String editNurse(@Valid @ModelAttribute("userDto") UserDto userDto) {
+	public String editNurse(@Validated @ModelAttribute("userDto") UserDto userDto,BindingResult result) {
 		userDto.setRoleDto("med. sestra");
+		if(result.hasErrors()) {
+			return "nurseProfileEdit";
+		}
 		userService.createUser(userDto);
 		return "redirect:/nurseProfile";
 	}
 	
 	
-	//godisnji odmor
-	@GetMapping("/godisnjiOdmorRezervisanjeSestra")
-	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
-		userService.Autorizacija(request);
-		
-		//autorizacija
-		if(userService.getNull()) {
-			return new ModelAndView("badUser");
-		}
-		else {
-			//autorizacija
-			if(userService.getSestra()){
-		
-		String username = (String) request.getSession().getAttribute("logUsername");
-		if(username!=null) {
-		UserDto userTemp = userService.getUserByUsername(username);
-		
-		vacReqDto.setEmailDto(userTemp.emailDto);
-		vacReqDto.setNameDto(userTemp.nameDto);
-		vacReqDto.setSurnameDto(userTemp.getSurnameDto());
-		vacReqDto.setUsernameDto(username);
-		vacReqDto.setRoleDto("med. sestra"); }
 	
-		return new ModelAndView("zakazivanjeGodisnjegSestra");
-			}else {
-				return new ModelAndView("badUser");
-			}
-			}
-
-	}
-	
-	@PostMapping("/kreirajZahtevGodisnjiSestra")
-	public String kreirajZahtev(@Valid @ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto) {
-		
-		vqService.createVacReq(vacReqDto);
-		return "redirect:/godisnjiOdmorRezervisanje";
-	}
 	
 	
 }

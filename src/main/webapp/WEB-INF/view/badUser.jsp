@@ -13,7 +13,7 @@
 			<h3 style="text-align:center; color:red;">	NEAUTORIZOVAN PRISTUP!</h3>
 			
 			
-			<h3 style="text-align:center;"><a href="/logovanje">Vratite se natrag</a></h3>
+			<h3 style="text-align:center;"><a href="/logovanje">Vratite se nazad</a></h3>
 			</div>
 
 </body>

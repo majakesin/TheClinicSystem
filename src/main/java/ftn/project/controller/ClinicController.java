@@ -3,11 +3,14 @@ package ftn.project.controller;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,7 @@ import ftn.project.dto.UserDto;
 import ftn.project.services.AppointmentService;
 import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
+import ftn.project.validation.ClinicCreateValidator;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +38,13 @@ public class ClinicController {
 	private final AppointmentService appointmentService;
 	
 	Set<ClinicDto> termini=null;
+	
+	private final ClinicCreateValidator ccValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(ccValidator);
+	}
 	
 	
 	@GetMapping("/clinics")
@@ -60,7 +71,11 @@ public class ClinicController {
 	
 	
 	@PostMapping("/clinics/create")
-	public String createClinic(HttpServletRequest request,@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
+	public String createClinic(@Validated @ModelAttribute("clinicDto")ClinicDto clinicDto,BindingResult result,HttpServletRequest request) {
+		if(result.hasErrors()) {
+			return "clinics";
+		}
+		
 		clinicService.createClinic(clinicDto);
 		return "redirect:/clinics";
 	}
@@ -108,7 +123,7 @@ public class ClinicController {
 	}
 	
 	@GetMapping("/clinicProfileCA/edit/{idDto}")
-	public ModelAndView showNurseProfileEdit(HttpServletRequest request,@ModelAttribute("clinicDto") ClinicDto clinicDto,@PathVariable("idDto") Long idDto, ModelMap model ) {
+	public ModelAndView showNurseProfileEdit(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, @PathVariable("idDto") Long idDto, ModelMap model ) {
 		
 		userService.Autorizacija(request);
 		
@@ -120,6 +135,7 @@ public class ClinicController {
 			//autorizacija
 			if(userService.getCCA()){
 		
+			
 		
 		model.addAttribute("clinicDto", clinicService.getClinicById(idDto));
 		return new ModelAndView("clinicProfileCAEdit", "Model",clinicService.getClinicById(idDto));
@@ -131,7 +147,9 @@ public class ClinicController {
 	}
 	
 	@PostMapping("/clinic/edit/ca")
-	public String edtClinicCA(@Valid @ModelAttribute("clinicDto")ClinicDto clinicDto) {
+	public String edtClinicCA( @ModelAttribute("clinicDto")ClinicDto clinicDto ) {
+		
+	
 		clinicService.editClinicProfile(clinicDto);
 		
 	return "redirect:/clinicsProfileCA";

@@ -29,11 +29,18 @@ public class MedicalRecordsValidator implements Validator {
 		
 		
 		RecordsDto record=(RecordsDto)target;
-		Pattern pattertn=Pattern.compile("/^[+]?((\\d+(\\.\\d*)?)|(\\.\\d+))$/");
+	//	Pattern pattertn=Pattern.compile("/^[+]?((\\d+(\\.\\d*)?)|(\\.\\d+))$/");
 		
-//		if(!pattertn.matcher(Double.toString(record.getHeightDto())).matches()) {
-//			errors.rejectValue("heightDto","medicalRecords.height.invalid");
-//		}
+		Pattern pattertn=Pattern.compile("[+]?([0-9]*\\.[0-9]+|[0-9]+)");
+		
+		if(!pattertn.matcher(Double.toString(record.getHeightDto())).matches()) {
+			errors.rejectValue("heightDto","medicalRecords.height.invalid");
+		}
+		
+		if(!pattertn.matcher(Double.toString(record.getWeightDto())).matches()) {
+			errors.rejectValue("weightDto","medicalRecords.height.invalid");
+		}
+		
 		
 	}
 

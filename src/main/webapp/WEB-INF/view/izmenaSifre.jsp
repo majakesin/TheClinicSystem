@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Izmeni sifru</title>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 </head>
 <body>
 
@@ -24,7 +30,8 @@
 	 		<div class="input-group-prepend">
      		<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
     	 	</div>
-		<form:input type="password" class="form-control" path="passwordDto" /></div> </td>
+		<form:input type="password" class="form-control" path="passwordDto" />
+		<form:errors path="passwordDto" cssClass="error" /></div></td>
 		
 		</tr>
 		<tr>
@@ -34,7 +41,8 @@
 	 		<div class="input-group-prepend">
      		<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
     	 	</div>
-		<form:input type="password" class="form-control" path="pomocnaSifraDto" /></div> </td>
+		<form:input type="password" class="form-control" path="pomocnaSifraDto" />
+		<form:errors path="passwordDto" cssClass="error" /></div></td>
 		
 		</tr>
 		<tr>

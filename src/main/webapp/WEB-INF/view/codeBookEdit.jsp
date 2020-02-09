@@ -16,6 +16,13 @@ body {
  }
 
 </style>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -33,13 +40,15 @@ body {
 			<tr>
 				<td><form:hidden path="idDto"/>
 			</tr>
-			<tr>
+	<!--  		<tr>
 				<td><form:label path="diagnosisCodeDto">Sifra dijagnoze:</form:label></td>
-				<td><form:input class="form-control" placeholder="Diagnose code" path="diagnosisCodeDto" /></td>
-			</tr>
+				<td><form:input class="form-control" placeholder="Diagnose code" path="diagnosisCodeDto" />
+				<form:errors path="diagnosisCodeDto" cssClass="error" /></td>
+			</tr> -->
 			<tr>
 				<td><form:label path="diagnosisNameDto">Naziv dijagnoze:</form:label></td>
-				<td><form:input  class="form-control" placeholder="Diagnose name" path="diagnosisNameDto" /></td>
+				<td><form:input  class="form-control" placeholder="Diagnose name" path="diagnosisNameDto" />
+				<form:errors path="diagnosisNameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="diagnosisDescriptionDto">Opis dijagnoze:</form:label></td>
@@ -48,12 +57,14 @@ body {
 			<tr><td></td></tr>
 			<tr><td></td></tr>
 			<tr>
-				<td><form:label path="drugCodeDto">Sifra leka:</form:label></td>
-				<td><form:input class="form-control" placeholder="Drug code" path="drugCodeDto" /></td>
-			</tr>
+	<!--  			<td><form:label path="drugCodeDto">Sifra leka:</form:label></td>
+				<td><form:input class="form-control" placeholder="Drug code" path="drugCodeDto" />
+				<form:errors path="drugCodeDto" cssClass="error" /></td>
+			</tr> -->
 			<tr>
 				<td><form:label path="drugNameDto">Naziv leka:</form:label></td>
-				<td><form:input class="form-control" placeholder="Drug name" path="drugNameDto" /></td>
+				<td><form:input class="form-control" placeholder="Drug name" path="drugNameDto" />
+				<form:errors path="drugNameDto" cssClass="error" /></td>
 			</tr>
 			
 			<tr>
@@ -62,10 +73,11 @@ body {
 			</tr>
 			<br/>
 			<br/>
-			<tr>
+	<!--  		<tr>
 				<td><form:label path="medicCodeDto">Kod lekara:</form:label></td>
-				<td><form:input class="form-control" placeholder="Medic code" path="medicCodeDto" /></td>
-			</tr>
+				<td><form:input class="form-control" placeholder="Medic code" path="medicCodeDto" />
+				<form:errors path="medicCodeDto" cssClass="error" /></td>
+			</tr> -->
 			
 
 			<tr>

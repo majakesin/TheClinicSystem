@@ -5,7 +5,11 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,50 +18,75 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.project.dto.UserDto;
 import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
-import lombok.AllArgsConstructor;
+import ftn.project.validation.CaCcaValidator;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class CCAController {
 
 	private final UserService userService;
 	private final ClinicService clinicService;
+	private final CaCcaValidator CaCcaValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(CaCcaValidator);
+	}
 	
 	@GetMapping("/administrators")
-	public ModelAndView showUsers(HttpServletRequest request,@ModelAttribute("userDto")UserDto userDto,ModelMap model) {
+	public ModelAndView showUsers( HttpServletRequest request , @ModelAttribute("userDto")UserDto userDto,ModelMap model) {
 		userService.Autorizacija(request);
 		
 		//autorizacija
-		if(userService.getNull()) {
-			return new ModelAndView("badUser");
-		}
-		else {
-			//autorizacija
-			if(userService.getCCA()){
+//		if(userService.getNull()) {
+//			return new ModelAndView("badUser");
+//		}
+//		else {
+//			//autorizacija
+//			if(userService.getCCA()){
 		
 		model.addAttribute("usersDto",userService.allUsers());
 		
 		return new ModelAndView("administratorRegistration","Model",userService.allUsers());
-			}else {
-				return new ModelAndView("badUser");
-			}
-			}
+//			}else {
+//				return new ModelAndView("badUser");
+//			}
+//			}
 	}
 	
 	@PostMapping("/administrators/create")
-	public String createAdministrator(@Valid @ModelAttribute("userDto") UserDto userDto) {
+	public String createAdministrator(@Validated @ModelAttribute("userDto") UserDto userDto,BindingResult result) {
 		userDto.setPrviLoginDto(false);
+		
+		if(result.hasErrors()) {
+			
+			if(userDto.roleDto.equals("Clinic Centar Administrator")) {
+				
+				return "CCARegistration";
+				
+			}else 
+				
+				
+			return "CARegistration";
+		} 
+		
 		userService.createUser(userDto);
 
 		if(userDto.roleDto.equals("Clinic Centar Administrator")) {
 			
 			return "redirect:/cca";
-		}else
+			
+		}else 
+			
 			
 		return "redirect:/ca";
-
+			
+				
+			
 		
 //		return "redirect:/administrators";
 

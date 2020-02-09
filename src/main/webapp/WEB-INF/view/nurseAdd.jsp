@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >    
 <meta charset="UTF-8">
 <title>Nurse</title>
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -32,19 +38,29 @@
 		<table>
 			<tr>
 				<td><form:label path="nameDto">Ime:</form:label></td>
-				<td><form:input class="form-control" placeholder="Name" path="nameDto" /></td>
+				<td><form:input class="form-control" placeholder="Name" path="nameDto" />
+				<form:errors path="nameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="surnameDto">Prezime:</form:label></td>
-				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" /></td>
+				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" />
+				<form:errors path="surnameDto" cssClass="error" /></td>
 
 			<tr>
 				<td><form:label path="usernameDto">Korisničko ime:</form:label></td>
-				<td><form:input class="form-control" path="usernameDto" /></td>
+				<td><form:input class="form-control" path="usernameDto" />
+				<form:errors path="usernameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="passwordDto">Šifra:</form:label></td>
-				<td><form:input class="form-control" path="passwordDto" /></td>
+				<td><form:input class="form-control" path="passwordDto" />
+				<form:errors path="passwordDto" cssClass="error" /></td>
+			</tr>
+			
+			<tr>
+				<td><form:label path="emailDto">Email:</form:label></td>
+				<td><form:input class="form-control" path="emailDto" />
+				<form:errors path="emailDto" cssClass="error" /></td>
 			</tr>
 			
 			<tr>

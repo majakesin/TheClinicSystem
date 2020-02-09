@@ -42,7 +42,7 @@ public class Appointment {
 //    @MapsId
 //	private Room room;
 
-	@Column(name = "Doctor", nullable = false)
+	@Column(name = "Doctor", nullable = true)
 	private Long doctor;
 
 	@Column(name = "Price", nullable = true)

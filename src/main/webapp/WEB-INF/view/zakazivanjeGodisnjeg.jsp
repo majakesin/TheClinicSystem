@@ -9,6 +9,12 @@
 
 
 </style>
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 <meta charset="UTF-8">
 <title></title>
 </head>
@@ -24,28 +30,35 @@
 		modelAttribute="VacationReqDto">
 	<tr>
 	<td><label>Ime:</label></td>
-	<td><form:input type="text" class="form-control"  path="nameDto" readonly="true" /> </td>
+	<td><form:input type="text" class="form-control"  path="nameDto" readonly="true" /> 
+		</td>
 	</tr>
 	<tr>
 	<td><label>Prezime:</label></td>
-	<td><form:input type="text" class="form-control"  path="surnameDto" readonly="true" /> </td>
+	<td><form:input type="text" class="form-control"  path="surnameDto" readonly="true" /> 
+		</td>
 	</tr><tr>
 	<td><label>Korisničko ime:</label></td>
-	<td><form:input type="text" class="form-control"  path="usernameDto" readonly="true" /> </td>
+	<td><form:input type="text" class="form-control"  path="usernameDto" readonly="true" /> 
+		</td>
 	</tr>
 	<tr>
 	<tr>
 	<td><label>Email:</label></td>
-	<td><form:input type="text" class="form-control"  path="emailDto" readonly="true" /></td>
+	<td><form:input type="text" class="form-control"  path="emailDto" readonly="true" />
+		</td>
 	
 	</tr>
 	<tr>
 	<td><label>Početak godišnjeg odmora:</label></td>
-	<td><form:input type="date" class="form-control"  path="pocetakGodisnjegDto"/></td>
+	<td><form:input type="date" class="form-control"  path="pocetakGodisnjegDto"/>
+	<form:errors path="pocetakGodisnjegDto" cssClass="error" /></td>
 	</tr>
 	<tr>
 	<td><label>Kraj godišnjeg odmora:</label></td>
-	<td><form:input type="date" class="form-control"  path="krajGodisnjegDto"/></td>
+	<td><form:input type="date" class="form-control"  path="krajGodisnjegDto"/>
+	<form:errors path="krajGodisnjegDto" cssClass="error" /></td>
+	
 	
 	</tr>
 	

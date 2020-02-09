@@ -42,4 +42,26 @@ public class CodeBookServiceImpl implements CodeBookService {
 		return codeBookMapper.SetToDtoSet(codeBookRepository.findAll());
 	}
 
+	@Override
+	public CodeBookDto getDiagnosisCode(String diag) {
+		CodeBook codeBook = codeBookRepository.findByDiagnosisCode(diag);
+		CodeBookDto cbd= codeBookMapper.CodeBookToDto(codeBook);
+		return cbd;
+	}
+
+	@Override
+	public CodeBookDto getDrugCode(String drug) {
+		CodeBook codeBook =codeBookRepository.findByDrugCode(drug);
+		CodeBookDto cbd = codeBookMapper.CodeBookToDto(codeBook);
+		return cbd;
+	}
+
+	@Override
+	public CodeBookDto getMedicCode(String medic) {
+		CodeBook codeBook =codeBookRepository.findByMedicCode(medic);
+		CodeBookDto cbd = codeBookMapper.CodeBookToDto(codeBook);
+		return cbd;
+		
+	}
+
 }

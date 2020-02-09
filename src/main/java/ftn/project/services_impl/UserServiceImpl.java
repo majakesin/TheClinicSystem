@@ -191,7 +191,7 @@ public class UserServiceImpl implements UserService {
 						 return "izmeniSifru";
 					 }
 					 else {
-						 return "clinics";
+						 return "doctors";
 					 }
 
 				} else if (u.getRole().equals("pacijent")) {
@@ -211,9 +211,7 @@ public class UserServiceImpl implements UserService {
 						 return "nurseProfile";
 					 }
 				}
-				else if(u.getRole().equals("doktor")) {
-					return "doctors";
-				}
+				
 					 
 				else if(u.getRole().equals("doktor")){
 					if(u.getPrviLogin()==false) {
