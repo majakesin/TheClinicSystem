@@ -30,4 +30,6 @@ public interface RoomService {
 	public Set<RoomDto> isTermsInRoomTerms(Long idTerm);
 	
 	public void TakeRoom(AppointmentDto app);
+	
+	public void takeRoomPredef(AppointmentDto app);
 }
