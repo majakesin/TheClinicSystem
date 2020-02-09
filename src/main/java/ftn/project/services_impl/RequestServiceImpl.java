@@ -126,7 +126,7 @@ public class RequestServiceImpl implements RequestService {
 	}
 	
 	public Set<AppointmentDto> allNotAccepted(){
-		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByisAccept(true));
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByRoomId(null));
 	}
 
 	@Override

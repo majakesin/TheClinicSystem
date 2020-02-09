@@ -14,4 +14,8 @@ public interface AppointmentService {
 	
 	//da mi iscita sve termine
 	public Set<AppointmentDto> allAppointment();
+	
+	public Set<AppointmentDto> allAppointmentsByPacient();
+	
+	public AppointmentDto getAppointement(Long idTerm);
 }
