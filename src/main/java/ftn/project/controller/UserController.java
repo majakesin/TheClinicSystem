@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.AppointmentDto;
+import ftn.project.dto.ClinicDto;
 import ftn.project.dto.UserDto;
+import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
