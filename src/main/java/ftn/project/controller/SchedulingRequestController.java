@@ -105,7 +105,7 @@ public class SchedulingRequestController {
 			return "createTerm";
 		}
 		
-		requestService.createTerm(appointmentDto);
+		
 		roomService.takeRoomPredef(appointmentDto);
 		return "redirect:/createTerm";
 	}
@@ -144,7 +144,7 @@ public class SchedulingRequestController {
 			if(userService.getCA()){
 		Set<AppointmentDto> termini = requestService.allNotAcceptedMaja();
 		
-		model.addAttribute("appointmentDto", requestService.allNotAcceptedMaja());
+				model.addAttribute("appointmentDto", requestService.allNotAcceptedMaja());
 		return new ModelAndView("schedulingRequest", "Model", requestService.allNotAcceptedMaja());
 			}else {
 				return new ModelAndView("badUser");

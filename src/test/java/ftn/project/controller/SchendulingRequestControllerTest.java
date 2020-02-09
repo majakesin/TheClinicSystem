@@ -1,5 +1,6 @@
 package ftn.project.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -56,6 +57,8 @@ public class SchendulingRequestControllerTest {
 				.andExpect(MockMvcResultMatchers.view().name("createTerm"))
 				.andExpect(model().attributeExists("termsDto"))
 				.andExpect(model().attributeExists("allRooms"));
+		
+		assertThat(session.getAttribute("logUsername")).isNotNull();
 	}
 
 	@Test
