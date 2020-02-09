@@ -162,6 +162,7 @@ public class RoomServiceImpl implements RoomService {
 		
 		room.getTerms().add(bt);
 		appoint.setRoomId(room.getId());
+		appoint.setAccept(false);
 		busyTermsRepository.save(bt);
 		appointmentRepository.save(appoint);
 		roomRepository.save(room);

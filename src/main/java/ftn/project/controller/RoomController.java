@@ -171,7 +171,11 @@ public class RoomController  {
 		UserDto pacient = userService.getUserById(appDto.getIdDto());
 		if(appDto.operationTypeDto.equals("Pregled")) {
 			appDto.setRoomId(id);
+
+			
+
 			emailService.sendMail(pacient.getEmailDto(),"Postovani vas pregled je zakazan "+"soba "+appDto.getRoomId(), appDto.getOperationTypeDto());
+
 			roomService.TakeRoom(appDto);
 			return "redirect:/appointmentRequests";
 		}

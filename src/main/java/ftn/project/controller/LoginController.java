@@ -26,6 +26,7 @@ public class LoginController {
 	
 	
 	private final UserService userService;
+	
 	private final IzmeniSifruValidator izmeniValidator; 
 	
 	@InitBinder
@@ -96,4 +97,5 @@ public class LoginController {
 
 	}
 	
+		
 }

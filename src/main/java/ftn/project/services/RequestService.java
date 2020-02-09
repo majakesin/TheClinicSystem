@@ -32,7 +32,7 @@ public interface RequestService {
 	void deleteTerm(Long idDto);
 	
 	Appointment getAppointmentById(Long idDto);
-	
+	public Set<AppointmentDto> allNotAcceptedMaja();
 	Set<AppointmentDto> allFreeTerms();	
 	Set<AppointmentDto> allNotAccepted();	
 	

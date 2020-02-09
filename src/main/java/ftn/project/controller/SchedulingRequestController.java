@@ -142,9 +142,10 @@ public class SchedulingRequestController {
 		else {
 			//autorizacija
 			if(userService.getCA()){
+		Set<AppointmentDto> termini = requestService.allNotAcceptedMaja();
 		
-		model.addAttribute("appointmentDto", requestService.allNotAccepted());
-		return new ModelAndView("schedulingRequest", "Model", requestService.allNotAccepted());
+		model.addAttribute("appointmentDto", requestService.allNotAcceptedMaja());
+		return new ModelAndView("schedulingRequest", "Model", requestService.allNotAcceptedMaja());
 			}else {
 				return new ModelAndView("badUser");
 			}
@@ -285,91 +286,5 @@ public class SchedulingRequestController {
 			}
 	}
 	
-	@GetMapping("/kreirajNP1/{idDto}")
-	public ModelAndView kreirajNP1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
-		
-		model.addAttribute("doktor",userService.getUserById(idDto));
-		
-		return new ModelAndView("zakaziNPD1","Model",userService.getUserById(idDto));
-	}
 	
-	
-	//zakaziPregledNepredfinisan1
-	@PostMapping("/zakazanNP1/{idDto}")
-	public String zakazanTerminNEPredefinisan1(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
-		UserDto doktor = userService.getUserById(idDto);
-		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
-		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
-		AppointmentDto app = new AppointmentDto();
-		app.setDateDto(userVreme.getDatumPregledaDto());
-		app.setTimeDto(userVreme.getVremePregledaDto());
-		app.setTypeDto(doktor.getTipPregledaDto());
-		app.setDoctorDto(doktor.getIdDto());
-		app.setPatientIdDto(pacijent.getIdDto());
-		app.setAcceptDto(true);
-		
-		requestService.createTerm(app);
-		
-		return "redirect:/clincsSearchDateType";
-	
-		
-	}	
-	
-	@GetMapping("/kreirajNP2/{idDto}")
-	public ModelAndView kreirajNP2(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
-		
-		model.addAttribute("doktor",userService.getUserById(idDto));
-		
-		return new ModelAndView("zakazanNPD2","Model",userService.getUserById(idDto));
-	}
-	
-	@GetMapping("/kreirajNepredef2/{idDto}")
-	public ModelAndView kreirajNP2Profi(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto user,ModelMap model) {
-		
-		model.addAttribute("doktor",userService.getUserById(idDto));
-		
-		return new ModelAndView("ZakazanProfil","Model",userService.getUserById(idDto));
-	}
-	
-	//zakaziPregledNepredfinisan1
-	@PostMapping("/zakazanNP2/{idDto}")
-	public String zakazanTerminNEPredefinisan2(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
-		UserDto doktor = userService.getUserById(idDto);
-		String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
-		UserDto pacijent = userService.getUserByUsername(usernamePacijent);
-		AppointmentDto app = new AppointmentDto();
-		app.setDateDto(userVreme.getDatumPregledaDto());
-		app.setTimeDto(userVreme.getVremePregledaDto());
-		app.setTypeDto(doktor.getTipPregledaDto());
-		app.setDoctorDto(doktor.getIdDto());
-		app.setPatientIdDto(pacijent.getIdDto());
-		app.setAcceptDto(true);
-		
-		requestService.createTerm(app);
-		
-		return "redirect:/clincsSearchDateType";
-	
-		
-	}
-	
-	//zakaziPregledNepredfinisan1
-		@PostMapping("/zakazanNPD3/{idDto}")
-		public String zakazanTerminNEPredefinisan3(@PathVariable("idDto") Long idDto,@ModelAttribute("docVreme") UserDto userVreme , HttpServletRequest request,ModelMap model) {
-			UserDto doktor = userService.getUserById(idDto);
-			String usernamePacijent = (String) request.getSession().getAttribute("logUsername");
-			UserDto pacijent = userService.getUserByUsername(usernamePacijent);
-			AppointmentDto app = new AppointmentDto();
-			app.setDateDto(userVreme.getDatumPregledaDto());
-			app.setTimeDto(userVreme.getVremePregledaDto());
-			app.setTypeDto(doktor.getTipPregledaDto());
-			app.setDoctorDto(doktor.getIdDto());
-			app.setPatientIdDto(pacijent.getIdDto());
-			app.setAcceptDto(true);
-			
-			requestService.createTerm(app);
-			
-			return "redirect:/listaKlinikaProfil";
-		
-			
-		}
 }
