@@ -13,6 +13,12 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Registration</title>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 <style type="text/css">
 
               input.hidden {
@@ -86,29 +92,34 @@
 	<tr>
 				<td><form:hidden path="passwordDto"/></td>
 	</tr>
-	<tr>
+<!--  	<tr>
 				<td><form:hidden path="usernameDto"/></td>
-	</tr>
+	</tr> -->
 	<tr>
 	<td><h6>Ime: </h6></td>
-	<td><form:input class="form-control" path="nameDto" type="text"  /></td>
+	<td><form:input class="form-control" path="nameDto" type="text"  />
+	<form:errors path="nameDto" cssClass="error" /></td>
 	</tr>
 	<tr>
 	<td><h6>Prezime:</h6> </td>
-	<td><form:input class="form-control" path="surnameDto" type="text"  /> </td>
+	<td><form:input class="form-control" path="surnameDto" type="text"  /> 
+	<form:errors path="surnameDto" cssClass="error" /></td>
 	</tr>
 	<tr>
 	<td><h6>Grad:</h6> </td>
-	<td><form:input class="form-control"  path="cityDto" type="text"  /> </td>
+	<td><form:input class="form-control"  path="cityDto" type="text"  />
+	</td>
 	</tr>
 	<tr>
 	<td><h6>Telefon:</h6> </td>
-	<td><form:input class="form-control"  path="phoneDto" type="text" /> </td>
+	<td><form:input class="form-control"  path="phoneDto" type="text" /> 
+	<form:errors path="phoneDto" cssClass="error" /></td>
 	</tr>
-	<tr>
+<!--  	<tr>
 	<td><h6>Email:</h6> </td>
-	<td><form:input class="form-control"  path="emailDto" type="text"  /> </td>
-	</tr>
+	<td><form:input class="form-control"  path="emailDto" type="text"  /> 
+	<form:errors path="emailDto" cssClass="error" /></td>
+	</tr> -->
 	<tr>
 	
 	<td><h6>Biografija:</h6> </td>
@@ -116,7 +127,8 @@
 	</tr>
 	<tr>
 	<td><h6>Adresa:</h6> </td>
-	<td><form:input class="form-control"  path="addressDto" type="text"  /></td>
+	<td><form:input class="form-control"  path="addressDto" type="text"  />
+	<form:errors path="addressDto" cssClass="error" /></td>
 	</tr>
 	<tr>
 	<tr>

@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,16 +22,13 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
-
-import ftn.project.repository.AppointmentRepository;
-
-
 import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
 import ftn.project.services.RequestService;
 import ftn.project.services.RoomService;
 import ftn.project.services.UserService;
+import ftn.project.validation.SchedulingValidator;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -45,9 +46,18 @@ public class SchedulingRequestController {
 	
 	private final RoomService roomService;
 	
+
+	private final SchedulingValidator schedulingValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(schedulingValidator);
+	}
+
 	private final ClinicService clinicService;
 
 	private final UserRepository userRepository;
+
 	
 	
 	@GetMapping("/createTerm")
@@ -78,7 +88,12 @@ public class SchedulingRequestController {
 	}
 
 	@PostMapping("/createTerm/create")
-	public String createTerms(@ModelAttribute("appointmentDto") AppointmentDto appointmentDto,Model model) {
+	public String createTerms(@Validated @ModelAttribute("appointmentDto") AppointmentDto appointmentDto,BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			return "createTerm";
+		}
+		
 		requestService.createTerm(appointmentDto);
 		
 		return "redirect:/createTerm";
@@ -240,7 +255,12 @@ public class SchedulingRequestController {
 			//autorizacija
 			if(userService.getCA()){
 		String username=(String)request.getSession().getAttribute("logUsername");
+
+		requestService.acceptRequest(idDto,username);
+		
+
 		//requestService.acceptRequest(idDto);
+
 
 
 		

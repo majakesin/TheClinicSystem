@@ -16,6 +16,13 @@ body {
  }
 
 </style>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -34,11 +41,13 @@ body {
 		<table>
 			<tr>
 				<td><form:label path="diagnosisCodeDto">Sifra dijagnoze:</form:label></td>
-				<td><form:input class="form-control" placeholder="Diagnose code" path="diagnosisCodeDto" /></td>
+				<td><form:input class="form-control" placeholder="Diagnose code" path="diagnosisCodeDto" />
+				<form:errors path="diagnosisCodeDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="diagnosisNameDto">Naziv dijagnoze:</form:label></td>
-				<td><form:input  class="form-control" placeholder="Diagnose name" path="diagnosisNameDto" /></td>
+				<td><form:input  class="form-control" placeholder="Diagnose name" path="diagnosisNameDto" />
+				<form:errors path="diagnosisNameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="diagnosisDescriptionDto">Opis dijagnoze:</form:label></td>
@@ -48,11 +57,13 @@ body {
 			<tr><td></td></tr>
 			<tr>
 				<td><form:label path="drugCodeDto">Sifra leka:</form:label></td>
-				<td><form:input class="form-control" placeholder="Drug code" path="drugCodeDto" /></td>
+				<td><form:input class="form-control" placeholder="Drug code" path="drugCodeDto" />
+				<form:errors path="drugCodeDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="drugNameDto">Naziv leka:</form:label></td>
-				<td><form:input class="form-control" placeholder="Drug name" path="drugNameDto" /></td>
+				<td><form:input class="form-control" placeholder="Drug name" path="drugNameDto" />
+				<form:errors path="drugNameDto" cssClass="error" /></td>
 			</tr>
 			
 			<tr>
@@ -63,7 +74,8 @@ body {
 			<br/>
 			<tr>
 				<td><form:label path="medicCodeDto">Kod lekara:</form:label></td>
-				<td><form:input class="form-control" placeholder="Medic code" path="medicCodeDto" /></td>
+				<td><form:input class="form-control" placeholder="Medic code" path="medicCodeDto" />
+				<form:errors path="medicCodeDto" cssClass="error" /></td>
 			</tr>
 			
 
@@ -89,7 +101,7 @@ body {
 	<table class="table">
 		
 		<tr style="background-color: #53e3a6;">
-			<th colspan=8 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;">SIFRARNIK</h6> </th>
+			<th colspan=10 style="text-align=center;"><h6 style="color:white; letter-spacing: 4px; text-align=center;">SIFRARNIK</h6> </th>
 		</tr>
 		<tr>
 			<td>Sifra dijagnoze</td>

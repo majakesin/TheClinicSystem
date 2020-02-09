@@ -3,34 +3,32 @@ package ftn.project.controller;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.project.dto.UserDto;
-
-import ftn.project.services.ClinicService;
-
 import ftn.project.dto.VacationRequestDto;
-
-import ftn.project.repository.UserRepository;
-
-
-
+import ftn.project.services.ClinicService;
 import ftn.project.services.UserService;
 import ftn.project.services.VacationRequestService;
-import lombok.AllArgsConstructor;
+import ftn.project.validation.DoctorCreateValidator;
+import ftn.project.validation.VacationValidator;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 public class DoctorController {
 
@@ -38,7 +36,15 @@ public class DoctorController {
 
 	private final ClinicService clinicService;
 
-	private final VacationRequestService vqService;
+	
+	
+	private final DoctorCreateValidator doctorValidator;
+	
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(doctorValidator);
+	}
 	
 	
 	
@@ -72,9 +78,12 @@ public class DoctorController {
 	
 
 	@PostMapping("/doctors/create")
-	public String createClinic(HttpServletRequest request, @Valid @ModelAttribute("userDto") UserDto userDto) {
+	public String createClinic(HttpServletRequest request, @Validated @ModelAttribute("userDto") UserDto userDto, BindingResult result) {
 		
-
+		if(result.hasErrors()) {
+			return "doctors";
+		}
+		
 		userDto.setRoleDto("doktor");
 
 		
@@ -126,8 +135,15 @@ public class DoctorController {
 	}
 	
 	@PostMapping("/doctors/edit/create")
-	public String editDoctor(@Valid @ModelAttribute("userDto") UserDto userDto) {
+	public String editDoctor(@Validated @ModelAttribute("userDto") UserDto userDto,BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "doctorEdit";
+		}
+		
 		userDto.setRoleDto("doktor");
+	
+		
 		userService.createUser(userDto);
 		return "redirect:/doctors";
 	}
@@ -207,44 +223,6 @@ public class DoctorController {
 		
 	}
 	
-	//rezervisanje godisnjeg odmora
-	
-	@GetMapping("/godisnjiOdmorRezervisanje")
-	public ModelAndView rezervisanjeGodisnjeg(HttpServletRequest request,@ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto,ModelMap model) {
-		userService.Autorizacija(request);
-		
-		//autorizacija
-		if(userService.getNull()) {
-			return new ModelAndView("badUser");
-		}
-		else {
-		//autorizacija
-		if(userService.getDoktor()){
-		String username = (String) request.getSession().getAttribute("logUsername");
-		if(username!=null) {
-		UserDto userTemp = userService.getUserByUsername(username);
-		
-		vacReqDto.setEmailDto(userTemp.emailDto);
-		vacReqDto.setNameDto(userTemp.nameDto);
-		vacReqDto.setSurnameDto(userTemp.getSurnameDto());
-		vacReqDto.setUsernameDto(username);
-		vacReqDto.setRoleDto("doktor"); }
-	
-		return new ModelAndView("zakazivanjeGodisnjeg");
-		}else {
-			return new ModelAndView("badUser");
-		}
-		
-		}
-
-	}
-	
-	@PostMapping("/kreirajZahtevGodisnji")
-	public String kreirajZahtev(@Valid @ModelAttribute("VacationReqDto") VacationRequestDto vacReqDto) {
-		
-		vqService.createVacReq(vacReqDto);
-		return "redirect:/godisnjiOdmorRezervisanje";
-	}
 	
 	
 	

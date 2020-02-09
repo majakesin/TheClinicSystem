@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -38,11 +44,13 @@
 	</tr>
 	<tr>
 	<td><label>Početak godišnjeg odmora:</label></td>
-	<td><form:input type="date" class="form-control"  path="pocetakGodisnjegDto"/></td>
+	<td><form:input type="date" class="form-control"  path="pocetakGodisnjegDto"/>
+	<form:errors path="pocetakGodisnjegDto" cssClass="error" /></td>
 	</tr>
 	<tr>
 	<td><label>Kraj godišnjeg odmora:</label></td>
-	<td><form:input type="date" class="form-control"  path="krajGodisnjegDto"/></td>
+	<td><form:input type="date" class="form-control"  path="krajGodisnjegDto"/>
+	<form:errors path="krajGodisnjegDto" cssClass="error" /></td>
 	
 	</tr>
 	

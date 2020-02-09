@@ -13,6 +13,13 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Examination</title>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 <body>
 
 	<div>
@@ -34,6 +41,8 @@
 									placeholder="Izvestaj" /> <small id="emailHelp"
 								class="form-text text-muted">Ovo polje sluzi za unosenje
 									izvestaja o pregledu</small>
+									
+									
 						</tr>
 						<tr>
 							<td><form:label path="diagnosisId">Dijagnoza</form:label></td>

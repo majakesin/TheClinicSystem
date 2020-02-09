@@ -27,7 +27,7 @@
 	<div class="row">
 	 <div class="col-sm">
 		<br> <br> <br>
-	<form:form method="POST" action="/doctors/create"
+	<form:form method="POST" action="/doctors/edit/create"
 		modelAttribute="userDto">
 		<table>
 			<tr>
@@ -35,19 +35,23 @@
 			</tr>
 			<tr>
 				<td><form:label path="nameDto">Ime:</form:label></td>
-				<td><form:input class="form-control" placeholder="Name" path="nameDto" /></td>
+				<td><form:input class="form-control" placeholder="Name" path="nameDto" />
+				<form:errors path="nameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="surnameDto">Prezime:</form:label></td>
-				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" /></td>
+				<td><form:input class="form-control" placeholder="Surname" path="surnameDto" />
+				<form:errors path="surnameDto" cssClass="error" /></td>
 
-			<tr>
+		<!--  	<tr>
 				<td><form:label path="usernameDto">Korisničko ime:</form:label></td>
-				<td><form:input class="form-control" path="usernameDto" /></td>
-			</tr>
+				<td><form:hidden class="form-control" path="usernameDto" readonly="true" />
+				<form:errors path="usernameDto" cssClass="error" /></td>
+			</tr> -->
 			<tr>
 				<td><form:label path="passwordDto">Šifra:</form:label></td>
-				<td><form:input class="form-control" path="passwordDto" /></td>
+				<td><form:input class="form-control" path="passwordDto" />
+				<form:errors path="passwordDto" cssClass="error" /></td>
 			
 				
 			</tr>

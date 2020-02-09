@@ -15,6 +15,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <title>Create Term</title>
 
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
 
 </head>
 <body>
@@ -37,11 +42,16 @@
 		<table>
 			<tr>
 				<td><form:label path="dateDto">Datum:</form:label></td>
-				<td><form:input type="date" class="form-control" placeholder="Datum" path="dateDto"  /></td>
+				<td><form:input type="date" class="form-control" placeholder="Datum" path="dateDto"  />
+				<form:errors path="dateDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="timeDto">Vreme:</form:label></td>
-				<td><form:input type="time" class="without_ampm form-control"  path="timeDto" /></td>
+
+
+				<td><form:input type="time" class="form-control" placeholder="Vreme" path="timeDto" />
+				<form:errors path="timeDto" cssClass="error" /></td>
+
 
 			<tr>
 				<td><form:label path="roomDto">Soba:</form:label></td>
@@ -67,13 +77,15 @@
 			</tr>
 			<tr>
 				<td><form:label path="priceDto">Cena:</form:label></td>
-				<td><form:input class="form-control" placeholder="Cena" path="priceDto" /></td>
+				<td><form:input class="form-control" placeholder="Cena" path="priceDto" />
+				<form:errors path="priceDto" cssClass="error" /></td>
 			
 				
 			</tr>
 			<tr>
 				<td><form:label path="discountDto">Popust:</form:label></td>
-				<td><form:input class="form-control" placeholder="Popust" path="discountDto" /></td>
+				<td><form:input class="form-control" placeholder="Popust" path="discountDto" />
+				<form:errors path="discountDto" cssClass="error" /></td>
 			
 				
 			</tr>

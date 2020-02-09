@@ -212,6 +212,7 @@ public class UserServiceImpl implements UserService {
 					 }
 				}
 				
+
 				else if(u.getRole().equals("doktor")){
 					if(u.getPrviLogin()==false) {
 						 return "izmeniSifru";

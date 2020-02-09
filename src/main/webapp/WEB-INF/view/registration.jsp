@@ -157,6 +157,13 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
 
 
 </style>
+
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 	
@@ -174,21 +181,24 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
     		 	<div class="input-group-prepend">
     			<div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
     	 		</div>
-				<form:input class="form-control" placeholder=" * Korisničko ime" path="usernameDto" required="required" />
+				<form:input class="form-control" placeholder=" * Korisničko ime" path="usernameDto"  />
+				<form:errors path="usernameDto" cssClass="error" />
 				</div>
 				<div class="input-group mb-2">
     		 	<div class="input-group-prepend">
     			<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
     	 		</div>
 				
-				<form:input class="form-control" type="password" placeholder=" * Lozinka"  path="passwordDto"  required="required"/>
+				<form:input class="form-control" type="password" placeholder=" * Lozinka"  path="passwordDto" />
+				<form:errors path="passwordDto" cssClass="error" />
 				</div>
 				
 				<div class="input-group mb-2">
     		 	<div class="input-group-prepend">
     			<div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
     	 		</div>	
-				<form:input  type="password" class="form-control" placeholder="* Ponovi lozinku" path="pomocnaSifraDto" required="required"/>
+				<form:input  type="password" class="form-control" placeholder="* Ponovi lozinku" path="pomocnaSifraDto"   />
+				<form:errors path="pomocnaSifraDto" cssClass="error" />
 				</div>
 				
 				<div class="input-group mb-2">
@@ -239,7 +249,8 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
     			<div class="input-group-text"><i class="fa fa-id-badge" aria-hidden="true"></i></div>
     	 		</div>
 				
-				<form:input class="form-control" path="insuranceNumberDto" placeholder =" * Broj osiguranika " required="required" />
+				<form:input class="form-control" path="insuranceNumberDto" placeholder =" * Broj osiguranika "  />
+				<form:errors path="insuranceNumberDto" cssClass="error" />
 				</div>
 				
 				<div class="input-group mb-2">
@@ -253,7 +264,8 @@ background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
     		 	<div class="input-group-prepend">
     			<div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
     	 		</div>
-				<form:input class="form-control"  type="email" placeholder= " * Email" path="emailDto" required="required"/>
+				<form:input class="form-control"  type="email" placeholder= " * Email" path="emailDto" />
+				<form:errors path="emailDto" cssClass="error" />
 				</div>
 			</div>
 				<br><br><br>

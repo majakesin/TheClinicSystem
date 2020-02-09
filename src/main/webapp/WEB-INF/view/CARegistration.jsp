@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <title>Administrator registration</title>
+<style type="text/css">
+.error {
+	color: red;
+}
+</style>
+
 </head>
 <body>
 
@@ -32,11 +38,14 @@
 		<table>
 			<tr>
 				<td><form:label path="usernameDto">Username:</form:label></td>
-				<td><form:input class="form-control" placeholder="Username" path="usernameDto" /></td>
+				<td><form:input class="form-control" placeholder="Username" path="usernameDto" />
+				<form:errors path="usernameDto" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="passwordDto">Password:</form:label></td>
-				<td><form:input type="password" class="form-control" placeholder="Password" path="passwordDto" /></td>
+				<td><form:input type="password" class="form-control" placeholder="Password" path="passwordDto" />
+				<form:errors path="passwordDto" cssClass="error" /></td>
+				
 			</tr>
 			<tr>
 				<td colspan="2">

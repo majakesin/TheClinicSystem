@@ -42,7 +42,7 @@ public class CodeBook {
 	@Column(name = "DrugDescription", nullable = true)
 	private String drugDescription;
 
-	@Column(name = "CodeDiagnose", nullable = true)
+	@Column(name = "MedicCode", nullable = true)
 	private String medicCode;
 
 }
