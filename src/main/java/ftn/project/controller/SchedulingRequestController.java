@@ -22,6 +22,11 @@ import ftn.project.dto.AppointmentDto;
 import ftn.project.dto.UserDto;
 import ftn.project.model.Appointment;
 import ftn.project.model.User;
+
+
+import ftn.project.repository.AppointmentRepository;
+
+
 import ftn.project.repository.AppoitmentRepository;
 import ftn.project.repository.UserRepository;
 import ftn.project.services.ClinicService;
@@ -91,11 +96,17 @@ public class SchedulingRequestController {
 	public String createTerms(@Validated @ModelAttribute("appointmentDto") AppointmentDto appointmentDto,BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
+			Set<UserDto> medical=new HashSet<UserDto>();
+			model.addAttribute("termsDto", requestService.allSchedulingRequest());
+			model.addAttribute("allRooms",roomService.allRooms());
+			medical.addAll(userService.allMedicalStaff());
+			medical.addAll(userService.allNurse());
+			model.addAttribute("allMedics",medical);
 			return "createTerm";
 		}
 		
 		requestService.createTerm(appointmentDto);
-		
+		roomService.takeRoomPredef(appointmentDto);
 		return "redirect:/createTerm";
 	}
 

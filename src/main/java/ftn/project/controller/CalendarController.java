@@ -2,7 +2,9 @@ package ftn.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,10 @@ import com.google.gson.Gson;
 
 import ftn.project.dto.CalendarDto;
 import ftn.project.dto.UserDto;
+import ftn.project.model.Appointment;
+import ftn.project.model.User;
+import ftn.project.repository.AppoitmentRepository;
+import ftn.project.services.AppointmentService;
 import ftn.project.services.CalendarService;
 import ftn.project.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +34,13 @@ import lombok.RequiredArgsConstructor;
 public class CalendarController {
 
 	private final CalendarService calendarService;
-	
+
 	private final UserService userService;
-	
+
+	private final AppointmentService appointmentService;
+
+	private final AppoitmentRepository appoitmentRepository;
+
 	@GetMapping
 	public Set<CalendarDto> getPage(ModelAndView model, HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
@@ -52,10 +62,10 @@ public class CalendarController {
 	@ResponseBody
 	@GetMapping("/allEvents")
 	public void get(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String username=(String)request.getSession().getAttribute("logUsername");
-		UserDto userDto=userService.getUserProfile(username);
-		
-		
+		String username = (String) request.getSession().getAttribute("logUsername");
+
+		UserDto userDto = userService.getUserProfile(username);
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();

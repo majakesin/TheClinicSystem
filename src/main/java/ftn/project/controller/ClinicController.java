@@ -81,7 +81,7 @@ private final ClinicService clinicService;
 	}
 	
 	@GetMapping("/clinicsProfileCA")
-	public String showClinicProfile(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public String showClinicProfile(HttpServletRequest request,@ModelAttribute("clinicDto")ClinicDto clinicDto, ModelMap model) {
 		userService.Autorizacija(request);
 		
 		//autorizacija
