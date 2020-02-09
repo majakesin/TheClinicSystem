@@ -23,14 +23,17 @@ public class ClinicCreateValidator implements Validator {
 		return ClinicDto.class.equals(clazz);
 	}
 
+	
 	@Override
 	public void validate(Object target, Errors errors) {
+		
+	
+		ClinicDto cl=(ClinicDto)target;
+	
+		
 		ValidationUtils.rejectIfEmpty(errors, "nameDto","CCV.nameDto.empty");
 		ValidationUtils.rejectIfEmpty(errors, "adressDto", "CCV.adressDto.empty");
 		ValidationUtils.rejectIfEmpty(errors, "phoneDto", "CCV.phoneDto.empty");
-		ClinicDto cl=(ClinicDto)target;
-		
-		
 		
 		
 		

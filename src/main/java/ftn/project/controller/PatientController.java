@@ -39,7 +39,7 @@ public class PatientController {
 	
 	private final UserService userService;
 	
-	
+	@Autowired
 	private ClinicService clinicService;
 	
 	
@@ -50,44 +50,13 @@ public class PatientController {
 	RequestMapper requestMapper;
 	
 
-	private final PatientValidator patientValidator;
 	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(patientValidator);
-	}
 
 	private Set<UserDto> pomocnaTemp = new HashSet<UserDto> ();
 	
 	
 
 	
-	//pisi mapiranja metoda na engleskom
-	@GetMapping("/registracija")
-	public ModelAndView showRegistrationPage(@ModelAttribute("userDto") UserDto userto,ModelMap model) {
-		
-		return new ModelAndView("registration");
-	}
-	@PostMapping("/patient/create")
-	public String createPatient(@Validated @ModelAttribute("userDto") UserDto userDto, BindingResult result) {
-				
-			if(result.hasErrors()) {
-			return "registration";
-		}
-			
-			if(userDto.getPasswordDto().equals(userDto.getPomocnaSifraDto())) {
-				userDto.setPomocnaSifraDto(null);
-				if(userDto.getInsuranceNumberDto().length()==13) {
-					
-				
-			userDto.setRoleDto("pacijent");
-			requestService.saveRequest(userDto);
-			
-      return"redirect:/logovanje";
-			}
-			}
-		return "redirect:/registracija";
-	}
 	
  
 	@GetMapping("/logovanje")
@@ -185,6 +154,7 @@ public class PatientController {
 	@GetMapping("/zakaziNepredefinisani1/{idDto}")
 	public ModelAndView vratiPacijenteNepredefinisani(HttpServletRequest request,@PathVariable("idDto") Long idDto,ModelMap model,@ModelAttribute("doctorDtoPretraga") UserDto doktorDto) {
 			ClinicDto clinicDto = clinicService.getClinicById(idDto);
+			
 			model.addAttribute("clinicDto",clinicDto);
 			
 			
@@ -217,7 +187,7 @@ public class PatientController {
 				model.addAttribute("doctorsDto",doktoriPr);
 				pomocnaTemp.addAll(doktoriPr);
 			}
-			return new ModelAndView("DoktoriNepredefPregled","Model", clinicDto);
+			return new ModelAndView("DoktoriNepredefPregled","Model", pomocna);
 			
 	
 			

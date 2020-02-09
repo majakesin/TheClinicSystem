@@ -39,49 +39,9 @@ private final ClinicService clinicService;
 	
 	Set<ClinicDto> termini=null;
 	
-	private final ClinicCreateValidator ccValidator;
-	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(ccValidator);
-	}
-	
-	
-	@GetMapping("/clinics")
-	public ModelAndView showClinics(HttpServletRequest request,@ModelAttribute("clinicDto")ClinicDto clinicDto,ModelMap model) {
-		userService.Autorizacija(request);
-		
-		//autorizacija
-		if(userService.getNull()) {
-			return new ModelAndView("badUser");
-		}
-		else {
-			//autorizacija
-			if(userService.getCCA()){
-		
-		model.addAttribute("clinicsDto",clinicService.allClinics());
-	//	model.addAttribute("allClinicsAdmins",userService.allUserByRole("Clinic Administrator"));
-		return new ModelAndView("clinics","Model",clinicService.allClinics());
-			}else {
-				return new ModelAndView("badUser");
-			}
-			}
-	}
-	
-	
-	
-	@PostMapping("/clinics/create")
-	public String createClinic(@Validated @ModelAttribute("clinicDto")ClinicDto clinicDto,BindingResult result,HttpServletRequest request) {
-		if(result.hasErrors()) {
-			return "clinics";
-		}
-		
-		clinicService.createClinic(clinicDto);
-		return "redirect:/clinics";
-	}
 	
 	@GetMapping("/clinicsProfileCA")
-	public String showClinicProfile(HttpServletRequest request,@ModelAttribute("userDto") UserDto userDto, ModelMap model) {
+	public String showClinicProfile(HttpServletRequest request, ModelMap model) {
 		userService.Autorizacija(request);
 		
 		//autorizacija
@@ -103,24 +63,7 @@ private final ClinicService clinicService;
 
 	}
 	
-	@GetMapping("clinics/delete/{idDto}") 
-	public String deleteClinic(HttpServletRequest request,@PathVariable("idDto") Long idDto,ModelMap model) {
-		userService.Autorizacija(request);
-		
-		//autorizacija
-		if(userService.getNull()) {
-			return "redirect:badUser";
-		}
-		else {
-			//autorizacija
-			if(userService.getCCA()){
-		clinicService.deleteClinic(idDto);
-		return "redirect:/clinics";
-			}else {
-				return "redirect:badUser";
-			}
-			}
-	}
+	
 	
 	@GetMapping("/clinicProfileCA/edit/{idDto}")
 	public ModelAndView showNurseProfileEdit(HttpServletRequest request, @ModelAttribute("clinicDto") ClinicDto clinicDto, @PathVariable("idDto") Long idDto, ModelMap model ) {

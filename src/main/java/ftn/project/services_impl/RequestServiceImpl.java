@@ -129,6 +129,10 @@ public class RequestServiceImpl implements RequestService {
 		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByOperationTypeAndRoomId("Pregled", null));
 	}
 
+	public Set<AppointmentDto> allNotAcceptedMaja() {
+		return appointmentMapper.setToDtoSet(sRequestRepository.findAllByisAccept(true));
+	}
+
 	@Override
 	public void acceptUserRequest(Long idDto) {
 		RegisterRequest reg=requestRepository.findById(idDto).get();

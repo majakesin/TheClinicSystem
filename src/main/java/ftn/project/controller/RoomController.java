@@ -167,6 +167,7 @@ public class RoomController  {
 		AppointmentDto appDto=appointmentService.getAppointement(idTerm);
 		if(appDto.operationTypeDto.equals("Pregled")) {
 			appDto.setRoomId(id);
+			
 			roomService.TakeRoom(appDto);
 			return "redirect:/appointmentRequests";
 		}
